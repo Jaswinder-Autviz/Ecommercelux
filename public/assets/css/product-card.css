@@ -1,0 +1,57 @@
+/* product-card.css */
+.product-card-premium {
+    display: block; text-decoration: none; color: inherit;
+    background: #fff; cursor: pointer;
+}
+.pcp-img-wrap {
+    position: relative; overflow: hidden;
+    aspect-ratio: 3/4; background: #f4f4f4;
+}
+.pcp-img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.product-card-premium:hover .pcp-img { transform: scale(1.05); }
+.pcp-overlay {
+    position: absolute; inset: 0; background: rgba(0,0,0,0.28);
+    display: flex; align-items: flex-end; justify-content: center;
+    padding-bottom: 28px; opacity: 0; transition: opacity 0.35s ease;
+}
+.product-card-premium:hover .pcp-overlay { opacity: 1; }
+.pcp-cta {
+    display: inline-block; background: #fff; color: #000;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; padding: 10px 24px;
+    transform: translateY(10px); transition: transform 0.35s ease;
+}
+.product-card-premium:hover .pcp-cta { transform: translateY(0); }
+.pcp-badge {
+    position: absolute; top: 12px; left: 12px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; padding: 4px 10px; z-index: 2;
+}
+.pcp-badge-sale { background: #e8353b; color: #fff; }
+.pcp-badge-featured { background: #292b2c; color: #fff; }
+
+.pcp-wishlist {
+    position: absolute; top: 10px; right: 10px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #fff; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.12); color: #999;
+    opacity: 0; transform: translateY(-4px);
+    transition: opacity .3s, transform .3s, color .25s; z-index: 3;
+}
+.product-card-premium:hover .pcp-wishlist { opacity: 1; transform: translateY(0); }
+.pcp-wishlist:hover, .pcp-wishlist.wl-active { color: #e8353b; }
+.pcp-wishlist.wl-active path { fill: #e8353b; stroke: #e8353b; }
+
+.pcp-body {
+    padding: 14px 4px 18px;
+    border-bottom: 1px solid #ebebeb;
+}
+.pcp-category { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 6px; }
+.pcp-name { font-size: 14px; font-weight: 700; color: #111; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 10px; letter-spacing: 0.2px; }
+.pcp-price { display: flex; align-items: center; gap: 10px; }
+.pcp-new { font-size: 15px; font-weight: 700; color: #111; }
+.pcp-old { font-size: 13px; color: #aaa; text-decoration: line-through; }

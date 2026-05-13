@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+class Customer extends Authenticatable
+{
+    use HasFactory, Notifiable;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'gender',
+        'dob',
+        'profile_image',
+        'phone_verified_at',
+    ];
+
+    protected $hidden = [
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'phone_verified_at' => 'datetime',
+        'dob' => 'date',
+    ];
+
+    public function addresses()
+    {
+        return $this->hasMany(CustomerAddress::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class); // Assuming Order model exists and has customer_id or user_id
+    }
+}

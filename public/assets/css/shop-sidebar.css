@@ -1,0 +1,25 @@
+/* shop-sidebar.css */
+.shop-sidebar { height: 100%; overflow-y: auto; padding-right: 15px; }
+.sidebar-block { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+.sidebar-title { font-size: 13px; font-weight: 700; margin-bottom: 15px; color: #333; text-transform: uppercase; letter-spacing: 0.5px; }
+.filter-item { display: flex; align-items: center; margin-bottom: 10px; cursor: pointer; font-size: 14px; color: #555; position: relative; }
+.filter-item:hover { color: #000; }
+.checkbox-item { padding-left: 30px; }
+.filter-checkbox { position: absolute; opacity: 0; cursor: pointer; }
+.checkmark { position: absolute; top: 50%; left: 0; transform: translateY(-50%); height: 18px; width: 18px; background-color: #fff; border: 1px solid #d0d0d0; }
+.filter-checkbox:checked ~ .checkmark { background-color: #000; border-color: #000; }
+.checkmark:after { content: ""; position: absolute; display: none; left: 6px; top: 2px; width: 4px; height: 9px; border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.filter-checkbox:checked ~ .checkmark:after { display: block; }
+.item-count { margin-left: auto; font-size: 12px; color: #999; }
+.size-search-input { width: 100%; padding: 10px; border: 1px solid #eee; font-size: 13px; margin-bottom: 15px; outline: none; }
+.size-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.size-filter-btn { padding: 8px 12px; border: 1.5px solid #e0e0e0; background: #fff; font-size: 12px; font-weight: 600; text-align: left; display: flex; justify-content: space-between; cursor: pointer; transition: all 0.2s; }
+.size-filter-btn:hover { border-color: #000; }
+.size-filter-btn.active { border-color: #000; background: #f9f9f9; }
+.btn-count { color: #999; font-weight: 400; font-size: 11px; }
+.radio-item { padding-left: 30px; }
+.price-radio-filter { position: absolute; opacity: 0; }
+.radio-mark { position: absolute; top: 50%; left: 0; transform: translateY(-50%); height: 18px; width: 18px; background-color: #fff; border: 1px solid #d0d0d0; border-radius: 50%; }
+.price-radio-filter:checked ~ .radio-mark { border-color: #000; }
+.radio-mark:after { content: ""; position: absolute; display: none; top: 4px; left: 4px; width: 8px; height: 8px; border-radius: 50%; background: #000; }
+.price-radio-filter:checked ~ .radio-mark:after { display: block; }
