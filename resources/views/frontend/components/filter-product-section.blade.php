@@ -7,17 +7,17 @@
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="promo-slide">
-                        <img src="{{ asset('assets/images/banners/slider2.jpg') }}" alt="Slide 1" class="promo-slide-img">
+                        <img src="{{ asset('assets/images/banners/Banner1.png') }}" alt="Classic fit t-shirts" class="promo-slide-img">
                     </div>
                 </div>
-                <div class="swiper-slide">
+                <!-- <div class="swiper-slide">
                     <div class="promo-slide">
-                        <img src="{{ asset('assets/images/banners/slider1.jpg') }}" alt="Slide 2" class="promo-slide-img">
+                        <img src="{{ asset('assets/images/banners/Banner1.png') }}" alt="Oversized t-shirts" class="promo-slide-img">
                     </div>
-                </div>
+                </div> -->
                 <div class="swiper-slide">
                     <div class="promo-slide">
-                        <img src="{{ asset('assets/images/banners/slider3.jpg') }}" alt="Slide 3" class="promo-slide-img">
+                        <img src="{{ asset('assets/images/banners/Banner3.png') }}" alt="Graphic t-shirts" class="promo-slide-img">
                     </div>
                 </div>
             </div>

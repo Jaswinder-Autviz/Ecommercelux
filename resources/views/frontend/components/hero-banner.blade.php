@@ -11,11 +11,12 @@
             {{-- SLIDE 1 --}}
             <div class="swiper-slide">
                 <div class="hero-slide-inner">
-                    <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    
+                    <img src="{{ asset('assets/images/banners/Banner2.png') }}"
                          alt="Hustler T-shirt Collection" class="hero-slide-img" loading="eager" fetchpriority="high">
                     <div class="hero-slide-overlay"></div>
                     <div class="hero-slide-content">
-                        <span class="hsc-tag">New Season 2025</span>
+                        <span class="hsc-tag">New Season</span>
                         <h1 class="hsc-title">HUSTLER<br>TEES</h1>
                         <p class="hsc-sub">Premium t-shirts made for people who keep moving.</p>
                         <div class="hsc-actions">
@@ -29,7 +30,7 @@
             {{-- SLIDE 2 --}}
             <div class="swiper-slide">
                 <div class="hero-slide-inner">
-                    <img src="https://images.unsplash.com/photo-1581343600721-f4ea1318ec57?q=80&w=1062&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    <img src="{{ asset('assets/images/banners/Banner6.jpg') }}"
                          alt="Streetwear T-shirts" class="hero-slide-img" loading="lazy">
                     <div class="hero-slide-overlay"></div>
                     <div class="hero-slide-content">
@@ -47,7 +48,7 @@
             {{-- SLIDE 3 --}}
             <div class="swiper-slide">
                 <div class="hero-slide-inner">
-                    <img src="https://images.unsplash.com/photo-1580813089103-119575a0a880?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    <img src="{{ asset('assets/images/banners/Banner2.webp') }}"
                          alt="Premium Hustler T-shirts" class="hero-slide-img" loading="lazy">
                     <div class="hero-slide-overlay"></div>
                     <div class="hero-slide-content">

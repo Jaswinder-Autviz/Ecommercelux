@@ -16,6 +16,45 @@
 
     @include('frontend.components.hero-banner')
 
+    <!-- <section class="hustler-marquee" aria-label="Hustler highlights">
+        <div class="hustler-marquee-track">
+            @for ($i = 0; $i < 2; $i++)
+                <span>Oversized Tees</span>
+                <span>Heavy Cotton</span>
+                <span>Street Fits</span>
+                <span>Limited Drops</span>
+                <span>Made For Daily Hustle</span>
+            @endfor
+        </div>
+    </section> -->
+
+    <section class="brand-story-section">
+        <div class="container p-0">
+            <div class="brand-story-grid">
+                <div class="brand-story-copy reveal-left">
+                    <span class="section-eyebrow">Hustler essentials</span>
+                    <h2>Tees that work hard without trying too hard.</h2>
+                    <p>Clean silhouettes, bold attitude, and fabrics made for repeat wear. Build your daily uniform with graphic tees, oversized fits, and statement basics.</p>
+                    <a href="{{ route('shop') }}" class="brand-story-btn">Shop T-Shirts</a>
+                </div>
+                <div class="brand-story-stats reveal-right">
+                    <div class="brand-stat">
+                        <strong>240 GSM</strong>
+                        <span>Premium cotton feel</span>
+                    </div>
+                    <div class="brand-stat">
+                        <strong>Drop Based</strong>
+                        <span>Fresh designs every week</span>
+                    </div>
+                    <div class="brand-stat">
+                        <strong>All Day</strong>
+                        <span>Comfort-first streetwear</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
       {{-- WHY HUSTLER ROW --}}
     <section class="container p-0">
         <div class="why-luxe-section">
@@ -24,8 +63,8 @@
                     <div class="wl-row-icon">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                     </div>
-                    <h3>Verified Authentic</h3>
-                    <p>Every sneaker passes our 30-point authentication check.</p>
+                    <h3>Premium Fabric</h3>
+                    <p>Soft cotton blends selected for shape, comfort, and everyday wear.</p>
                 </div>
                 <div class="wl-row-card reveal" style="transition-delay:0.1s">
                     <div class="wl-row-icon">
@@ -38,8 +77,8 @@
                     <div class="wl-row-icon">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
                     </div>
-                    <h3>Easy Returns</h3>
-                    <p>Return within 7 days, no questions asked.</p>
+                    <h3>Easy Exchanges</h3>
+                    <p>Size not right? Exchange within 7 days without the drama.</p>
                 </div>
                 <div class="wl-row-card reveal" style="transition-delay:0.3s">
                     <div class="wl-row-icon">
@@ -57,31 +96,36 @@
     @include('frontend.components.categories-grid')
     @include('frontend.components.filter-product-section')
 
-    {{-- LACE IMAGES ROW (above footer) --}}
+    {{-- LOOKBOOK ROW (above footer) --}}
     <section class="categories-grid-section">
         <div class="container p-0">
             <div class="categories-title reveal">
-                <h2>The LACE</h2>
+                <h2>THE HUSTLER FIT</h2>
             </div>
             <div class="categories-grid">
                 <div class="category-card lace-card reveal" style="transition-delay:0s">
                     <div class="category-image-wrapper">
-                        <img src="{{ asset('assets/images/lace/nb1.jpg') }}" alt="Lace 1" class="category-image">
-                    </div>                </div>
+                        <img src="{{ asset('assets/images/categories/clothes1.jpg') }}" alt="Oversized Hustler T-shirt" class="category-image">
+                    </div>
+                    <div class="lookbook-label">Oversized</div>
+                </div>
                 <div class="category-card lace-card reveal" style="transition-delay:0.07s">
                     <div class="category-image-wrapper">
-                        <img src="{{ asset('assets/images/lace/nb2.png') }}" alt="Lace 2" class="category-image">
+                        <img src="{{ asset('assets/images/categories/clothes2.jpg') }}" alt="Graphic Hustler T-shirt" class="category-image">
                     </div>
+                    <div class="lookbook-label">Graphic</div>
                </div>
                 <div class="category-card lace-card reveal" style="transition-delay:0.14s">
                     <div class="category-image-wrapper">
-                        <img src="{{ asset('assets/images/lace/nb3.jpg') }}" alt="Lace 3" class="category-image">
+                        <img src="{{ asset('assets/images/categories/clothes4.jpg') }}" alt="Streetwear Hustler T-shirt" class="category-image">
                     </div>
+                    <div class="lookbook-label">Streetwear</div>
                 </div>
                 <div class="category-card lace-card reveal" style="transition-delay:0.21s">
                     <div class="category-image-wrapper">
-                        <img src="{{ asset('assets/images/lace/nb4.jpg') }}" alt="Lace 4" class="category-image">
+                        <img src="{{ asset('assets/images/categories/clothes5.jpg') }}" alt="Everyday Hustler T-shirt" class="category-image">
                     </div>
+                    <div class="lookbook-label">Everyday</div>
                </div>
             </div>
         </div>
@@ -242,13 +286,156 @@
 }
 .na-header:hover .na-title::after,.categories-title:hover h2::after,.choose-title:hover h2::after { width:100%; }
 
+.section-eyebrow {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #e71318;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+}
+
+/* HUSTLER INTRO */
+.hustler-marquee {
+    background: #111;
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.hustler-marquee-track {
+    display: inline-flex;
+    min-width: 200%;
+    animation: hustlerMarquee 30s linear infinite;
+}
+.hustler-marquee span {
+    position: relative;
+    padding: 13px 34px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+}
+.hustler-marquee span::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -3px;
+    width: 6px;
+    height: 6px;
+    background: #e71318;
+    transform: translateY(-50%);
+}
+@keyframes hustlerMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.brand-story-section { padding: 58px 0 8px; background: #fff; }
+.brand-story-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr);
+    gap: 36px;
+    align-items: stretch;
+}
+.brand-story-copy {
+    background: #f6f7f5;
+    padding: 46px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.brand-story-copy h2 {
+    max-width: 720px;
+    font-size: clamp(34px, 5vw, 68px);
+    line-height: .98;
+    font-weight: 900;
+    letter-spacing: 0;
+    color: #111;
+    margin: 0 0 20px;
+    text-transform: uppercase;
+}
+.brand-story-copy p {
+    max-width: 620px;
+    color: #555;
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0 0 28px;
+}
+.brand-story-btn {
+    width: fit-content;
+    background: #111;
+    color: #fff;
+    padding: 14px 24px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    transition: background .25s ease;
+}
+.brand-story-btn:hover { background: #e71318; }
+.brand-story-stats { display: grid; gap: 12px; }
+.brand-stat {
+    min-height: 92px;
+    padding: 24px;
+    background: #111;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.brand-stat strong {
+    display: block;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+.brand-stat span {
+    color: rgba(255,255,255,.72);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+@media(max-width:900px) {
+    .brand-story-grid { grid-template-columns: 1fr; gap: 14px; }
+    .brand-story-copy { padding: 34px 22px; }
+}
+
 /* ── CHOOSE ─────────────────────────────────────────────── */
 .choose-section { padding: 0px 0px 70px 0px; overflow: hidden;}
-.choose-item { position:relative; overflow:hidden; }
+.choose-item { position:relative; overflow:hidden; display:block; color:inherit; text-decoration:none; }
 .choose-item::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.35) 0%,transparent 60%); opacity:0; transition:opacity .4s ease; }
 .choose-item:hover::after { opacity:1; }
 .choose-image img { transition:transform 1s cubic-bezier(.4,0,.2,1); }
 .choose-item:hover .choose-image img { transform:scale(1.06); }
+.choose-label {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    color: #fff;
+}
+.choose-label span {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+}
+.choose-label strong {
+    flex: 0 0 auto;
+    background: #fff;
+    color: #111;
+    padding: 8px 10px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
 
 /* ── CATEGORIES / NA / FP ───────────────────────────────── */
 .categories-grid-section { padding:0px 0px 70px 0px; }
@@ -264,16 +451,16 @@
 @keyframes marqueeScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
 /* ── WHY HUSTLER ROW ────────────────────────────────────── */
-.why-luxe-section { background: #e8f8f8; margin: 50px 0; }
+.why-luxe-section { background: #f2f7f4; margin: 50px 0; border: 1px solid #e3ece6; }
 .wl-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; }
-.wl-row-card { padding: 25px 32px; border-right: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; align-items: flex-start; gap: 5px; transition: background 0.3s ease; }
+.wl-row-card { padding: 28px 30px; border-right: 1px solid #dce8e0; display: flex; flex-direction: column; align-items: flex-start; gap: 7px; transition: background 0.3s ease; }
 .wl-row-card:last-child { border-right: none; }
-.wl-row-card:hover { background: rgba(255,255,255,0.04); }
-.wl-row-icon { width: 52px; height: 52px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: #e71318; transition: all 0.3s ease; }
+.wl-row-card:hover { background: #fff; }
+.wl-row-icon { width: 52px; height: 52px; border: 1px solid #d7e2dc; background: #fff; display: flex; align-items: center; justify-content: center; color: #e71318; transition: all 0.3s ease; }
 .wl-row-card:hover .wl-row-icon { background: #e71318; color: #fff; border-color: #e71318; }
 .wl-row-card h3 { font-size: 14px; font-weight: 800; color: #111111; letter-spacing: 0.5px; margin: 0; }
 .wl-row-card p { font-size: 12px; color: #111111; line-height: 1.7; margin: 0; }
-@media(max-width:1024px) { .wl-row { grid-template-columns: repeat(2,1fr); } .wl-row-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); } }
+@media(max-width:1024px) { .wl-row { grid-template-columns: repeat(2,1fr); } .wl-row-card { border-right: none; border-bottom: 1px solid #dce8e0; } }
 @media(max-width:480px) { .wl-row { grid-template-columns: 1fr; } }
 
 /* ── FEATURED DROPS ─────────────────────────────────────── */
@@ -328,10 +515,10 @@
 @media(max-width:1024px) { .reels-grid { grid-template-columns:repeat(2,1fr); } }
 @media(max-width:480px) { .reels-grid { grid-template-columns:repeat(2,1fr); gap:8px; } }
 
-/* ── LACE IMAGES ROW ───────────────────────────────────── */
+/* ── LOOKBOOK IMAGES ROW ────────────────────────────────── */
 .lace-row-section { padding: 36px 0 48px; }
 .lace-row { display: flex;  gap: 5px; }
-.lace-card { overflow: hidden; }
+.lace-card { overflow: hidden; position: relative; }
 .lace-card .category-image-wrapper { position: relative; }
 .lace-card .category-image-wrapper::after {
     content: '';
@@ -343,6 +530,19 @@
 }
 .lace-card:hover .category-image-wrapper::after { background: rgba(0, 0, 0, 0.2); }
 .lace-card .category-image { width: 100%; display: block; transition: transform .45s cubic-bezier(.2,.9,.2,1), filter .3s ease; }
+.lookbook-label {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    z-index: 2;
+    background: rgba(255,255,255,.92);
+    color: #111;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
 @media(max-width:1024px) { .lace-row { grid-template-columns: repeat(2, 1fr); } .lace-card .category-image { height: 180px; } }
 @media(max-width:480px) { .lace-row { grid-template-columns: repeat(1, 1fr); } .lace-card .category-image { height: 160px; } }
 </style>
