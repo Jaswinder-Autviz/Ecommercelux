@@ -1,5 +1,5 @@
 /* choose.css */
-.choose-section { padding: 70px 0; background-color: #fff; }
+.choose-section { padding: 0px; background-color: #fff; }
 .choose-title { text-align: center; margin-bottom: 25px; }
 .choose-title h2 { font-size: 24px; font-weight: 700; color: var(--color-primary); text-transform: uppercase; }
 .choose-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; }

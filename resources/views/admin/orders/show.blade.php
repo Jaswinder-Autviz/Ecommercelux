@@ -110,7 +110,7 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="w-full bg-primary text-gray-400 font-bold py-3 rounded-xl transition-all shadow-lg shadow-primary/20">
+                    <button type="submit" class="w-full text-white bg-primary font-bold py-3 rounded-xl transition-all shadow-lg shadow-primary/20">
                         Update Status
                     </button>
                 </form>

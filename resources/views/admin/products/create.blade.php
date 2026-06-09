@@ -23,6 +23,23 @@
 
     <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         @csrf
+        <div class="lg:col-span-3">
+            @if ($errors->any())
+            <div class="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl text-sm text-red-700">
+                <strong class="font-semibold">Please fix the following errors:</strong>
+                <ul class="mt-2 space-y-1 list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if (session('error'))
+            <div class="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl text-sm text-red-700">
+                {{ session('error') }}
+            </div>
+            @endif
+        </div>
         <!-- Left: Basic Info -->
         <div class="lg:col-span-2 space-y-6">
             <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
@@ -31,12 +48,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="md:col-span-2">
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Product Name</label>
-                        <input type="text" name="name" id="product_name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Nike Air Max 270">
+                        <input type="text" name="name" id="product_name" value="{{ old('name') }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Nike Air Max 270">
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Slug</label>
-                        <input type="text" name="slug" id="product_slug" readonly class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 cursor-not-allowed" placeholder="auto-generated-slug">
+                        <input type="text" name="slug" id="product_slug" value="{{ old('slug') }}" readonly class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 cursor-not-allowed" placeholder="auto-generated-slug">
                     </div>
 
                     <div>
@@ -44,22 +61,22 @@
                         <select name="category_id" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">SKU</label>
-                        <input type="text" name="sku" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. NIKE-AM270-001">
+                        <input type="text" name="sku" value="{{ old('sku') }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. NIKE-AM270-001">
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Brand</label>
-                        <select name="brand_id" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+                        <select name="brand" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
                             <option value="">Select Brand</option>
                             @foreach(\App\Models\Brand::all() as $brand)
-                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                            <option value="{{ $brand->name }}" {{ old('brand') == $brand->name ? 'selected' : '' }}>{{ $brand->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -67,12 +84,12 @@
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Short Description</label>
-                    <textarea name="short_description" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Brief summary of the product..."></textarea>
+                    <textarea name="short_description" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Brief summary of the product...">{{ old('short_description') }}</textarea>
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Full Description</label>
-                    <textarea name="full_description" id="editor" class="hidden"></textarea>
+                    <textarea name="full_description" id="editor" class="hidden">{{ old('full_description') }}</textarea>
                 </div>
             </div>
 
@@ -82,15 +99,15 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Regular Price (₹)</label>
-                        <input type="number" name="price" required step="0.01" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="0.00">
+                        <input type="number" name="price" value="{{ old('price') }}" required step="0.01" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="0.00">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Discount Price (₹)</label>
-                        <input type="number" name="discount_price" step="0.01" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="0.00">
+                        <input type="number" name="discount_price" value="{{ old('discount_price') }}" step="0.01" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="0.00">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Stock Quantity</label>
-                        <input type="number" name="stock_quantity" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="0">
+                        <input type="number" name="stock_quantity" value="{{ old('stock_quantity') }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="0">
                     </div>
                 </div>
             </div>
@@ -123,7 +140,7 @@
                     <div class="flex items-center justify-between">
                         <label class="text-sm font-semibold text-gray-700">Publish Status</label>
                         <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" name="status" value="1" checked class="sr-only peer">
+                            <input type="checkbox" name="status" value="1" {{ old('status', '1') ? 'checked' : '' }} class="sr-only peer">
                             <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:width-5 after:transition-all peer-checked:bg-primary"></div>
                         </label>
                     </div>
@@ -131,7 +148,7 @@
                     <div class="flex items-center justify-between">
                         <label class="text-sm font-semibold text-gray-700">Featured Product</label>
                         <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" name="is_featured" value="1" class="sr-only peer">
+                            <input type="checkbox" name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }} class="sr-only peer">
                             <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:width-5 after:transition-all peer-checked:bg-primary"></div>
                         </label>
                     </div>

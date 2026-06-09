@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\OtpVerification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 
 class CustomerAuthController extends Controller
@@ -23,17 +24,36 @@ class CustomerAuthController extends Controller
         OtpVerification::updateOrCreate(
             ['phone' => $request->phone],
             [
-                'otp' => $request->otp ?? $otp, // Use actual service in production
+                'otp' => $otp,
                 'expires_at' => $expiresAt,
                 'is_verified' => false
             ]
         );
 
-        // In production, send SMS here
+        // Send OTP via Telegram
+        $botToken = env('TELEGRAM_BOT_TOKEN');
+        $chatId = env('TELEGRAM_CHAT_ID');
+        $message = "🔐 *OTP Verification*\n\nPhone: +91{$request->phone}\nOTP: *{$otp}*\nExpires in: 5 minutes";
+
+        Http::post("https://api.telegram.org/bot{$botToken}/sendMessage", [
+            'chat_id' => $chatId,
+            'text' => $message,
+            'parse_mode' => 'Markdown',
+        ]);
+
+        // Send OTP via WhatsApp (CallMeBot)
+        if (env('WHATSAPP_API_KEY') && env('WHATSAPP_PHONE')) {
+            $whatsappMessage = urlencode("🔐 OTP Verification\nPhone: +91{$request->phone}\nOTP: {$otp}\nExpires in: 5 minutes");
+            Http::get("https://api.callmebot.com/whatsapp.php", [
+                'phone' => env('WHATSAPP_PHONE'),
+                'text'  => $whatsappMessage,
+                'apikey' => env('WHATSAPP_API_KEY'),
+            ]);
+        }
+
         return response()->json([
             'status' => 'success',
             'message' => 'OTP sent successfully to ' . $request->phone,
-            'otp' => $otp // Sending in response for testing purposes only!
         ]);
     }
 

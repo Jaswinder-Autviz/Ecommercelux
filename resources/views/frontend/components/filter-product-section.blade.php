@@ -1,23 +1,44 @@
 <section class="fp-section">
-    <!-- Section Banner -->
-    <div class="fp-banner">
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1600&q=90&fit=crop&crop=center" alt="New Season" class="fp-banner-img">
-        <div class="fp-banner-overlay"></div>
-        <div class="fp-banner-content reveal">
-            <span class="fp-banner-tag">Season 2025</span>
-            <h2 class="fp-banner-title">NEW SEASON<br>COLLECTIONS</h2>
-            <p class="fp-banner-text">Discover the latest trends in luxury footwear and apparel.</p>
-            <a href="{{ route('shop') }}" class="fp-banner-btn">Shop Now →</a>
+
+    {{-- PREMIUM PROMO SLIDER --}}
+    <div class="container p-0">
+    <div class="promo-slider-wrap">
+        <div class="swiper promo-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="promo-slide">
+                        <img src="{{ asset('assets/images/banners/slider2.jpg') }}" alt="Slide 1" class="promo-slide-img">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="promo-slide">
+                        <img src="{{ asset('assets/images/banners/slider1.jpg') }}" alt="Slide 2" class="promo-slide-img">
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="promo-slide">
+                        <img src="{{ asset('assets/images/banners/slider3.jpg') }}" alt="Slide 3" class="promo-slide-img">
+                    </div>
+                </div>
+            </div>
+            <div class="promo-pagination"></div>
+            <button class="promo-nav promo-nav-prev">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="promo-nav promo-nav-next">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
         </div>
     </div>
+</div>
 
-    <div class="container">
+    <div class="container p-0">
         <!-- Filter Bar -->
         <div class="fp-filter-wrapper">
             <div class="fp-filter-bar">
                 <div class="fp-filter-left">
                     <div class="fp-filter-tabs">
-                        <button class="fp-filter-btn active" data-filter="all">All</button>
+                        <button class="fp-filter-btn active" data-filter="all">Trending</button>
                         @foreach(\App\Models\Category::where('status', true)->get() as $cat)
                             <button class="fp-filter-btn" data-filter="{{ strtolower($cat->name) }}">{{ $cat->name }}</button>
                         @endforeach
@@ -39,7 +60,7 @@
 
         <!-- Product Grid -->
         <div class="fp-grid" id="fp-product-grid">
-            @foreach(\App\Models\Product::where('status', true)->with('category')->latest()->take(8)->get() as $product)
+            @foreach(\App\Models\Product::where('status', true)->with('category')->latest()->get() as $product)
                 <div class="fp-item"
                      data-category="{{ strtolower($product->category->name ?? '') }}"
                      data-price="{{ $product->price }}">
@@ -55,10 +76,29 @@
 </section>
 
 @push('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <link rel="stylesheet" href="{{ asset('assets/css/product-card.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/filter-product-section.css') }}">
 @endpush
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="{{ asset('assets/js/filter-product-section.js') }}"></script>
+<script>
+new Swiper('.promo-swiper', {
+    loop: true,
+    autoplay: { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
+    speed: 700,
+    slidesPerView: 1,
+    spaceBetween: 0,
+    grabCursor: true,
+    simulateTouch: true,
+    allowTouchMove: true,
+    touchRatio: 1,
+    touchAngle: 45,
+    pagination: { el: '.promo-pagination', clickable: true },
+    navigation: { prevEl: '.promo-nav-prev', nextEl: '.promo-nav-next' },
+    keyboard: { enabled: true, onlyInViewport: true },
+});
+</script>
 @endpush

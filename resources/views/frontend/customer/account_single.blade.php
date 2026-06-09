@@ -3,6 +3,7 @@
 @section('title', 'My Account - LuxeStore')
 
 @section('content')
+@php $nameParts = explode(' ', trim(Auth::guard('customer')->user()->name ?? '')); @endphp
 <div class="min-h-screen bg-white pt-32 pb-20">
     <div class="container mx-auto px-4 max-w-6xl">
         
@@ -26,9 +27,7 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-bold leading-tight truncate w-40">{{ Auth::guard('customer')->user()->name ?? 'Jaswinder Singh' }}</h3>
-                            <p class="text-xs text-gray-400/70 mt-1 flex items-center">
-                                <i class="far fa-clock mr-1"></i> <span id="current-time">04:58:50 PM</span>
-                            </p>
+                          
                         </div>
                     </div>
 
@@ -51,7 +50,7 @@
                                         <i class="fas fa-shopping-basket text-lg"></i>
                                         <span class="font-bold">Order history</span>
                                     </div>
-                                    <span class="bg-white/20 w-5 h-5 flex items-center justify-center text-[10px] rounded-md font-bold">1</span>
+                                    <span class="bg-white/20 w-5 h-5 flex items-center justify-center text-[10px] rounded-md font-bold">{{ $totalOrders }}</span>
                                 </button>
                             </li>
                             <li>
@@ -60,7 +59,7 @@
                                         <i class="fas fa-map-marker-alt text-lg"></i>
                                         <span class="font-bold">Delivery address</span>
                                     </div>
-                                    <span class="bg-white/20 w-5 h-5 flex items-center justify-center text-[10px] rounded-md font-bold">1</span>
+                                    <span class="bg-white/20 w-5 h-5 flex items-center justify-center text-[10px] rounded-md font-bold">{{ $addresses->count() }}</span>
                                 </button>
                             </li>
                     
@@ -84,59 +83,72 @@
             {{-- Main Content Area (Single Page) --}}
             <main class="flex-1">
                 <div class="bg-white rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100 p-10 min-h-[550px]">
-                    
+                    @if(session('success'))
+                        <div class="mb-6 rounded-3xl border border-green-200 bg-green-50 p-5 text-sm text-green-700">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if($errors->any())
+                        <div class="mb-6 rounded-3xl border border-red-200 bg-red-50 p-5 text-sm text-red-700">
+                            <ul class="list-disc list-inside">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     {{-- Profile Tab --}}
                     <div id="tab-profile" class="tab-content space-y-10">
                         <div class="flex justify-between items-center">
                             <h2 class="text-xl font-bold text-gray-800">Profile Details</h2>
-                            <button class="p-2 text-gray-400 hover:text-primary transition-all">
-                                <i class="far fa-edit text-xl"></i>
-                            </button>
                         </div>
 
-                        <form class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+                        <form action="{{ route('customer.profile.update') }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+                            @csrf
                             <div class="space-y-2">
                                 <label class="text-sm font-bold text-gray-600 ml-1">First name</label>
-                                <input type="text" value="{{ explode(' ', Auth::guard('customer')->user()->name ?? 'Jaswinder Singh')[0] }}" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all font-medium text-gray-800">
+                                <input type="text" name="first_name" value="{{ old('first_name', $nameParts[0] ?? '') }}" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all font-medium text-gray-800">
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-bold text-gray-600 ml-1">Last name</label>
-                                <input type="text" value="{{ explode(' ', Auth::guard('customer')->user()->name ?? 'Singh')[1] ?? '' }}" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all font-medium text-gray-800">
+                                <input type="text" name="last_name" value="{{ old('last_name', $nameParts[1] ?? '') }}" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all font-medium text-gray-800">
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-bold text-gray-600 ml-1">Email</label>
-                                <input type="email" value="{{ Auth::guard('customer')->user()->email ?? 'jaswinderhunjan15@gmail.com' }}" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all font-medium text-gray-800">
+                                <input type="email" name="email" value="{{ old('email', Auth::guard('customer')->user()->email ?? '') }}" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all font-medium text-gray-800">
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-bold text-gray-600 ml-1">Contact number</label>
-                                <input type="text" value="+91 {{ Auth::guard('customer')->user()->phone ?? '9915541237' }}" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all font-medium text-gray-800">
+                                <input type="text" name="phone" value="{{ old('phone', Auth::guard('customer')->user()->phone ?? '') }}" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all font-medium text-gray-800">
                             </div>
-                            
-                            <div class="md:col-span-2 space-y-2">
+                            <div class="space-y-2">
                                 <label class="text-sm font-bold text-gray-600 ml-1">Birthdate</label>
-                                <div class="flex gap-4">
-                                    <input type="text" placeholder="DD" class="w-24 px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl text-center font-medium">
-                                    <input type="text" placeholder="MM" class="w-24 px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl text-center font-medium">
-                                    <input type="text" placeholder="YYYY" class="flex-1 px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl font-medium">
-                                </div>
+                                <input type="date" name="dob" value="{{ old('dob', optional(Auth::guard('customer')->user())->dob ? Auth::guard('customer')->user()->dob->format('Y-m-d') : '') }}" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all font-medium text-gray-800">
                             </div>
-
+                            <div class="space-y-2 md:col-span-2">
+                                <label class="text-sm font-bold text-gray-600 ml-1">Profile image</label>
+                                <input type="file" name="profile_image" accept="image/*" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all text-gray-800">
+                            </div>
                             <div class="md:col-span-2 space-y-4">
                                 <label class="text-sm font-bold text-gray-600 ml-1">Gender</label>
                                 <div class="flex items-center gap-8">
                                     <label class="flex items-center space-x-3 cursor-pointer group">
-                                        <input type="radio" name="gender" class="w-5 h-5 text-primary focus:ring-primary/20 bg-[#f0f4f9] border-none">
+                                        <input type="radio" name="gender" value="male" class="w-5 h-5 text-primary focus:ring-primary/20 bg-[#f0f4f9] border-none" {{ old('gender', Auth::guard('customer')->user()->gender) === 'male' ? 'checked' : '' }}>
                                         <span class="font-bold text-gray-700 group-hover:text-primary transition-all">Male</span>
                                     </label>
                                     <label class="flex items-center space-x-3 cursor-pointer group">
-                                        <input type="radio" name="gender" class="w-5 h-5 text-primary focus:ring-primary/20 bg-[#f0f4f9] border-none">
+                                        <input type="radio" name="gender" value="female" class="w-5 h-5 text-primary focus:ring-primary/20 bg-[#f0f4f9] border-none" {{ old('gender', Auth::guard('customer')->user()->gender) === 'female' ? 'checked' : '' }}>
                                         <span class="font-bold text-gray-700 group-hover:text-primary transition-all">Female</span>
                                     </label>
                                     <label class="flex items-center space-x-3 cursor-pointer group">
-                                        <input type="radio" name="gender" class="w-5 h-5 text-primary focus:ring-primary/20 bg-[#f0f4f9] border-none">
+                                        <input type="radio" name="gender" value="other" class="w-5 h-5 text-primary focus:ring-primary/20 bg-[#f0f4f9] border-none" {{ old('gender', Auth::guard('customer')->user()->gender) === 'other' ? 'checked' : '' }}>
                                         <span class="font-bold text-gray-700 group-hover:text-primary transition-all">Other</span>
                                     </label>
                                 </div>
+                            </div>
+                            <div class="md:col-span-2 flex justify-end pt-4">
+                                <button type="submit" class="bg-primary text-white px-8 py-4 rounded-2xl shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all font-bold">Save changes</button>
                             </div>
                         </form>
                     </div>
@@ -154,39 +166,127 @@
                     {{-- Orders Tab --}}
                     <div id="tab-orders" class="tab-content hidden space-y-6">
                         <h2 class="text-xl font-bold text-gray-800">Order History</h2>
-                        <div class="space-y-4">
-                            <div class="p-6 bg-[#f0f4f9] rounded-[24px] flex items-center justify-between">
-                                <div class="flex items-center space-x-4">
-                                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm">
-                                        <i class="fas fa-shopping-bag"></i>
+                        @if($orders->count())
+                            <div class="space-y-4">
+                                @foreach($orders as $order)
+                                    <div class="p-6 bg-[#f0f4f9] rounded-[24px] flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary shadow-sm">
+                                                <i class="fas fa-shopping-bag"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-bold text-gray-800">Order #{{ $order->order_number ?? 'ORD-' . $order->id }}</p>
+                                                <p class="text-xs text-gray-500">Placed on {{ $order->created_at->format('d M, Y') }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <p class="font-bold text-primary">₹{{ number_format($order->final_amount ?? $order->total_amount ?? 0, 2) }}</p>
+                                            <span class="text-[10px] font-bold uppercase {{ ($order->order_status ?? $order->payment_status) === 'delivered' ? 'text-green-500' : 'text-blue-500' }}">{{ ucfirst($order->order_status ?? $order->payment_status ?? 'Pending') }}</span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p class="font-bold text-gray-800">Order #LX-5520</p>
-                                        <p class="text-xs text-gray-500">Placed on 10 May, 2026</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-primary">₹2,499.00</p>
-                                    <span class="text-[10px] font-bold uppercase text-green-500">Delivered</span>
-                                </div>
+                                @endforeach
                             </div>
-                        </div>
+                        @else
+                            <div class="p-8 border border-dashed rounded-[32px] text-center text-gray-500">
+                                <i class="fas fa-box-open text-4xl mb-4"></i>
+                                <p>No orders found yet. Your order history will appear here once you place an order.</p>
+                            </div>
+                        @endif
                     </div>
 
                     {{-- Address Tab --}}
                     <div id="tab-address" class="tab-content hidden space-y-6">
                         <div class="flex justify-between items-center">
                             <h2 class="text-xl font-bold text-gray-800">Saved Addresses</h2>
-                            <button class="bg-primary text-gray-400 px-5 py-2 rounded-xl text-xs font-bold shadow-lg shadow-primary/20">Add New</button>
+                                <button onclick="document.getElementById('addressModal').classList.remove('hidden')" class="bg-primary text-gray-400 px-5 py-2 rounded-xl text-xs font-bold shadow-lg shadow-primary/20">Add New</button>
                         </div>
                         <div class="grid grid-cols-1 gap-4">
-                            <div class="p-6 border-2 border-primary rounded-[24px] bg-primary/5 relative">
-                                <span class="absolute top-4 right-4 bg-primary text-gray-400 text-[10px] px-2 py-0.5 rounded-md font-bold uppercase">Default</span>
-                                <h4 class="font-bold text-gray-800 mb-2">Home</h4>
-                                <p class="text-sm text-gray-500 leading-relaxed">
-                                    #123, Luxury Heights, Fashion Street,<br>
-                                    Model Town, Ludhiana, Punjab - 141001
-                                </p>
+                            @forelse($addresses as $address)
+                                <div class="p-6 border-2 rounded-[24px] bg-white relative {{ $address->is_default ? 'border-primary bg-primary/5' : 'border-gray-100' }}">
+                                    @if($address->is_default)
+                                        <span class="absolute top-4 right-4 bg-primary text-gray-100 text-[10px] px-2 py-0.5 rounded-md font-bold uppercase">Default</span>
+                                    @endif
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div>
+                                            <h4 class="font-bold text-gray-800 capitalize">{{ $address->address_type }}</h4>
+                                            <p class="text-sm text-gray-500">{{ $address->full_name }}</p>
+                                        </div>
+                                        <span class="text-xs uppercase tracking-[0.15em] text-gray-400">Saved</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500 leading-relaxed mb-3">
+                                        {{ $address->street_address }}{{ $address->landmark ? ', ' . $address->landmark : '' }}<br>
+                                        {{ $address->city }}, {{ $address->state }} - {{ $address->pincode }}
+                                    </p>
+                                    <p class="text-sm text-gray-500">Phone: {{ $address->mobile_number }}</p>
+                                </div>
+                            @empty
+                                <div class="p-8 border border-dashed rounded-3xl text-center text-gray-500">
+                                    <i class="far fa-address-card text-4xl mb-4"></i>
+                                    <p>No saved addresses yet.</p>
+                                    <button onclick="document.getElementById('addressModal').classList.remove('hidden')" class="mt-4 bg-primary text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-primary/20 transition-all">Add your first address</button>
+                                </div>
+                            @endforelse
+                        </div>
+                    
+                        {{-- Add Address Modal (embedded for account page) --}}
+                        <div id="addressModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+                            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="this.parentElement.classList.add('hidden')"></div>
+                            <div class="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden p-8 max-h-[90vh] overflow-y-auto">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-8">Add New Address</h3>
+                            
+                                <form action="{{ route('customer.addresses.store') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    @csrf
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+                                        <input type="text" name="full_name" required class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Mobile Number</label>
+                                        <input type="text" name="mobile_number" required maxlength="10" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Pincode</label>
+                                        <input type="text" name="pincode" required maxlength="6" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">State</label>
+                                        <input type="text" name="state" required class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">City</label>
+                                        <input type="text" name="city" required class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Landmark (Optional)</label>
+                                        <input type="text" name="landmark" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none">
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Street Address</label>
+                                        <textarea name="street_address" required rows="3" class="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none"></textarea>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">Address Type</label>
+                                        <div class="flex space-x-4">
+                                            <label class="flex-1">
+                                                <input type="radio" name="address_type" value="home" checked class="hidden peer">
+                                                <div class="text-center py-3 rounded-xl border border-gray-100 bg-gray-50 peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary cursor-pointer transition-all font-bold text-sm">Home</div>
+                                            </label>
+                                            <label class="flex-1">
+                                                <input type="radio" name="address_type" value="office" class="hidden peer">
+                                                <div class="text-center py-3 rounded-xl border border-gray-100 bg-gray-50 peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary cursor-pointer transition-all font-bold text-sm">Office</div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="md:col-span-2 flex space-x-4 pt-4">
+                                        <button type="submit" class="flex-1 bg-primary text-gray-400 font-bold py-4 rounded-2xl shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all">
+                                            Save Address
+                                        </button>
+                                        <button type="button" onclick="document.getElementById('addressModal').classList.add('hidden')" class="px-8 py-4 text-gray-500 font-bold hover:bg-gray-50 rounded-2xl transition-all">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

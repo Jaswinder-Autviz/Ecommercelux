@@ -4,19 +4,24 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-    --color-primary:   #292b2c;
-    --color-secondary: #666666;
-    --color-accent:    #e8353b;
+    --color-primary:   #111111;
+    --color-secondary: #555555;
+    --color-accent:    #e71318;
+    --color-gold:      #e71318;
     --color-white:     #ffffff;
-    --color-light-bg:  #f8f8f8;
-    --color-border:    #e5e5e5;
-    --container-max:        1500px;
+    --color-light-bg:  #F5F5F2;
+    --color-border:    #E8E8E4;
+    --container-max:        1540px;
     --header-height:        70px;
     --announcement-height:  40px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+    --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-md: 0 6px 24px rgba(0,0,0,0.10);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.14);
+}
+
+body {
+    background: var(--color-light-bg);
 }
 
 html { scroll-behavior: smooth; }
@@ -48,3 +53,33 @@ button { font-family: inherit; }
     padding: 0; margin: -1px; overflow: hidden;
     clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
+
+/* ── Global Button / Primary Overrides ───────────────────────────────── */
+/* Ensure buttons across the system use the requested primary color and white text */
+
+input[type="submit"],
+input[type="button"],
+.btn,
+.btn-primary,
+a.btn,
+a.bg-primary {
+    background-color: #e31837!important;
+    color: #ffffff !important;
+    border-color: #e31837!important;
+}
+
+/* Make any element using .bg-primary use white text by default */
+.bg-primary {
+    background-color: #e31837!important;
+    color: #ffffff !important;
+}
+
+/* Links styled as primary buttons */
+a.bg-primary {
+    color: #ffffff !important;
+}
+
+/* Small variants */
+.bg-primary\/10 { background-color: rgba(231,19,24,0.10) !important; }
+.bg-primary\/5  { background-color: rgba(231,19,24,0.05) !important; }
+

@@ -15,104 +15,184 @@
 <div class="home-page">
 
     @include('frontend.components.hero-banner')
-    @include('frontend.components.choose')
-    @include('frontend.components.new-arrivals-slider')
-    @include('frontend.components.categories-grid')
-    @include('frontend.components.filter-product-section')
 
-    {{-- STATS SECTION --}}
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item reveal">
-                    <div class="stat-number" data-target="15000">0</div>
-                    <div class="stat-label">Happy Customers</div>
+      {{-- WHY LUXE ROW --}}
+    <section class="container p-0">
+        <div class="why-luxe-section">
+            <div class="wl-row ">
+                <div class="wl-row-card reveal" style="transition-delay:0s">
+                    <div class="wl-row-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Verified Authentic</h3>
+                    <p>Every sneaker passes our 30-point authentication check.</p>
                 </div>
-                <div class="stat-item reveal" style="transition-delay:0.1s">
-                    <div class="stat-number" data-target="500">0</div>
-                    <div class="stat-label">Premium Products</div>
+                <div class="wl-row-card reveal" style="transition-delay:0.1s">
+                    <div class="wl-row-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    </div>
+                    <h3>2-Day Delivery</h3>
+                    <p>Same-day dispatch on all orders placed before 3PM.</p>
                 </div>
-                <div class="stat-item reveal" style="transition-delay:0.2s">
-                    <div class="stat-number" data-target="50">0</div>
-                    <div class="stat-label">Top Brands</div>
+                <div class="wl-row-card reveal" style="transition-delay:0.2s">
+                    <div class="wl-row-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+                    </div>
+                    <h3>Easy Returns</h3>
+                    <p>Return within 7 days, no questions asked.</p>
                 </div>
-                <div class="stat-item reveal" style="transition-delay:0.3s">
-                    <div class="stat-number" data-target="99">0</div>
-                    <div class="stat-label">% Satisfaction Rate</div>
+                <div class="wl-row-card reveal" style="transition-delay:0.3s">
+                    <div class="wl-row-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    </div>
+                    <h3>Exclusive Drops</h3>
+                    <p>Early access to limited releases before they sell out.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    @include('frontend.components.choose')
+    @include('frontend.components.new-arrivals-slider')
+    @include('frontend.components.categories-grid')
+    @include('frontend.components.filter-product-section')
+
+    {{-- LACE IMAGES ROW (above footer) --}}
+    <section class="categories-grid-section">
+        <div class="container p-0">
+            <div class="categories-title reveal">
+                <h2>The LACE</h2>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card lace-card reveal" style="transition-delay:0s">
+                    <div class="category-image-wrapper">
+                        <img src="{{ asset('assets/images/lace/nb1.jpg') }}" alt="Lace 1" class="category-image">
+                    </div>                </div>
+                <div class="category-card lace-card reveal" style="transition-delay:0.07s">
+                    <div class="category-image-wrapper">
+                        <img src="{{ asset('assets/images/lace/nb2.png') }}" alt="Lace 2" class="category-image">
+                    </div>
+               </div>
+                <div class="category-card lace-card reveal" style="transition-delay:0.14s">
+                    <div class="category-image-wrapper">
+                        <img src="{{ asset('assets/images/lace/nb3.jpg') }}" alt="Lace 3" class="category-image">
+                    </div>
+                </div>
+                <div class="category-card lace-card reveal" style="transition-delay:0.21s">
+                    <div class="category-image-wrapper">
+                        <img src="{{ asset('assets/images/lace/nb4.jpg') }}" alt="Lace 4" class="category-image">
+                    </div>
+               </div>
+            </div>
+        </div>
+    </section>
+
+  
+
+    {{-- FEATURED DROPS --}}
+    <!-- <section class="featured-drops-section">
+        <div class="container">
+            <div class="fd-header reveal">
+                <span class="fd-eyebrow">Limited Edition</span>
+                <h2 class="fd-title">THIS WEEK'S DROPS</h2>
+            </div>
+            <div class="fd-grid">
+                <div class="fd-card fd-card--large reveal-left">
+                    <div class="fd-card-inner" style="background: linear-gradient(135deg, #111111 0%, #1a1a2e 50%, #16213e 100%)">
+                        <div class="fd-shoe-visual">
+                            <div class="fd-shoe-glow" style="background: radial-gradient(circle, rgba(255,107,53,0.4) 0%, transparent 70%)"></div>
+                            <svg viewBox="0 0 300 180" class="fd-shoe-svg">
+                                <ellipse cx="150" cy="155" rx="130" ry="12" fill="rgba(255,255,255,0.05)"/>
+                                <path d="M40,130 Q60,80 120,70 Q160,65 200,75 Q240,85 260,110 Q270,125 265,135 Q200,145 150,148 Q90,150 40,130Z" fill="#e71318" opacity="0.9"/>
+                                <path d="M40,130 Q60,80 120,70 Q160,65 200,75 Q240,85 260,110" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                                <path d="M80,125 Q100,95 140,88 Q170,84 200,90" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="8" stroke-linecap="round"/>
+                                <path d="M55,128 Q75,100 115,92" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="6" stroke-linecap="round"/>
+                                <circle cx="220" cy="100" r="8" fill="rgba(255,255,255,0.1)"/>
+                                <circle cx="235" cy="108" r="5" fill="rgba(255,255,255,0.08)"/>
+                                <path d="M150,70 L155,50 L160,70" fill="rgba(255,255,255,0.2)"/>
+                                <path d="M170,68 L175,45 L180,68" fill="rgba(255,255,255,0.15)"/>
+                                <path d="M190,72 L195,52 L200,72" fill="rgba(255,255,255,0.1)"/>
+                            </svg>
+                        </div>
+                        <div class="fd-card-content">
+                            <span class="fd-tag">🔥 Hot Drop</span>
+                            <h3 class="fd-card-title">PHANTOM X1</h3>
+                            <p class="fd-card-sub">Ultra-light performance meets street style</p>
+                            <a href="{{ route('shop') }}" class="fd-card-btn">Shop Now →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fd-right">
+                    <div class="fd-card fd-card--small reveal" style="transition-delay:0.1s">
+                        <div class="fd-card-inner" style="background: linear-gradient(135deg, #f8f8f8 0%, #ececec 100%)">
+                            <div class="fd-shoe-visual">
+                                <svg viewBox="0 0 300 180" class="fd-shoe-svg">
+                                    <ellipse cx="150" cy="155" rx="130" ry="12" fill="rgba(0,0,0,0.05)"/>
+                                    <path d="M40,130 Q60,80 120,70 Q160,65 200,75 Q240,85 260,110 Q270,125 265,135 Q200,145 150,148 Q90,150 40,130Z" fill="#0a0a0a" opacity="0.85"/>
+                                    <path d="M80,125 Q100,95 140,88 Q170,84 200,90" fill="none" stroke="rgba(255,107,53,0.6)" stroke-width="8" stroke-linecap="round"/>
+                                    <path d="M55,128 Q75,100 115,92" fill="none" stroke="rgba(255,107,53,0.4)" stroke-width="6" stroke-linecap="round"/>
+                                    <path d="M150,70 L155,50 L160,70" fill="rgba(0,0,0,0.3)"/>
+                                    <path d="M170,68 L175,45 L180,68" fill="rgba(0,0,0,0.2)"/>
+                                </svg>
+                            </div>
+                            <div class="fd-card-content">
+                                <span class="fd-tag fd-tag--dark">New</span>
+                                <h3 class="fd-card-title fd-card-title--dark">SHADOW RUN</h3>
+                                <a href="{{ route('shop') }}" class="fd-card-btn fd-card-btn--dark">Explore →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fd-card fd-card--small reveal" style="transition-delay:0.2s">
+                        <div class="fd-card-inner" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)">
+                            <div class="fd-shoe-visual">
+                                <svg viewBox="0 0 300 180" class="fd-shoe-svg">
+                                    <ellipse cx="150" cy="155" rx="130" ry="12" fill="rgba(255,255,255,0.03)"/>
+                                    <path d="M40,130 Q60,80 120,70 Q160,65 200,75 Q240,85 260,110 Q270,125 265,135 Q200,145 150,148 Q90,150 40,130Z" fill="#ffffff" opacity="0.9"/>
+                                    <path d="M80,125 Q100,95 140,88 Q170,84 200,90" fill="none" stroke="rgba(255,107,53,0.8)" stroke-width="8" stroke-linecap="round"/>
+                                    <path d="M55,128 Q75,100 115,92" fill="none" stroke="rgba(255,107,53,0.5)" stroke-width="6" stroke-linecap="round"/>
+                                    <path d="M150,70 L155,50 L160,70" fill="rgba(255,255,255,0.5)"/>
+                                    <path d="M170,68 L175,45 L180,68" fill="rgba(255,255,255,0.3)"/>
+                                </svg>
+                            </div>
+                            <div class="fd-card-content">
+                                <span class="fd-tag">Limited</span>
+                                <h3 class="fd-card-title">CLOUD FORCE</h3>
+                                <a href="{{ route('shop') }}" class="fd-card-btn">Explore →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
     {{-- REELS SECTION --}}
-    <section class="reels-section">
+    <!-- <section class="reels-section">
         <div class="container">
             <div class="reels-header reveal">
                 <p class="reels-eyebrow">@luxestore</p>
                 <h2 class="reels-title">AS SEEN ON INSTAGRAM</h2>
             </div>
             <div class="reels-grid">
-
-                <div class="reel-card reveal" style="transition-delay:0s">
+                @forelse($reels as $index => $reel)
+                <div class="reel-card reveal" style="transition-delay:{{ $index * 0.08 }}s">
                     <div class="reel-inner">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=85&fit=crop&crop=center" alt="Reel 1" class="reel-img">
+                        <img src="{{ asset('assets/images/reels/' . $reel->thumbnail) }}" alt="Reel {{ $index + 1 }}" class="reel-img">
                         <div class="reel-overlay">
                             <div class="reel-play">
                                 <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
                             </div>
                             <div class="reel-meta">
-                                <span class="reel-likes">❤ 4.2k</span>
+                                @if($reel->likes)<span class="reel-likes">❤ {{ $reel->likes }}</span>@endif
                             </div>
                         </div>
                         <div class="reel-badge">Reel</div>
                     </div>
                 </div>
-
-                <div class="reel-card reveal" style="transition-delay:0.08s">
-                    <div class="reel-inner">
-                        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=85&fit=crop&crop=center" alt="Reel 2" class="reel-img">
-                        <div class="reel-overlay">
-                            <div class="reel-play">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-                            </div>
-                            <div class="reel-meta">
-                                <span class="reel-likes">❤ 6.8k</span>
-                            </div>
-                        </div>
-                        <div class="reel-badge">Reel</div>
-                    </div>
-                </div>
-
-                <div class="reel-card reveal" style="transition-delay:0.16s">
-                    <div class="reel-inner">
-                        <img src="https://images.unsplash.com/photo-1584735175315-9d5df23be620?w=600&q=85&fit=crop&crop=center" alt="Reel 3" class="reel-img">
-                        <div class="reel-overlay">
-                            <div class="reel-play">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-                            </div>
-                            <div class="reel-meta">
-                                <span class="reel-likes">❤ 3.1k</span>
-                            </div>
-                        </div>
-                        <div class="reel-badge">Reel</div>
-                    </div>
-                </div>
-
-                <div class="reel-card reveal" style="transition-delay:0.24s">
-                    <div class="reel-inner">
-                        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&q=85&fit=crop&crop=center" alt="Reel 4" class="reel-img">
-                        <div class="reel-overlay">
-                            <div class="reel-play">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-                            </div>
-                            <div class="reel-meta">
-                                <span class="reel-likes">❤ 9.4k</span>
-                            </div>
-                        </div>
-                        <div class="reel-badge">Reel</div>
-                    </div>
-                </div>
-
+                @empty
+                @endforelse
             </div>
             <div class="reels-follow reveal">
                 <a href="#" class="reels-follow-btn">
@@ -121,7 +201,7 @@
                 </a>
             </div>
         </div>
-    </section>
+    </section> -->
 
 </div>
 @endsection
@@ -131,7 +211,7 @@
 <style>
 /* ── LOADER ─────────────────────────────────────────────── */
 #page-loader {
-    position: fixed; inset: 0; background: #0a0a0a; z-index: 99999;
+    position: fixed; inset: 0; background: #111111; z-index: 99999;
     display: flex; align-items: center; justify-content: center;
     transition: opacity 0.6s ease, visibility 0.6s ease;
 }
@@ -143,7 +223,7 @@
 }
 @keyframes loaderPulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 .loader-bar { width: 160px; height: 2px; background: rgba(255,255,255,0.15); margin: 0 auto; overflow: hidden; }
-.loader-bar-fill { height: 100%; width: 0%; background: #fff; animation: loaderFill 1.2s ease forwards; }
+.loader-bar-fill { height: 100%; width: 0%; background: #e71318; animation: loaderFill 1.2s ease forwards; }
 @keyframes loaderFill { to { width: 100%; } }
 
 /* ── SCROLL REVEAL ──────────────────────────────────────── */
@@ -158,12 +238,12 @@
 .na-title,.categories-title h2,.choose-title h2 { position:relative; display:inline-block; }
 .na-title::after,.categories-title h2::after,.choose-title h2::after {
     content:''; position:absolute; bottom:-6px; left:50%; transform:translateX(-50%);
-    width:40px; height:2px; background:#000; transition:width .4s ease;
+    width:40px; height:2px; background:#e71318; transition:width .4s ease;
 }
 .na-header:hover .na-title::after,.categories-title:hover h2::after,.choose-title:hover h2::after { width:100%; }
 
 /* ── CHOOSE ─────────────────────────────────────────────── */
-.choose-section { padding: 70px 0; }
+.choose-section { padding: 0px 0px 70px 0px; overflow: hidden;}
 .choose-item { position:relative; overflow:hidden; }
 .choose-item::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.35) 0%,transparent 60%); opacity:0; transition:opacity .4s ease; }
 .choose-item:hover::after { opacity:1; }
@@ -171,36 +251,65 @@
 .choose-item:hover .choose-image img { transform:scale(1.06); }
 
 /* ── CATEGORIES / NA / FP ───────────────────────────────── */
-.categories-grid-section { padding:70px 0; }
-.na-section { padding:70px 0; }
+.categories-grid-section { padding:0px 0px 70px 0px; }
+.na-section { padding:0px 0px 70px 0px; }
 .fp-section { padding-bottom:80px; }
 
 /* ── MARQUEE ────────────────────────────────────────────── */
-.marquee-strip { background:#0a0a0a; color:#fff; overflow:hidden; padding:13px 0; white-space:nowrap; }
+.marquee-strip { background:#111111; color:#fff; overflow:hidden; padding:13px 0; white-space:nowrap; }
 .marquee-track { display:inline-flex; animation:marqueeScroll 28s linear infinite; }
 .marquee-strip:hover .marquee-track { animation-play-state:paused; }
 .marquee-item { font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; padding:0 32px; opacity:.9; }
 .marquee-dot { color:#888; margin-left:32px; }
 @keyframes marqueeScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-/* ── STATS ──────────────────────────────────────────────── */
-.stats-section { background:#0a0a0a; padding:80px 0; }
-.stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
-.stat-item { text-align:center; padding:40px 20px; border-right:1px solid rgba(255,255,255,.08); }
-.stat-item:last-child { border-right:none; }
-.stat-number { font-size:52px; font-weight:900; color:#fff; letter-spacing:-2px; line-height:1; margin-bottom:12px; }
-.stat-label { font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.45); }
-@media(max-width:768px) {
-    .stats-grid { grid-template-columns:repeat(2,1fr); }
-    .stat-item { border-right:none; border-bottom:1px solid rgba(255,255,255,.08); }
-    .stat-number { font-size:38px; }
-}
+/* ── WHY LUXE ROW ───────────────────────────────────────── */
+.why-luxe-section { background: #e8f8f8; margin: 50px 0; }
+.wl-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; }
+.wl-row-card { padding: 25px 32px; border-right: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; align-items: flex-start; gap: 5px; transition: background 0.3s ease; }
+.wl-row-card:last-child { border-right: none; }
+.wl-row-card:hover { background: rgba(255,255,255,0.04); }
+.wl-row-icon { width: 52px; height: 52px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: #e71318; transition: all 0.3s ease; }
+.wl-row-card:hover .wl-row-icon { background: #e71318; color: #fff; border-color: #e71318; }
+.wl-row-card h3 { font-size: 14px; font-weight: 800; color: #111111; letter-spacing: 0.5px; margin: 0; }
+.wl-row-card p { font-size: 12px; color: #111111; line-height: 1.7; margin: 0; }
+@media(max-width:1024px) { .wl-row { grid-template-columns: repeat(2,1fr); } .wl-row-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); } }
+@media(max-width:480px) { .wl-row { grid-template-columns: 1fr; } }
+
+/* ── FEATURED DROPS ─────────────────────────────────────── */
+.featured-drops-section { padding: 90px 0; background: #F5F5F2; }
+.fd-header { text-align: center; margin-bottom: 48px; }
+.fd-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3px; color: #e71318; text-transform: uppercase; display: block; margin-bottom: 10px; }
+.fd-title { font-size: 28px; font-weight: 900; letter-spacing: 2px; color: #111111; text-transform: uppercase; }
+.fd-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+.fd-right { display: flex; flex-direction: column; gap: 16px; }
+.fd-card { border-radius: 28px; overflow: hidden; cursor: pointer; }
+.fd-card--large { height: 420px; }
+.fd-card--small { flex: 1; }
+.fd-card-inner { height: 100%; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; transition: transform 0.4s ease; }
+.fd-card:hover .fd-card-inner { transform: scale(1.02); }
+.fd-shoe-visual { position: absolute; right: -20px; bottom: 60px; width: 85%; opacity: 0.9; }
+.fd-card--small .fd-shoe-visual { width: 90%; bottom: 40px; right: -10px; }
+.fd-shoe-glow { position: absolute; inset: 0; pointer-events: none; }
+.fd-shoe-svg { width: 100%; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4)); }
+.fd-card-content { position: relative; z-index: 2; }
+.fd-tag { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; border-radius: 20px; margin-bottom: 12px; }
+.fd-tag--dark { background: rgba(235,62,37,0.15); border-color: rgba(235,62,37,0.3); color: #111111; }
+.fd-card-title { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: 1px; margin-bottom: 8px; }
+.fd-card--large .fd-card-title { font-size: 36px; }
+.fd-card-title--dark { color: #111111; }
+.fd-card-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+.fd-card-btn { display: inline-flex; align-items: center; gap: 6px; background: #e71318; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 20px; border-radius: 20px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(231,19,24,0.35); }
+.fd-card-btn:hover { background: #111111; box-shadow: none; }
+.fd-card-btn--dark { background: #111111; color: #fff; }
+.fd-card-btn--dark:hover { background: #e71318; }
+@media(max-width:768px) { .fd-grid { grid-template-columns: 1fr; } .fd-card--large { height: 320px; } }
 
 /* ── REELS SECTION ──────────────────────────────────────── */
-.reels-section { padding:90px 0 100px; background:#fff; }
+.reels-section { padding:90px 0 100px; background:#F5F5F2; }
 .reels-header { text-align:center; margin-bottom:48px; }
 .reels-eyebrow { font-size:12px; font-weight:700; letter-spacing:3px; color:#999; margin-bottom:10px; text-transform:uppercase; }
-.reels-title { font-size:26px; font-weight:900; letter-spacing:2px; color:#0a0a0a; text-transform:uppercase; }
+.reels-title { font-size:26px; font-weight:900; letter-spacing:2px; color:#111111; text-transform:uppercase; }
 .reels-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:36px; }
 .reel-card { cursor:pointer; }
 .reel-inner { position:relative; aspect-ratio:9/16; overflow:hidden; background:#111; }
@@ -214,21 +323,37 @@
 .reel-likes { font-size:12px; font-weight:700; color:#fff; letter-spacing:.5px; }
 .reel-badge { position:absolute; top:12px; left:12px; background:rgba(255,255,255,.15); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,.25); color:#fff; font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:4px 10px; }
 .reels-follow { text-align:center; }
-.reels-follow-btn { display:inline-flex; align-items:center; gap:10px; height:48px; padding:0 32px; border:1.5px solid #0a0a0a; color:#0a0a0a; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:all .3s ease; }
-.reels-follow-btn:hover { background:#0a0a0a; color:#fff; }
+.reels-follow-btn { display:inline-flex; align-items:center; gap:10px; height:48px; padding:0 32px; border:1.5px solid #111111; color:#111111; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:all .3s ease; border-radius:2px; }
+.reels-follow-btn:hover { background:#e71318; color:#fff; border-color:#e71318; }
 @media(max-width:1024px) { .reels-grid { grid-template-columns:repeat(2,1fr); } }
 @media(max-width:480px) { .reels-grid { grid-template-columns:repeat(2,1fr); gap:8px; } }
+
+/* ── LACE IMAGES ROW ───────────────────────────────────── */
+.lace-row-section { padding: 36px 0 48px; }
+.lace-row { display: flex;  gap: 5px; }
+.lace-card { overflow: hidden; }
+.lace-card .category-image-wrapper { position: relative; }
+.lace-card .category-image-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    pointer-events: none;
+    transition: background .3s ease;
+}
+.lace-card:hover .category-image-wrapper::after { background: rgba(0, 0, 0, 0.2); }
+.lace-card .category-image { width: 100%; display: block; transition: transform .45s cubic-bezier(.2,.9,.2,1), filter .3s ease; }
+@media(max-width:1024px) { .lace-row { grid-template-columns: repeat(2, 1fr); } .lace-card .category-image { height: 180px; } }
+@media(max-width:480px) { .lace-row { grid-template-columns: repeat(1, 1fr); } .lace-card .category-image { height: 160px; } }
 </style>
 @endpush
 
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Loader
     const loader = document.getElementById('page-loader');
     setTimeout(() => loader.classList.add('hide'), 1400);
 
-    // Scroll Reveal
     const io = new IntersectionObserver((entries) => {
         entries.forEach((entry, i) => {
             if (entry.isIntersecting) {
@@ -238,24 +363,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => io.observe(el));
-
-    // Stats Counter
-    const statsIo = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            const el = entry.target;
-            const target = parseInt(el.dataset.target);
-            const step = target / (1800 / 16);
-            let current = 0;
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) { current = target; clearInterval(timer); }
-                el.textContent = Math.floor(current).toLocaleString();
-            }, 16);
-            statsIo.unobserve(el);
-        });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('.stat-number').forEach(el => statsIo.observe(el));
 });
 </script>
 @endpush

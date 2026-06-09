@@ -8,15 +8,15 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-primary/5 p-6 rounded-2xl border border-primary/10">
                 <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">Total Orders</p>
-                <h3 class="text-3xl font-bold text-primary">{{ $recentOrders->count() }}</h3>
+                <h3 class="text-3xl font-bold text-primary">{{ $totalOrders }}</h3>
             </div>
             <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
                 <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">Items in Cart</p>
-                <h3 class="text-3xl font-bold text-blue-500">0</h3>
+                <h3 class="text-3xl font-bold text-blue-500">{{ $cartCount }}</h3>
             </div>
             <div class="bg-purple-50 p-6 rounded-2xl border border-purple-100">
                 <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">Saved Items</p>
-                <h3 class="text-3xl font-bold text-purple-500">0</h3>
+                <h3 class="text-3xl font-bold text-purple-500">{{ $wishlistCount }}</h3>
             </div>
         </div>
     </div>

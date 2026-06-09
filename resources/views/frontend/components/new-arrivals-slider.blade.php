@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="na-slider-wrap container">
+    <div class="na-slider-wrap container p-0">
         <div class="swiper na-swiper">
             <div class="swiper-wrapper">
                 @foreach(\App\Models\Product::where('status', true)->latest()->take(6)->get() as $product)

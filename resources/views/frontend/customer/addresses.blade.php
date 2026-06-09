@@ -53,7 +53,7 @@
 </div>
 
 {{-- Add Address Modal --}}
-<div id="addressModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+<div id="addressModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
     <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="this.parentElement.classList.add('hidden')"></div>
     <div class="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden p-8 max-h-[90vh] overflow-y-auto">
         <h3 class="text-2xl font-bold text-gray-900 mb-8">Add New Address</h3>
@@ -93,11 +93,11 @@
                 <div class="flex space-x-4">
                     <label class="flex-1">
                         <input type="radio" name="address_type" value="home" checked class="hidden peer">
-                        <div class="text-center py-3 rounded-xl border border-gray-100 bg-gray-50 peer-checked:bg-primary peer-checked:text-gray-400 peer-checked:border-primary cursor-pointer transition-all font-bold text-sm">Home</div>
+                        <div class="text-center py-3 rounded-xl border border-gray-100 bg-gray-50 peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary cursor-pointer transition-all font-bold text-sm">Home</div>
                     </label>
                     <label class="flex-1">
                         <input type="radio" name="address_type" value="office" class="hidden peer">
-                        <div class="text-center py-3 rounded-xl border border-gray-100 bg-gray-50 peer-checked:bg-primary peer-checked:text-gray-400 peer-checked:border-primary cursor-pointer transition-all font-bold text-sm">Office</div>
+                        <div class="text-center py-3 rounded-xl border border-gray-100 bg-gray-50 peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary cursor-pointer transition-all font-bold text-sm">Office</div>
                     </label>
                 </div>
             </div>

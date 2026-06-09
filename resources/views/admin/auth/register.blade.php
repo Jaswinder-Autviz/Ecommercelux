@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="w-full bg-primary text-gray-400 font-bold py-3 rounded-xl transition-all shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]">
+            <button type="submit" class="w-full bg-primary text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]">
                 Create Account
             </button>
         </form>

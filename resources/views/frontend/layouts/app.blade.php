@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', config('app.name', 'LuxeStore'))</title>
+    <title>@yield('title', config('app.name', 'Hustler'))</title>
     <meta name="description" content="@yield('meta_description', 'Premium fashion & lifestyle store')">
 
     {{-- Google Fonts --}}
@@ -19,7 +19,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#e8353b',
+                        primary: '#e71318',
+                        gold: '#C8A96B',
+                        luxury: '#111111',
                     }
                 }
             }

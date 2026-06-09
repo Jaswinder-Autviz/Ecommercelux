@@ -7,7 +7,8 @@ use App\Http\Controllers\Frontend\ProductController;
 // ─── Frontend Routes ───────────────────────────────────────────────────────────
 
 Route::get('/', function () {
-    return view('frontend.home');
+    $reels = \App\Models\InstagramReel::where('status', true)->orderBy('sort_order')->get();
+    return view('frontend.home', compact('reels'));
 })->name('home');
 
 // Shop Routes
@@ -26,6 +27,7 @@ Route::get('/checkout', function () {
 // Payment Routes
 Route::post('/payment/create-order', [\App\Http\Controllers\Frontend\PaymentController::class, 'createOrder'])->name('payment.create');
 Route::post('/payment/verify', [\App\Http\Controllers\Frontend\PaymentController::class, 'verifyPayment'])->name('payment.verify');
+Route::post('/payment/submit-order', [\App\Http\Controllers\Frontend\PaymentController::class, 'submitOrder'])->name('payment.submit');
 Route::get('/payment/success', function () {
     return view('frontend.payment-success');
 })->name('payment.success');
@@ -73,6 +75,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
         Route::get('/orders/{id}', [\App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
         Route::post('/orders/{id}/status', [\App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.status');
+
+        // Instagram Reels
+        Route::get('/reels', [\App\Http\Controllers\Admin\InstagramReelController::class, 'index'])->name('reels.index');
+        Route::post('/reels', [\App\Http\Controllers\Admin\InstagramReelController::class, 'store'])->name('reels.store');
+        Route::delete('/reels/{instagramReel}', [\App\Http\Controllers\Admin\InstagramReelController::class, 'destroy'])->name('reels.destroy');
     });
 });
 
@@ -91,6 +98,7 @@ Route::middleware(['customer.auth'])->group(function () {
     Route::post('/my-account/profile/update', [CustomerAccountController::class, 'updateProfile'])->name('customer.profile.update');
     Route::get('/my-account/addresses', [CustomerAccountController::class, 'addresses'])->name('customer.addresses');
     Route::post('/my-account/addresses/store', [CustomerAccountController::class, 'storeAddress'])->name('customer.addresses.store');
+    Route::post('/my-account/addresses/{id}/update', [CustomerAccountController::class, 'updateAddress'])->name('customer.addresses.update');
     Route::get('/my-account/orders', [CustomerAccountController::class, 'orders'])->name('customer.orders');
 });
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');

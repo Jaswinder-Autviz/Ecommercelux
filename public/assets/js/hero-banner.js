@@ -47,13 +47,15 @@
         }
 
         var heroSwiper = new Swiper('.hero-swiper', {
-            effect:        'fade',
             loop:          true,
-            speed:         1000,
+            speed:         700,
             grabCursor:    true,
             slidesPerView: 1,
-
-            fadeEffect: { crossFade: true },
+            spaceBetween:  0,
+            simulateTouch:  true,
+            allowTouchMove: true,
+            touchRatio:     1,
+            touchAngle:     45,
 
             autoplay: {
                 delay:                autoplayDelay,
@@ -64,10 +66,7 @@
 
             keyboard: { enabled: true, onlyInViewport: true },
 
-            navigation: {
-                prevEl: '.hero-nav-prev',
-                nextEl: '.hero-nav-next',
-            },
+            navigation: false,
 
             pagination: {
                 el:        '.hero-pagination',

@@ -13,9 +13,9 @@
 .item-count { margin-left: auto; font-size: 12px; color: #999; }
 .size-search-input { width: 100%; padding: 10px; border: 1px solid #eee; font-size: 13px; margin-bottom: 15px; outline: none; }
 .size-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.size-filter-btn { padding: 8px 12px; border: 1.5px solid #e0e0e0; background: #fff; font-size: 12px; font-weight: 600; text-align: left; display: flex; justify-content: space-between; cursor: pointer; transition: all 0.2s; }
-.size-filter-btn:hover { border-color: #000; }
-.size-filter-btn.active { border-color: #000; background: #f9f9f9; }
+.size-filter-btn { padding: 8px 12px; border: 1.5px solid #e0e0e0 !important; background: #fff !important; color: #000 !important; font-size: 12px; font-weight: 600; text-align: left; display: flex; justify-content: space-between; cursor: pointer; transition: all 0.2s; }
+.size-filter-btn:hover { border-color: #000 !important; }
+.size-filter-btn.active { border-color: #000 !important; background: #f9f9f9 !important; }
 .btn-count { color: #999; font-weight: 400; font-size: 11px; }
 .radio-item { padding-left: 30px; }
 .price-radio-filter { position: absolute; opacity: 0; }

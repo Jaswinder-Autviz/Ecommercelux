@@ -14,12 +14,12 @@
 .sp-result-count span { font-weight: 700; color: #000; }
 .sp-topbar-right { display: flex; align-items: center; gap: 14px; }
 .sp-sort-select { height: 40px; padding: 0 16px; border: 1px solid #e0e0e0; background: #fff; font-size: 13px; font-family: inherit; cursor: pointer; outline: none; min-width: 180px; }
-.sp-filter-btn { display: none; align-items: center; gap: 8px; height: 40px; padding: 0 18px; background: #292b2c; color: #fff; border: none; font-size: 13px; font-weight: 600; cursor: pointer; }
+.sp-filter-btn { display: none; align-items: center; gap: 8px; height: 40px; padding: 0 18px; background: #292b2c !important; color: #fff !important; border: none !important; font-size: 13px; font-weight: 600; cursor: pointer; }
 .shop-main-layout { display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: start; }
 .shop-sidebar-container { position: sticky; top: 90px; }
 .mobile-sidebar-header { display: none; }
 .sf-block { border-bottom: 1px solid #ebebeb; padding-bottom: 4px; margin-bottom: 4px; }
-.sf-block-title { width: 100%; background: none; border: none; padding: 16px 0; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #111; cursor: pointer; display: flex; justify-content: space-between; align-items: center; text-align: left; }
+.sf-block-title { width: 100%; background: none !important; border: none !important; padding: 16px 0; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #111 !important; cursor: pointer; display: flex; justify-content: space-between; align-items: center; text-align: left; }
 .sf-arrow { font-size: 18px; font-weight: 300; color: #999; }
 .sf-block-body { display: none; padding-bottom: 18px; }
 .sf-block.open .sf-block-body { display: block; }
@@ -29,7 +29,7 @@
 .sf-check-item input:checked ~ .sf-checkmark { background: #000; border-color: #000; }
 .sf-check-item input:checked ~ .sf-checkmark::after { content: ''; position: absolute; left: 4px; top: 1px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
 .sf-size-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
-.sf-size-btn { padding: 8px 4px; border: 1.5px solid #e0e0e0; background: #fff; font-size: 12px; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s; }
+.sf-size-btn { padding: 8px 4px; border: 1.5px solid #e0e0e0 !important; background: #fff !important; color: #000 !important; font-size: 12px; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s; }
 .sf-size-btn:hover, .sf-size-btn.active { border-color: #000; background: #000; color: #fff; }
 .sf-radio-item { display: flex; align-items: center; gap: 10px; padding: 7px 0; cursor: pointer; font-size: 13px; color: #444; position: relative; }
 .sf-radio-item input { display: none; }

@@ -24,7 +24,7 @@
                     <div class="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-mobile-alt text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900">Welcome to LUXE</h3>
+                    <h3 class="text-2xl font-bold text-gray-900">Welcome to Hustler</h3>
                     <p class="text-sm text-gray-500 mt-2">Login or Signup to manage your orders</p>
                 </div>
 
@@ -86,7 +86,7 @@
         {{-- Footer Info --}}
         <div class="p-6 bg-gray-50/50 border-t border-gray-100 text-center">
             <p class="text-[10px] text-gray-400 px-8 leading-relaxed">
-                By continuing, you agree to LUXE's <a href="#" class="underline">Terms of Service</a> and <a href="#" class="underline">Privacy Policy</a>.
+                By continuing, you agree to Hustler's <a href="#" class="underline">Terms of Service</a> and <a href="#" class="underline">Privacy Policy</a>.
             </p>
         </div>
     </div>
@@ -164,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             
             if(data.status === 'success') {
-                console.log('OTP (Testing):', data.otp); // ONLY FOR TESTING
                 document.getElementById('displayPhone').textContent = '+91 ' + phone;
                 stepPhone.classList.add('hidden');
                 stepOtp.classList.remove('hidden');

@@ -267,15 +267,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+async function submitCheckoutOrder(payload) {
+    const res = await fetch('/payment/submit-order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+        },
+        body: JSON.stringify(payload),
+    });
+    return res.json();
+}
+
 async function initiatePayment() {
     const name  = document.getElementById('co_name').value.trim();
     const email = document.getElementById('co_email').value.trim();
     const phone = document.getElementById('co_phone').value.trim();
     const addr  = document.getElementById('co_address').value.trim();
     const city  = document.getElementById('co_city').value.trim();
+    const state = document.getElementById('co_state').value.trim();
     const pin   = document.getElementById('co_pin').value.trim();
 
-    if (!name || !email || !phone || !addr || !city || !pin) {
+    if (!name || !email || !phone || !addr || !city || !state || !pin) {
         alert('Please fill in all required fields.');
         return;
     }
@@ -293,13 +306,40 @@ async function initiatePayment() {
     btn.disabled = true;
     btnText.textContent = 'Processing...';
 
-    // COD — no payment gateway
+    const cartItems = JSON.parse(localStorage.getItem('luxe_cart') || '[]').map(item => ({
+        product_id: item.product_id || item.id || null,
+        product_name: item.name || 'Item',
+        quantity: item.quantity || 1,
+        price: item.price || 0,
+        size: item.size || null,
+    }));
+
+    const orderPayload = {
+        name,
+        email,
+        phone,
+        address: addr,
+        city,
+        state,
+        pin,
+        method,
+        amount,
+        items: cartItems,
+    };
+
     if (method === 'cod') {
-        setTimeout(() => {
+        try {
+            const submitData = await submitCheckoutOrder(orderPayload);
+            if (!submitData.success) throw new Error(submitData.message || 'Unable to create order.');
             localStorage.removeItem('luxe_cart');
-            window.location.href = '/payment/success?method=cod';
-        }, 600);
-        return;
+            window.location.href = '/payment/success?method=cod&order=' + encodeURIComponent(submitData.order_number);
+            return;
+        } catch (e) {
+            alert('Error: ' + e.message);
+            btn.disabled = false;
+            btnText.textContent = 'Pay ₹' + amount.toLocaleString('en-IN');
+            return;
+        }
     }
 
     try {
@@ -325,24 +365,30 @@ async function initiatePayment() {
             prefill:     { name: data.name, email: data.email, contact: data.phone },
             theme:       { color: '#e8353b' },
             handler: async function(response) {
-                const vRes = await fetch('/payment/verify', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                    },
-                    body: JSON.stringify({
-                        razorpay_order_id:   response.razorpay_order_id,
-                        razorpay_payment_id: response.razorpay_payment_id,
-                        razorpay_signature:  response.razorpay_signature,
-                    }),
-                });
-                const vData = await vRes.json();
-                if (vData.success) {
+                try {
+                    const vRes = await fetch('/payment/verify', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        },
+                        body: JSON.stringify({
+                            razorpay_order_id:   response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature:  response.razorpay_signature,
+                        }),
+                    });
+                    const vData = await vRes.json();
+                    if (!vData.success) throw new Error('Payment verification failed.');
+
+                    orderPayload.payment_id = response.razorpay_payment_id;
+                    const submitData = await submitCheckoutOrder(orderPayload);
+                    if (!submitData.success) throw new Error(submitData.message || 'Unable to create order.');
+
                     localStorage.removeItem('luxe_cart');
-                    window.location.href = '/payment/success?payment_id=' + response.razorpay_payment_id;
-                } else {
-                    alert('Payment verification failed. Please contact support.');
+                    window.location.href = '/payment/success?payment_id=' + response.razorpay_payment_id + '&order=' + encodeURIComponent(submitData.order_number);
+                } catch (error) {
+                    alert('Error: ' + error.message + '. Please contact support.');
                     btn.disabled = false;
                     btnText.textContent = 'Pay ₹' + amount.toLocaleString('en-IN');
                 }
@@ -357,10 +403,10 @@ async function initiatePayment() {
 
         new Razorpay(options).open();
 
-    } catch(e) {
+    } catch (e) {
         alert('Error: ' + e.message);
         btn.disabled = false;
-        btnText.textContent = 'Pay ₹' + (window._cartTotal || 0).toLocaleString('en-IN');
+        btnText.textContent = 'Pay ₹' + amount.toLocaleString('en-IN');
     }
 }
 </script>

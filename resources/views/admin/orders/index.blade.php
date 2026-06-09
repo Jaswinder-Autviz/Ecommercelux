@@ -90,8 +90,8 @@
                             {{ $order->created_at->format('d M, Y') }}
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <a href="{{ route('admin.orders.show', $order->id) }}" class="inline-flex items-center px-3 py-1 bg-gray-50 text-gray-600 rounded-lg text-xs font-bold hover:bg-primary hover:text-gray-400 transition-all">
-                                Details
+                            <a href="{{ route('admin.orders.show', $order->id) }}" class="inline-flex items-center px-3 py-1 bg-black text-white rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all">
+                                View
                             </a>
                         </td>
                     </tr>

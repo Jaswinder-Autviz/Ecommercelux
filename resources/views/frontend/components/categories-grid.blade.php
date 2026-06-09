@@ -5,7 +5,7 @@
 @endpush
 
 <section class="categories-grid-section">
-    <div class="categories-container">
+    <div class="container p-0">
         <div class="categories-title reveal">
             <h2>CATEGORIES</h2>
         </div>
@@ -15,12 +15,18 @@
                    class="category-card reveal"
                    style="transition-delay: {{ $index * 0.07 }}s">
                     <div class="category-image-wrapper">
-                        <img
-                            src="{{ asset('assets/images/categories/category' . ($index + 1) . '.jpg') }}"
-                            alt="{{ $category->name }}"
-                            class="category-image"
-                            loading="lazy"
-                        >
+                        @if($category->image)
+                            <img
+                                src="{{ asset('assets/images/categories/' . $category->image) }}"
+                                alt="{{ $category->name }}"
+                                class="category-image"
+                                loading="lazy"
+                            >
+                        @else
+                            <div class="category-image" style="background:#f3f4f6;display:flex;align-items:center;justify-content:center;">
+                                <i class="fas fa-tag" style="font-size:2rem;color:#d1d5db;"></i>
+                            </div>
+                        @endif
                     </div>
                     <div class="category-label">{{ $category->name }}</div>
                 </a>

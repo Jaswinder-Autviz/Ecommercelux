@@ -12,7 +12,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#e8353b',
+                        primary: '#e71318',
                         dark: '#292b2c',
                     }
                 }
@@ -99,19 +99,19 @@
             cursor: pointer; background: none; border-left: none; border-top: none; border-bottom: none;
             width: 100%; text-align: left;
         }
-        .sidebar-link:hover { background: rgba(232,53,59,0.1); color: #fff; }
-        .sidebar-link:hover i { color: #e8353b; }
-        .sidebar-link.active { background: rgba(232,53,59,0.15); color: #e8353b; border-right: 3px solid #e8353b; }
-        .sidebar-link.active i { color: #e8353b; }
+        .sidebar-link:hover { background: rgba(231,19,24,0.1); color: #fff; }
+        .sidebar-link:hover i { color: #e71318; }
+        .sidebar-link.active { background: rgba(231,19,24,0.15); color: #e71318; border-right: 3px solid #e71318; }
+        .sidebar-link.active i { color: #e71318; }
 
         /* ── Accent ── */
-        .text-primary { color: #e8353b !important; }
-        .bg-primary { background-color: #e8353b !important; }
+        .text-primary { color: #e31837!important; }
+        .bg-primary { background-color: #e31837!important; }
         .stat-card:hover .stat-icon { transform: scale(1.1) rotate(5deg); }
 
         /* ── Scrollbar ── */
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: #e8353b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #e71318; border-radius: 4px; }
     </style>
     @stack('styles')
 </head>
@@ -125,7 +125,7 @@
         <div class="p-6 border-b border-white/10 flex items-center justify-between">
             <div>
                 <h1 class="text-xl font-bold text-white">
-                    <span style="color:#e8353b">Luxe</span>Store
+                    <span style="color:#e71318">Luxe</span>Store
                 </h1>
                 <p class="text-[10px] text-gray-500 mt-0.5 tracking-widest uppercase">Admin Panel</p>
             </div>
@@ -184,7 +184,7 @@
         <!-- User info -->
         <div class="p-4 border-t border-white/10">
             <div class="flex items-center gap-3 bg-white/5 p-3 rounded-2xl">
-                <div class="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0" style="background:#e8353b">
+                <div class="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0" style="background:#e71318">
                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 </div>
                 <div class="overflow-hidden">
@@ -220,7 +220,7 @@
             <!-- Bell -->
             <button class="relative w-9 h-9 flex items-center justify-center rounded-xl bg-gray-50 text-gray-500 hover:text-primary transition-all">
                 <i class="far fa-bell"></i>
-                <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full border-2 border-white" style="background:#e8353b"></span>
+                <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full border-2 border-white" style="background:#e71318"></span>
             </button>
             <!-- User -->
             <div class="flex items-center gap-2">
@@ -228,7 +228,7 @@
                     <p class="text-sm font-bold text-gray-900 leading-tight">{{ Auth::user()->name }}</p>
                     <p class="text-[10px] text-gray-400">Super Admin</p>
                 </div>
-                <div class="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background:#e8353b">
+                <div class="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background:#e71318">
                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 </div>
             </div>
@@ -245,7 +245,7 @@
         @endif
         @if(session('error'))
             <div class="mb-6 p-4 bg-gray-50 text-gray-700 rounded-2xl border border-gray-200 flex items-center gap-3">
-                <i class="fas fa-exclamation-circle" style="color:#e8353b"></i>
+                <i class="fas fa-exclamation-circle" style="color:#e71318"></i>
                 <span class="text-sm font-bold">{{ session('error') }}</span>
             </div>
         @endif

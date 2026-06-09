@@ -110,8 +110,13 @@
             </table>
         </div>
         
-        <div class="p-6 border-t border-gray-50">
-            {{ $products->links() }}
+        <div class="p-6 border-t border-gray-50 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <p class="text-sm text-gray-500">
+                Showing {{ $products->firstItem() ?? 0 }} to {{ $products->lastItem() ?? 0 }} of {{ $products->total() }} products
+            </p>
+            <div>
+                {{ $products->links() }}
+            </div>
         </div>
     </div>
 </div>

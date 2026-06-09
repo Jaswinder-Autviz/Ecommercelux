@@ -57,10 +57,10 @@
 
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Brand</label>
-                        <select name="brand_id" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+                        <select name="brand" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
                             <option value="">Select Brand</option>
                             @foreach(\App\Models\Brand::all() as $brand)
-                            <option value="{{ $brand->id }}" {{ $product->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
+                            <option value="{{ $brand->name }}" {{ $product->brand === $brand->name ? 'selected' : '' }}>{{ $brand->name }}</option>
                             @endforeach
                         </select>
                     </div>

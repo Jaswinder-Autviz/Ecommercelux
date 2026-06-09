@@ -28,15 +28,21 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
+            'brand' => 'nullable|string|max:255',
             'price' => 'required|numeric',
             'stock_quantity' => 'required|integer',
             'sku' => 'required|string|unique:products,sku',
-            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'main_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $slug = $this->resolveProductSlug($request->name);
+        if (! $slug) {
+            return redirect()->back()->withInput()->with('error', 'A product with this name already exists. Please choose a different name.');
+        }
+
         $data = $request->except(['main_image', 'gallery_images']);
-        $data['slug'] = Str::slug($request->name);
+        $data['slug'] = $slug;
         $data['status'] = $request->has('status');
         $data['is_featured'] = $request->has('is_featured');
         
@@ -72,6 +78,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
+            'brand' => 'nullable|string|max:255',
             'price' => 'required|numeric',
             'stock_quantity' => 'required|integer',
             'sku' => 'required|string|unique:products,sku,' . $product->id,
@@ -79,8 +86,13 @@ class ProductController extends Controller
             'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $slug = $this->resolveProductSlug($request->name, $product->id);
+        if (! $slug) {
+            return redirect()->back()->withInput()->with('error', 'A product with this name already exists. Please choose a different name.');
+        }
+
         $data = $request->except(['main_image', 'gallery_images']);
-        $data['slug'] = Str::slug($request->name);
+        $data['slug'] = $slug;
         $data['status'] = $request->has('status');
         $data['is_featured'] = $request->has('is_featured');
 
@@ -112,5 +124,17 @@ class ProductController extends Controller
     {
         $product->delete();
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
+    }
+
+    private function resolveProductSlug(string $name, ?int $ignoreId = null)
+    {
+        $slug = Str::slug($name);
+
+        $query = Product::where('slug', $slug);
+        if ($ignoreId) {
+            $query->where('id', '!=', $ignoreId);
+        }
+
+        return $query->exists() ? null : $slug;
     }
 }
