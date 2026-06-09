@@ -28,7 +28,7 @@
         </button>
 
         {{-- Logo --}}
-        <a href="{{ route('home') }}" class="site-logo">LUXE</a>
+        <a href="{{ route('home') }}" class="site-logo">HUSTLER</a>
 
         {{-- Primary Navigation --}}
         <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
@@ -169,7 +169,7 @@
 <div class="mobile-overlay" id="mobileOverlay"></div>
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
     <div class="mobile-nav-header">
-        <span class="mobile-logo">LUXE</span>
+        <span class="mobile-logo">HUSTLER</span>
         <button class="mobile-close" id="mobileClose" aria-label="Close menu">
             <svg width="20" height="20" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </button>

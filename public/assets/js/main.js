@@ -163,7 +163,7 @@
     updateCartBadge(getCartCount());
 
     // Expose globally for other scripts
-    window.LuxeStore = {
+    window.Hustler = {
         updateCartBadge: updateCartBadge,
         getCartCount: getCartCount,
     };

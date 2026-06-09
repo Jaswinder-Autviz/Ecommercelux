@@ -11,10 +11,10 @@
         <div class="coupon-list">
             <div class="coupon-item">
                 <div class="coupon-info">
-                    <strong>LUXE10</strong>
+                    <strong>HUSTLER10</strong>
                     <p>Get 10% OFF on your first order</p>
                 </div>
-                <button class="apply-specific-coupon" data-code="LUXE10">APPLY</button>
+                <button class="apply-specific-coupon" data-code="HUSTLER10">APPLY</button>
             </div>
             <div class="coupon-item">
                 <div class="coupon-info">

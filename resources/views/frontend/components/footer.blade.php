@@ -2,8 +2,8 @@
     <div class="footer-inner container">
         <div class="footer-grid">
             <div class="footer-col">
-                <span class="footer-logo">LUXE</span>
-                <p class="footer-tagline">Curated fashion for the modern individual.</p>
+                <span class="footer-logo">HUSTLER</span>
+                <p class="footer-tagline">Statement tees for everyday ambition.</p>
             </div>
             <div class="footer-col">
                 <h4>Shop</h4>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; {{ date('Y') }} LuxeStore. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} Hustler. All rights reserved.</p>
         </div>
     </div>
 </footer>
