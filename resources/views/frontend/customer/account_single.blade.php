@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'My Account - LuxeStore')
+@section('title', 'My Account - Hustler')
 
 @section('content')
 @php $nameParts = explode(' ', trim(Auth::guard('customer')->user()->name ?? '')); @endphp

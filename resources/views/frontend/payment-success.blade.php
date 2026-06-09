@@ -1,5 +1,5 @@
 @extends('frontend.layouts.app')
-@section('title', 'Order Confirmed - LuxeStore')
+@section('title', 'Order Confirmed - Hustler')
 @section('content')
 <div style="min-height:70vh;display:flex;align-items:center;justify-content:center;padding:60px 20px;background:#fafafa">
     <div style="text-align:center;max-width:480px">

@@ -1,13 +1,13 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'About Us - LuxeStore')
+@section('title', 'About Us - Hustler')
 
 @section('content')
 <div class="about-page">
     
     <section style="padding: 80px 0;">
         <div class="container" style="max-width: 900px;">
-            <h1 style="font-size: 48px; font-weight: 300; margin-bottom: 30px; text-align: center; letter-spacing: -1px;">About LuxeStore</h1>
+            <h1 style="font-size: 48px; font-weight: 300; margin-bottom: 30px; text-align: center; letter-spacing: -1px;">About Hustler</h1>
             
             <div style="text-align: center; margin-bottom: 60px;">
                 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 300px; margin-bottom: 40px; border-radius: 4px;"></div>
@@ -15,7 +15,7 @@
 
             <div style="color: #666; line-height: 1.9; font-size: 17px;">
                 <p style="margin-bottom: 24px;">
-                    Founded with a passion for timeless design and quality craftsmanship, LuxeStore curates a collection of premium fashion pieces for the modern individual.
+                    Founded with a passion for bold design and everyday comfort, Hustler curates premium t-shirts for people who move with purpose.
                 </p>
                 
                 <p style="margin-bottom: 24px;">

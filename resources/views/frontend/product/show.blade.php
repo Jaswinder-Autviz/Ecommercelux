@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', $product->name . ' - LuxeStore')
+@section('title', $product->name . ' - Hustler')
 
 @section('content')
 <div class="product-page">

@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Checkout - LuxeStore')
+@section('title', 'Checkout - Hustler')
 
 @section('content')
 <div class="co-page">
@@ -360,7 +360,7 @@ async function initiatePayment() {
             amount:      data.amount,
             currency:    data.currency,
             order_id:    data.order_id,
-            name:        'LuxeStore',
+            name:        'Hustler',
             description: 'Order Payment',
             prefill:     { name: data.name, email: data.email, contact: data.phone },
             theme:       { color: '#e8353b' },

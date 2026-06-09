@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - LuxeStore</title>
+    <title>Admin Dashboard - Hustler</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -125,7 +125,7 @@
         <div class="p-6 border-b border-white/10 flex items-center justify-between">
             <div>
                 <h1 class="text-xl font-bold text-white">
-                    <span style="color:#e71318">Luxe</span>Store
+                    <span style="color:#e71318">Hustler</span>
                 </h1>
                 <p class="text-[10px] text-gray-500 mt-0.5 tracking-widest uppercase">Admin Panel</p>
             </div>

@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'All Products - LuxeStore')
+@section('title', 'All Products - Hustler')
 
 @section('content')
 <section class="shop-page">

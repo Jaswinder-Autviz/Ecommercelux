@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - LuxeStore Admin</title>
+    <title>Register - Hustler Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
@@ -32,7 +32,7 @@
     <div class="glass w-full max-w-md p-8 rounded-3xl shadow-2xl space-y-8">
         <div class="text-center">
             <h1 class="text-3xl font-bold text-gray-900">Create Account</h1>
-            <p class="text-gray-500 mt-2">Join LuxeStore to manage your shop</p>
+            <p class="text-gray-500 mt-2">Join Hustler to manage your shop</p>
         </div>
 
         @if(session('error'))
@@ -64,7 +64,7 @@
                     </span>
                     <input type="email" name="email" required value="{{ old('email') }}"
                         class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                        placeholder="admin@luxestore.com">
+                        placeholder="admin@hustler.com">
                 </div>
                 @error('email') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
             </div>

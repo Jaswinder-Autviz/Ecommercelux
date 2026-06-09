@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'My Account - LuxeStore')
+@section('title', 'My Account - Hustler')
 
 @section('content')
 <div class="min-h-screen bg-gray-50 pt-32 pb-20">

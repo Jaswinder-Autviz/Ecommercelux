@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Shopping Bag - LuxeStore')
+@section('title', 'Shopping Bag - Hustler')
 
 @section('content')
 <div class="cart-page-wrapper">

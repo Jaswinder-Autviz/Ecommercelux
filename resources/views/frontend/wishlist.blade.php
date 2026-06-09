@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Wishlist - LuxeStore')
+@section('title', 'Wishlist - Hustler')
 
 @section('content')
 <div class="wl-page">

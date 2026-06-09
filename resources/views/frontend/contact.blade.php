@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Contact Us - LuxeStore')
+@section('title', 'Contact Us - Hustler')
 
 @section('content')
 <div class="contact-page">

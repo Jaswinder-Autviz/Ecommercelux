@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Shopping Cart - LuxeStore')
+@section('title', 'Shopping Cart - Hustler')
 
 @section('content')
 <div class="cart-page">
