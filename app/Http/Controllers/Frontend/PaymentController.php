@@ -144,7 +144,7 @@ class PaymentController extends Controller
     private function generateOrderNumber(): string
     {
         do {
-            $number = 'LUXE' . strtoupper(Str::random(6));
+            $number = 'HUSTLER' . strtoupper(Str::random(6));
         } while (Order::where('order_number', $number)->exists());
 
         return $number;

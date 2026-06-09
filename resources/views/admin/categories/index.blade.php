@@ -101,7 +101,7 @@
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Category Name <span class="text-red-500">*</span></label>
                 <input type="text" name="name" required
                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm"
-                    placeholder="e.g. Sneakers">
+                    placeholder="e.g. T-Shirts">
             </div>
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Category Image</label>

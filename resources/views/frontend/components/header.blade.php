@@ -5,7 +5,7 @@
             <div class="announcement-content">
                 @for ($i = 0; $i < 4; $i++)
                     <span class="announcement-text">
-                        ✦ Free shipping on orders over $150 &nbsp;&nbsp;|&nbsp;&nbsp; New arrivals every Friday &nbsp;&nbsp;|&nbsp;&nbsp; Use code <strong>LUXE20</strong> for 20% off
+                        ✦ Free shipping on orders over $150 &nbsp;&nbsp;|&nbsp;&nbsp; New Hustler tees every Friday &nbsp;&nbsp;|&nbsp;&nbsp; Use code <strong>HUSTLER10</strong> for 10% off
                     </span>
                 @endfor
             </div>

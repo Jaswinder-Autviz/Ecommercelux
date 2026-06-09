@@ -10,7 +10,7 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-        $categories = ['Sneakers', 'Apparel', 'Accessories', 'Socks'];
+        $categories = ['T-Shirts', 'Apparel', 'Accessories', 'Socks'];
 
         foreach ($categories as $cat) {
             Category::create([

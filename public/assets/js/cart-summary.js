@@ -44,7 +44,7 @@ const CartSummary = {
         let discount = 0;
         const subtotal = this.calculateSubtotal();
 
-        if (code === 'LUXE10') {
+        if (code === 'HUSTLER10') {
             discount = subtotal * 0.1;
         } else if (code === 'FREESHIP') {
             // Logic handled in updateSummary
