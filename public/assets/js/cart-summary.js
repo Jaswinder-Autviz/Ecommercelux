@@ -50,7 +50,7 @@ const CartSummary = {
             // Logic handled in updateSummary
         }
 
-        localStorage.setItem('luxe_applied_coupon', JSON.stringify({ code, discount }));
+        localStorage.setItem('hustler_applied_coupon', JSON.stringify({ code, discount }));
         this.updateSummary();
         alert(`Coupon ${code} applied!`);
     },
@@ -76,7 +76,7 @@ const CartSummary = {
         const mrp = this.calculateMRP();
         const discountOnMRP = mrp - subtotal;
         
-        const couponData = JSON.parse(localStorage.getItem('luxe_applied_coupon')) || { code: '', discount: 0 };
+        const couponData = JSON.parse(localStorage.getItem('hustler_applied_coupon')) || { code: '', discount: 0 };
         const shipping = (subtotal > 2999 || couponData.code === 'FREESHIP') ? 0 : 99;
         const finalTotal = subtotal - couponData.discount + shipping;
 
