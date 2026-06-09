@@ -7,7 +7,7 @@
 
     {{-- PREMIUM SHOP BANNER --}}
     <div class="shop-hero">
-        <img src="{{ asset('assets/images/banners/Banner2.webp') }}" alt="Shop" class="shop-hero-img">
+        <img src="{{ asset('assets/images/banners/Banner2.png') }}" alt="Shop" class="shop-hero-img">
         <div class="shop-hero-overlay">
             <p class="shop-hero-sub">All Collections</p>
             <h1 class="shop-hero-title">SHOP ALL</h1>
