@@ -28,34 +28,7 @@
         </div>
     </section> -->
 
-    <section class="brand-story-section">
-        <div class="container p-0">
-            <div class="brand-story-grid">
-                <div class="brand-story-copy reveal-left">
-                    <span class="section-eyebrow">Hustler essentials</span>
-                    <h2>Tees that work hard without trying too hard.</h2>
-                    <p>Clean silhouettes, bold attitude, and fabrics made for repeat wear. Build your daily uniform with graphic tees, oversized fits, and statement basics.</p>
-                    <a href="{{ route('shop') }}" class="brand-story-btn">Shop T-Shirts</a>
-                </div>
-                <div class="brand-story-stats reveal-right">
-                    <div class="brand-stat">
-                        <strong>240 GSM</strong>
-                        <span>Premium cotton feel</span>
-                    </div>
-                    <div class="brand-stat">
-                        <strong>Drop Based</strong>
-                        <span>Fresh designs every week</span>
-                    </div>
-                    <div class="brand-stat">
-                        <strong>All Day</strong>
-                        <span>Comfort-first streetwear</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-      {{-- WHY HUSTLER ROW --}}
+         {{-- WHY HUSTLER ROW --}}
     <section class="container p-0">
         <div class="why-luxe-section">
             <div class="wl-row ">
@@ -90,8 +63,40 @@
             </div>
         </div>
     </section>
+    
+
+
+ 
 
     @include('frontend.components.choose')
+
+        <section class="brand-story-section">
+        <div class="container p-0">
+            <div class="brand-story-grid">
+                <div class="brand-story-copy reveal-left">
+                    <span class="section-eyebrow">Hustler essentials</span>
+                    <h2>Tees that work hard without trying too hard.</h2>
+                    <p>Clean silhouettes, bold attitude, and fabrics made for repeat wear. Build your daily uniform with graphic tees, oversized fits, and statement basics.</p>
+                    <a href="{{ route('shop') }}" class="brand-story-btn">Shop T-Shirts</a>
+                </div>
+                <div class="brand-story-stats reveal-right">
+                    <div class="brand-stat">
+                        <strong>240 GSM</strong>
+                        <span>Premium cotton feel</span>
+                    </div>
+                    <div class="brand-stat">
+                        <strong>Drop Based</strong>
+                        <span>Fresh designs every week</span>
+                    </div>
+                    <div class="brand-stat">
+                        <strong>All Day</strong>
+                        <span>Comfort-first streetwear</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     @include('frontend.components.new-arrivals-slider')
     @include('frontend.components.categories-grid')
     @include('frontend.components.filter-product-section')

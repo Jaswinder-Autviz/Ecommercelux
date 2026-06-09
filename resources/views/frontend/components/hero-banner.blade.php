@@ -35,7 +35,7 @@
                     <div class="hero-slide-overlay bg-black/40 absolute inset-0 z-10"></div>
                     <div class="hero-slide-content z-20">
                         <span class="hsc-tag">New Season</span>
-                        <h1 class="hsc-title"><span class="hsc-title-inner">HUSTLER<br>TEES</span></h1>
+                        <h1 class="hsc-title"><span class="hsc-title-inner">BORN ON<br>THE STREETS</span></h1>
                         <p class="hsc-sub"><span class="hsc-sub-inner">Premium t-shirts made for people who keep moving.</span></p>
                         <div class="hsc-actions">
                             <a href="{{ route('shop') }}" class="hsc-btn hsc-btn-primary">Shop Now</a>
