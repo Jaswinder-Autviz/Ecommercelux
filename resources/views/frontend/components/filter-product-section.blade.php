@@ -1,4 +1,4 @@
-<section class="fp-section">
+<section class="fp-section mt-5">
 
     {{-- PREMIUM PROMO SLIDER --}}
     <div class="container p-0">

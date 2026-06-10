@@ -9,26 +9,8 @@
         <div class="swiper-wrapper">
 
             {{-- SLIDE 1 --}}
-                <div class="swiper-slide">
-                <div class="hero-slide-inner">
-                    <img src="{{ asset('assets/images/banners/Banner_2.png') }}"
-                         alt="Streetwear T-shirts" class="hero-slide-img" loading="lazy">
-                    <div class="hero-slide-overlay bg-black/40 absolute inset-0 z-10"></div>
-                    <div class="hero-slide-content z-20">
-                        <span class="hsc-tag">Street Culture</span>
-                        <h1 class="hsc-title"><span class="hsc-title-inner">BORN ON<br>THE STREETS</span></h1>
-                        <p class="hsc-sub"><span class="hsc-sub-inner">Street-ready staples with bold everyday attitude.</span></p>
-                        <div class="hsc-actions">
-                            <a href="{{ route('shop') }}" class="hsc-btn hsc-btn-primary">Explore</a>
-                            <a href="{{ route('shop') }}" class="hsc-btn hsc-btn-ghost">View All</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            
-            {{-- SLIDE 2 --}}
-          <div class="swiper-slide">
+                     <div class="swiper-slide">
                 <div class="hero-slide-inner">
                     <img src="{{ asset('assets/images/banners/Banner_1.png') }}"
                          alt="Hustler T-shirt Collection" class="hero-slide-img" loading="eager" fetchpriority="high">
@@ -39,6 +21,26 @@
                         <p class="hsc-sub"><span class="hsc-sub-inner">Premium t-shirts made for people who keep moving.</span></p>
                         <div class="hsc-actions">
                             <a href="{{ route('shop') }}" class="hsc-btn hsc-btn-primary">Shop Now</a>
+                            <a href="{{ route('shop') }}" class="hsc-btn hsc-btn-ghost">View All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {{-- SLIDE 2 --}}
+ 
+            <div class="swiper-slide">
+                <div class="hero-slide-inner">
+                    <img src="{{ asset('assets/images/banners/Banner_2.png') }}"
+                         alt="Streetwear T-shirts" class="hero-slide-img" loading="lazy">
+                    <div class="hero-slide-overlay bg-black/40 absolute inset-0 z-10"></div>
+                    <div class="hero-slide-content z-20">
+                        <span class="hsc-tag">Street Culture</span>
+                        <h1 class="hsc-title"><span class="hsc-title-inner">HUSTLER<br>TEES</span></h1>
+                        <p class="hsc-sub"><span class="hsc-sub-inner">Street-ready staples with bold everyday attitude.</span></p>
+                        <div class="hsc-actions">
+                            <a href="{{ route('shop') }}" class="hsc-btn hsc-btn-primary">Explore</a>
                             <a href="{{ route('shop') }}" class="hsc-btn hsc-btn-ghost">View All</a>
                         </div>
                     </div>

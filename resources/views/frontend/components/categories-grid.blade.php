@@ -6,6 +6,7 @@
 
 <section class="categories-grid-section">
     <div class="container p-0">
+        <div class="categories-width">
         <div class="categories-title reveal">
             <h2>CATEGORIES</h2>
         </div>
@@ -32,5 +33,6 @@
                 </a>
             @endforeach
         </div>
+    </div>
     </div>
 </section>
