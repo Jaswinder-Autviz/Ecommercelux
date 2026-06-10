@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Razorpay\Api\Api;
 
@@ -97,7 +99,7 @@ class PaymentController extends Controller
             'items.*.product_name' => 'required|string|max:255',
             'items.*.quantity'     => 'required|integer|min:1',
             'items.*.price'        => 'required|numeric|min:0',
-            'items.*.size'         => 'nullable|string|max:100',
+            'items.*.size'         => ['required', 'string', Rule::in(Product::DEFAULT_APPAREL_SIZES)],
         ]);
 
         $orderData = [

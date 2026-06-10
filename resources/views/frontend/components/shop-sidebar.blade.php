@@ -36,15 +36,9 @@
             </div>
             <div class="size-grid">
                 @php
-                    $sizes = [
-                        ['val' => 'UK 6', 'count' => 33],
-                        ['val' => 'UK 7', 'count' => 30],
-                        ['val' => 'UK 8', 'count' => 26],
-                        ['val' => 'UK 9', 'count' => 29],
-                        ['val' => 'UK 10', 'count' => 29],
-                        ['val' => 'UK 11', 'count' => 27],
-                        ['val' => 'UK 12', 'count' => 6],
-                    ];
+                    $sizes = collect(\App\Models\Product::DEFAULT_APPAREL_SIZES)
+                        ->map(fn ($size) => ['val' => $size, 'count' => \App\Models\Product::whereJsonContains('sizes', $size)->count()])
+                        ->all();
                 @endphp
                 @foreach($sizes as $size)
                     <button class="size-filter-btn" data-size="{{ $size['val'] }}">

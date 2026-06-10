@@ -48,7 +48,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="md:col-span-2">
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Product Name</label>
-                        <input type="text" name="name" id="product_name" value="{{ old('name') }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Nike Air Max 270">
+                        <input type="text" name="name" id="product_name" value="{{ old('name') }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Hustler Oversized Tee">
                     </div>
 
                     <div>
@@ -68,7 +68,7 @@
 
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">SKU</label>
-                        <input type="text" name="sku" value="{{ old('sku') }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. NIKE-AM270-001">
+                        <input type="text" name="sku" value="{{ old('sku') }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. HST-TEE-001">
                     </div>
 
                     <div>
@@ -96,6 +96,10 @@
             <!-- Inventory & Pricing -->
             <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
                 <h3 class="font-bold text-gray-900 border-b border-gray-50 pb-4">Inventory & Pricing</h3>
+                @php
+                    $apparelSizes = \App\Models\Product::DEFAULT_APPAREL_SIZES;
+                    $selectedSizes = old('sizes', $apparelSizes);
+                @endphp
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Regular Price (₹)</label>
@@ -109,6 +113,18 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Stock Quantity</label>
                         <input type="number" name="stock_quantity" value="{{ old('stock_quantity') }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="0">
                     </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-3">T-Shirt Sizes</label>
+                    <div class="flex flex-wrap gap-3">
+                        @foreach($apparelSizes as $size)
+                        <label class="inline-flex items-center gap-2 px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm font-semibold text-gray-700 cursor-pointer hover:border-primary transition-all">
+                            <input type="checkbox" name="sizes[]" value="{{ $size }}" class="rounded border-gray-300 text-primary focus:ring-primary" {{ in_array($size, $selectedSizes) ? 'checked' : '' }}>
+                            {{ $size }}
+                        </label>
+                        @endforeach
+                    </div>
+                    <p class="mt-2 text-xs text-gray-400">Used on the product page and checkout for apparel size selection.</p>
                 </div>
             </div>
 

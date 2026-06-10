@@ -79,26 +79,6 @@
         mobileOverlay.addEventListener('click', closeMobileMenu);
     }
 
-    /* ========== MOBILE SUBMENU ========== */
-    const mobileSubToggles = document.querySelectorAll('.mobile-sub-toggle');
-
-    mobileSubToggles.forEach(function (toggle) {
-        toggle.addEventListener('click', function () {
-            const parent = this.closest('.mobile-has-sub');
-            const isActive = parent.classList.contains('active');
-
-            // Close all
-            document.querySelectorAll('.mobile-has-sub').forEach(function (item) {
-                item.classList.remove('active');
-            });
-
-            // Open clicked if it was closed
-            if (!isActive) {
-                parent.classList.add('active');
-            }
-        });
-    });
-
     /* ========== SEARCH OVERLAY ========== */
     function openSearch() {
         searchOverlay.classList.add('active');

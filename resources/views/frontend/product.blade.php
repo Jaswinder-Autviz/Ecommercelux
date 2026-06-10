@@ -28,6 +28,7 @@
                             <button style="padding: 12px 24px; border: 1px solid #e5e5e5; background: white; cursor: pointer;">M</button>
                             <button style="padding: 12px 24px; border: 1px solid #e5e5e5; background: white; cursor: pointer;">L</button>
                             <button style="padding: 12px 24px; border: 1px solid #e5e5e5; background: white; cursor: pointer;">XL</button>
+                            <button style="padding: 12px 24px; border: 1px solid #e5e5e5; background: white; cursor: pointer;">2XL</button>
                         </div>
                     </div>
 

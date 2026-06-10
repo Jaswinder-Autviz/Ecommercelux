@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -31,6 +31,8 @@ class ProductController extends Controller
             'brand' => 'nullable|string|max:255',
             'price' => 'required|numeric',
             'stock_quantity' => 'required|integer',
+            'sizes' => 'nullable|array',
+            'sizes.*' => 'string|max:20',
             'sku' => 'required|string|unique:products,sku',
             'main_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -45,6 +47,7 @@ class ProductController extends Controller
         $data['slug'] = $slug;
         $data['status'] = $request->has('status');
         $data['is_featured'] = $request->has('is_featured');
+        $data['sizes'] = $this->normalizeProductSizes($request->input('sizes', []));
         
         if ($request->hasFile('main_image')) {
             $imageName = time() . '.' . $request->main_image->extension();
@@ -81,6 +84,8 @@ class ProductController extends Controller
             'brand' => 'nullable|string|max:255',
             'price' => 'required|numeric',
             'stock_quantity' => 'required|integer',
+            'sizes' => 'nullable|array',
+            'sizes.*' => 'string|max:20',
             'sku' => 'required|string|unique:products,sku,' . $product->id,
             'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -95,18 +100,21 @@ class ProductController extends Controller
         $data['slug'] = $slug;
         $data['status'] = $request->has('status');
         $data['is_featured'] = $request->has('is_featured');
+        $data['sizes'] = $this->normalizeProductSizes($request->input('sizes', []));
+
+        $oldMainImage = $product->main_image;
 
         if ($request->hasFile('main_image')) {
-            // Delete old image if exists
-            if ($product->main_image && file_exists(public_path('assets/images/products/' . $product->main_image))) {
-                unlink(public_path('assets/images/products/' . $product->main_image));
-            }
             $imageName = time() . '.' . $request->main_image->extension();
             $request->main_image->move(public_path('assets/images/products'), $imageName);
             $data['main_image'] = $imageName;
         }
 
         $product->update($data);
+
+        if ($request->hasFile('main_image')) {
+            $this->deleteProductImageFileIfUnused($oldMainImage);
+        }
 
         // Handle gallery images
         if ($request->hasFile('gallery_images')) {
@@ -117,13 +125,33 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
+        return redirect()->route('admin.products.edit', $product->id)->with('success', 'Product updated successfully.');
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
+    }
+
+    public function destroyGalleryImage(ProductImage $productImage)
+    {
+        $imagePath = $productImage->image_path;
+
+        $productImage->delete();
+        $this->deleteProductImageFileIfUnused($imagePath);
+
+        return back()->with('success', 'Gallery image deleted successfully.');
+    }
+
+    public function destroyMainImage(Product $product)
+    {
+        $imagePath = $product->main_image;
+
+        $product->update(['main_image' => Product::PLACEHOLDER_IMAGE]);
+        $this->deleteProductImageFileIfUnused($imagePath);
+
+        return back()->with('success', 'Main image removed successfully.');
     }
 
     private function resolveProductSlug(string $name, ?int $ignoreId = null)
@@ -136,5 +164,33 @@ class ProductController extends Controller
         }
 
         return $query->exists() ? null : $slug;
+    }
+
+    private function normalizeProductSizes(array $sizes): array
+    {
+        $allowedSizes = Product::DEFAULT_APPAREL_SIZES;
+
+        $selectedSizes = array_values(array_intersect($allowedSizes, $sizes));
+
+        return $selectedSizes ?: $allowedSizes;
+    }
+
+    private function deleteProductImageFileIfUnused(?string $imagePath): void
+    {
+        if (! $imagePath || $imagePath === Product::PLACEHOLDER_IMAGE) {
+            return;
+        }
+
+        $stillUsedAsMainImage = Product::where('main_image', $imagePath)->exists();
+        $stillUsedAsGalleryImage = ProductImage::where('image_path', $imagePath)->exists();
+
+        if ($stillUsedAsMainImage || $stillUsedAsGalleryImage) {
+            return;
+        }
+
+        $fullPath = public_path('assets/images/products/' . $imagePath);
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
     }
 }

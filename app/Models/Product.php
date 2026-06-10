@@ -9,6 +9,9 @@ class Product extends Model
 {
     use HasFactory;
 
+    public const DEFAULT_APPAREL_SIZES = ['S', 'M', 'L', 'XL', '2XL'];
+    public const PLACEHOLDER_IMAGE = 'placeholder-product.svg';
+
     protected $fillable = [
         'category_id',
         'name',
@@ -20,6 +23,7 @@ class Product extends Model
         'sku',
         'stock_quantity',
         'brand',
+        'sizes',
         'main_image',
         'gallery_images',
         'tags',
@@ -28,10 +32,18 @@ class Product extends Model
     ];
 
     protected $casts = [
+        'sizes' => 'array',
         'gallery_images' => 'array',
         'status' => 'boolean',
         'is_featured' => 'boolean',
     ];
+
+    public function getAvailableSizesAttribute(): array
+    {
+        return is_array($this->sizes) && count($this->sizes) > 0
+            ? $this->sizes
+            : self::DEFAULT_APPAREL_SIZES;
+    }
 
     public function category()
     {

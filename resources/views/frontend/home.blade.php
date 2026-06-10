@@ -6,8 +6,18 @@
 
 <div id="page-loader">
     <div class="loader-inner">
+        <div class="loader-tee" aria-hidden="true">
+            <div class="loader-tee-neck"></div>
+            <div class="loader-tee-print">H</div>
+            <div class="loader-tee-scan"></div>
+        </div>
         <div class="loader-logo">HUSTLER</div>
-        <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+        <div class="loader-copy">Printing the drop</div>
+        <div class="loader-dots" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </div>
 </div>
 
@@ -87,13 +97,28 @@
 
 @push('styles')
 <style>
-#page-loader { position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; background:#111; color:#fff; transition:opacity .45s ease,visibility .45s ease; }
+#page-loader { position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; background:#0b0b0b; color:#fff; transition:opacity .45s ease,visibility .45s ease; overflow:hidden; }
+#page-loader::before { content:'HUSTLER'; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:rgba(255,255,255,.035); font-size:clamp(74px,16vw,220px); font-weight:900; letter-spacing:0; line-height:.8; pointer-events:none; }
 #page-loader.hide { opacity:0; visibility:hidden; pointer-events:none; }
-.loader-inner { width:min(280px,80vw); text-align:center; }
-.loader-logo { font-size:24px; font-weight:900; letter-spacing:4px; margin-bottom:18px; }
-.loader-bar { height:3px; background:rgba(255,255,255,.16); overflow:hidden; }
-.loader-bar-fill { width:42%; height:100%; background:#e71318; animation:loaderSlide 1.1s ease-in-out infinite; }
-@keyframes loaderSlide { 0%{transform:translateX(-110%)} 100%{transform:translateX(260%)} }
+.loader-inner { position:relative; z-index:1; width:min(320px,82vw); text-align:center; display:flex; flex-direction:column; align-items:center; }
+.loader-tee { position:relative; width:132px; height:150px; margin-bottom:22px; border:3px solid rgba(255,255,255,.88); border-top-width:8px; border-radius:28px 28px 12px 12px; background:linear-gradient(145deg,#151515 0%,#050505 100%); box-shadow:0 24px 70px rgba(231,19,24,.18); animation:teeFloat 1.4s ease-in-out infinite; overflow:visible; }
+.loader-tee::before,
+.loader-tee::after { content:''; position:absolute; top:17px; width:44px; height:76px; border:3px solid rgba(255,255,255,.88); background:#090909; z-index:-1; }
+.loader-tee::before { left:-42px; border-right:none; border-radius:18px 0 0 12px; transform:rotate(18deg); }
+.loader-tee::after { right:-42px; border-left:none; border-radius:0 18px 12px 0; transform:rotate(-18deg); }
+.loader-tee-neck { position:absolute; left:50%; top:-2px; width:54px; height:26px; border:4px solid rgba(255,255,255,.85); border-top:0; border-radius:0 0 32px 32px; transform:translateX(-50%); background:#0b0b0b; z-index:3; }
+.loader-tee-print { position:absolute; left:50%; top:58%; width:64px; height:64px; display:flex; align-items:center; justify-content:center; transform:translate(-50%,-50%); border:2px solid rgba(231,19,24,.75); background:#e71318; color:#fff; font-size:32px; font-weight:900; line-height:1; box-shadow:0 0 24px rgba(231,19,24,.35); animation:printPulse 1.1s ease-in-out infinite; }
+.loader-tee-scan { position:absolute; left:16px; right:16px; top:38px; height:3px; background:#fff; box-shadow:0 0 18px rgba(255,255,255,.9),0 0 32px rgba(231,19,24,.8); animation:printScan 1.1s ease-in-out infinite; }
+.loader-logo { font-size:25px; font-weight:900; letter-spacing:4px; margin-bottom:8px; }
+.loader-copy { color:rgba(255,255,255,.58); font-size:11px; font-weight:800; letter-spacing:2px; text-transform:uppercase; margin-bottom:15px; }
+.loader-dots { display:flex; gap:8px; justify-content:center; }
+.loader-dots span { width:7px; height:7px; border-radius:50%; background:#e71318; animation:loaderDot .8s ease-in-out infinite; }
+.loader-dots span:nth-child(2) { animation-delay:.12s; }
+.loader-dots span:nth-child(3) { animation-delay:.24s; }
+@keyframes teeFloat { 0%,100%{ transform:translateY(0) rotate(-1deg); } 50%{ transform:translateY(-8px) rotate(1deg); } }
+@keyframes printScan { 0%{ transform:translateY(0); opacity:.2; } 50%{ opacity:1; } 100%{ transform:translateY(82px); opacity:.2; } }
+@keyframes printPulse { 0%,100%{ transform:translate(-50%,-50%) scale(.94); filter:saturate(1); } 50%{ transform:translate(-50%,-50%) scale(1); filter:saturate(1.4); } }
+@keyframes loaderDot { 0%,100%{ transform:translateY(0); opacity:.35; } 50%{ transform:translateY(-6px); opacity:1; } }
 .home-page { background:#fff; overflow:hidden; }
 .section-eyebrow { display:block; color:#e71318; font-size:11px; font-weight:900; letter-spacing:2.6px; line-height:1; text-transform:uppercase; margin-bottom:14px; }
 .reveal { opacity:0; transform:translateY(36px); transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }

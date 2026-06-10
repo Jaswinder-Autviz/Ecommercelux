@@ -31,19 +31,66 @@
     </div>
 
     {{-- Size Selector --}}
-    <div class="pi-shoe-size">
+    <div class="pi-size-selector">
         <div class="pi-size-header">
             <span class="pi-label">Select Size</span>
-            <button class="pi-size-guide" type="button">Size Guide</button>
+            <button class="pi-size-guide" type="button" aria-expanded="false" aria-controls="sizeGuideModal">Size Guide</button>
         </div>
-        <div class="pi-shoe-size-grid">
-            @foreach(['UK 6','UK 7','UK 8','UK 9','UK 10','UK 11'] as $size)
-                <button class="pi-shoe-btn" data-size="{{ $size }}" type="button">{{ $size }}</button>
+        <div class="pi-size-grid">
+            @foreach($product->available_sizes as $size)
+                <button class="pi-size-btn" data-size="{{ $size }}" type="button">{{ $size }}</button>
             @endforeach
         </div>
         <p id="sizeError" style="display:none;color:#e8353b;font-size:12px;margin-top:8px;">
             <i class="fas fa-exclamation-circle"></i> Please select a size first
         </p>
+    </div>
+
+    <div class="pi-size-guide-modal" id="sizeGuideModal" aria-hidden="true">
+        <div class="pi-size-guide-backdrop" data-close-size-guide></div>
+        <div class="pi-size-guide-panel" role="dialog" aria-modal="true" aria-labelledby="sizeGuideTitle">
+            <button class="pi-size-guide-close" type="button" data-close-size-guide aria-label="Close size guide">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="pi-tee-guide-art" aria-hidden="true">
+                <div class="pi-tee-neck"></div>
+                <div class="pi-tee-body">
+                    <span class="pi-tee-chest">Chest</span>
+                    <span class="pi-tee-length">Length</span>
+                </div>
+            </div>
+            <h2 id="sizeGuideTitle" class="pi-size-guide-title">T-Shirt Size Guide</h2>
+            <div class="pi-unit-toggle" aria-label="Measurement unit">
+                <span class="active">In</span>
+                <span>Cms</span>
+            </div>
+            <table class="pi-size-chart">
+                <thead>
+                    <tr>
+                        <th>Size</th>
+                        <th>Chest (Inch)</th>
+                        <th>Front Length (Inch)</th>
+                        <th>Sleeve Length (Inch)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach([
+                        ['S', '42', '29', '9.75'],
+                        ['M', '44', '29.75', '10'],
+                        ['L', '46', '30.5', '10.25'],
+                        ['XL', '48', '31.25', '10.5'],
+                        ['2XL', '50', '32', '10.75'],
+                    ] as $row)
+                    <tr>
+                        <td>{{ $row[0] }}</td>
+                        <td>{{ $row[1] }}</td>
+                        <td>{{ $row[2] }}</td>
+                        <td>{{ $row[3] }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
     {{-- Actions --}}

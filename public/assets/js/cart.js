@@ -199,13 +199,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isAddToCart && !isBuyNow) return;
 
         // Size validation
-        const selectedSize = document.querySelector('.pi-shoe-btn.active')?.dataset.size;
+        const selectedSize = document.querySelector('.pi-size-btn.active')?.dataset.size;
         const sizeError    = document.getElementById('sizeError');
 
         if (!selectedSize) {
             if (sizeError) {
                 sizeError.style.display = 'block';
-                document.querySelector('.pi-shoe-size')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                document.querySelector('.pi-size-selector')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
             return;
         }

@@ -13,7 +13,6 @@
 .sp-result-count { font-size: 13px; color: #555; }
 .sp-result-count span { font-weight: 700; color: #000; }
 .sp-topbar-right { display: flex; align-items: center; gap: 14px; }
-.sp-sort-select { height: 40px; padding: 0 16px; border: 1px solid #e0e0e0; background: #fff; font-size: 13px; font-family: inherit; cursor: pointer; outline: none; min-width: 180px; }
 .sp-filter-btn { display: none; align-items: center; gap: 8px; height: 40px; padding: 0 18px; background: #292b2c !important; color: #fff !important; border: none !important; font-size: 13px; font-weight: 600; cursor: pointer; }
 .shop-main-layout { display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: start; }
 .shop-sidebar-container { position: sticky; top: 90px; }

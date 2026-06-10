@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('sku')->unique();
             $table->integer('stock_quantity')->default(0);
             $table->string('brand')->nullable();
+            $table->json('sizes')->nullable();
             $table->string('main_image');
             $table->json('gallery_images')->nullable();
             $table->string('tags')->nullable();

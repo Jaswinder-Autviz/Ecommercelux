@@ -24,24 +24,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Shoe Size Selection
-    const shoeBtns = document.querySelectorAll('.pi-shoe-btn');
-    shoeBtns.forEach(btn => {
+    // Apparel Size Selection
+    const sizeButtons = document.querySelectorAll('.pi-size-btn');
+    sizeButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            shoeBtns.forEach(b => b.classList.remove('active'));
+            sizeButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             const sizeError = document.getElementById('sizeError');
             if (sizeError) sizeError.style.display = 'none';
         });
     });
 
-    // Size Selection
-    const sizeBtns = document.querySelectorAll('.pi-size-btn');
-    sizeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            sizeBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        });
+    // Size Guide Modal
+    const guideBtn = document.querySelector('.pi-size-guide');
+    const guideModal = document.getElementById('sizeGuideModal');
+    const closeGuide = () => {
+        if (!guideModal) return;
+        guideModal.classList.remove('active');
+        guideModal.setAttribute('aria-hidden', 'true');
+        guideBtn?.setAttribute('aria-expanded', 'false');
+    };
+
+    guideBtn?.addEventListener('click', () => {
+        if (!guideModal) return;
+        guideModal.classList.add('active');
+        guideModal.setAttribute('aria-hidden', 'false');
+        guideBtn.setAttribute('aria-expanded', 'true');
+    });
+
+    document.querySelectorAll('[data-close-size-guide]').forEach(el => {
+        el.addEventListener('click', closeGuide);
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeGuide();
     });
 
     // Variant Image Selection

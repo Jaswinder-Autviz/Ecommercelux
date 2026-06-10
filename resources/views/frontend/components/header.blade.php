@@ -38,51 +38,8 @@
                     <a href="{{ route('home') }}" class="nav-link">Home</a>
                 </li>
 
-                <li class="nav-item has-mega-menu {{ request()->routeIs('shop*') ? 'active' : '' }}">
-                    <a href="{{ route('shop') }}" class="nav-link">
-                        Shop
-                        <svg class="nav-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </a>
-                    <div class="mega-menu">
-                        <div class="mega-menu-inner container">
-                            <div class="mega-col">
-                                <h4 class="mega-heading">Women</h4>
-                                <ul>
-                                    <li><a href="{{ route('shop') }}">Dresses</a></li>
-                                    <li><a href="{{ route('shop') }}">Tops & Blouses</a></li>
-                                    <li><a href="{{ route('shop') }}">Trousers</a></li>
-                                    <li><a href="{{ route('shop') }}">Outerwear</a></li>
-                                    <li><a href="{{ route('shop') }}">Accessories</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h4 class="mega-heading">Men</h4>
-                                <ul>
-                                    <li><a href="{{ route('shop') }}">Shirts</a></li>
-                                    <li><a href="{{ route('shop') }}">Trousers</a></li>
-                                    <li><a href="{{ route('shop') }}">Jackets</a></li>
-                                    <li><a href="{{ route('shop') }}">Footwear</a></li>
-                                    <li><a href="{{ route('shop') }}">Accessories</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col">
-                                <h4 class="mega-heading">Collections</h4>
-                                <ul>
-                                    <li><a href="{{ route('shop') }}">New Arrivals</a></li>
-                                    <li><a href="{{ route('shop') }}">Best Sellers</a></li>
-                                    <li><a href="{{ route('shop') }}">Summer Edit</a></li>
-                                    <li><a href="{{ route('shop') }}">Sale</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-col mega-featured">
-                                <div class="mega-feature-card">
-                                    <div class="mega-feature-img"></div>
-                                    <span class="mega-feature-label">New Season</span>
-                                    <a href="{{ route('shop') }}" class="mega-feature-link">Shop Now →</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <li class="nav-item {{ request()->routeIs('shop*') ? 'active' : '' }}">
+                    <a href="{{ route('shop') }}" class="nav-link">Shop</a>
                 </li>
 
                 <li class="nav-item {{ request()->routeIs('about') ? 'active' : '' }}">
@@ -176,19 +133,7 @@
     </div>
     <ul class="mobile-nav-list">
         <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-        <li class="mobile-has-sub">
-            <button class="mobile-sub-toggle">
-                Shop
-                <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <ul class="mobile-sub-list">
-                <li><a href="{{ route('shop') }}">All Products</a></li>
-                <li><a href="{{ route('shop') }}">Women</a></li>
-                <li><a href="{{ route('shop') }}">Men</a></li>
-                <li><a href="{{ route('shop') }}">New Arrivals</a></li>
-                <li><a href="{{ route('shop') }}">Sale</a></li>
-            </ul>
-        </li>
+        <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop*') ? 'active' : '' }}">Shop</a></li>
         <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About</a></li>
         <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
         @if(Auth::guard('customer')->check())

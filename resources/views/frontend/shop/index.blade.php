@@ -28,13 +28,6 @@
                 <p class="sp-result-count"><span>{{ $products->total() }}</span> products found</p>
             </div>
             <div class="sp-topbar-right">
-                <select class="sp-sort-select" id="product-sort">
-                    <option value="" disabled selected>Sort By</option>
-                    <option value="featured">Featured</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="newest">Newest First</option>
-                </select>
                 <button class="sp-filter-btn mobile-filter-trigger">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h6"/></svg>
                     Filters
@@ -72,7 +65,7 @@
                     <button class="sf-block-title">Size <span class="sf-arrow">+</span></button>
                     <div class="sf-block-body">
                         <div class="sf-size-grid">
-                            @foreach(['UK 6','UK 7','UK 8','UK 9','UK 10','UK 11','UK 12'] as $size)
+                            @foreach(\App\Models\Product::DEFAULT_APPAREL_SIZES as $size)
                             <button class="sf-size-btn size-filter-btn" data-size="{{ $size }}">{{ $size }}</button>
                             @endforeach
                         </div>
@@ -108,6 +101,7 @@
                     @forelse($products as $product)
                     <div class="shop-item"
                          data-category="{{ strtolower($product->category->name ?? '') }}"
+                         data-sizes="{{ implode(',', $product->available_sizes) }}"
                          data-price="{{ $product->price }}"
                          data-id="{{ $product->id }}"
                          data-trending="{{ $product->is_featured ? 'true' : 'false' }}">
@@ -148,7 +142,6 @@
 
 @push('scripts')
 <script src="{{ asset('assets/js/shop-filter.js') }}"></script>
-<script src="{{ asset('assets/js/shop-sort.js') }}"></script>
 <script>
 // Sidebar accordion
 document.querySelectorAll('.sf-block-title').forEach(btn => {

@@ -38,6 +38,9 @@
                                         <div>
                                             <p class="text-sm font-bold text-gray-900">{{ $item->product->name ?? 'Deleted Product' }}</p>
                                             <p class="text-[11px] ">SKU: {{ $item->product->sku ?? 'N/A' }}</p>
+                                            @if($item->size)
+                                            <p class="text-[11px] text-gray-400">Size: {{ $item->size }}</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </td>

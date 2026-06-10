@@ -10,7 +10,7 @@ class BrandSeeder extends Seeder
 {
     public function run(): void
     {
-        $brands = ['Nike', 'Adidas', 'Puma', 'Reebok'];
+        $brands = ['Hustler', 'Marvel', 'DC Comics', 'Anime Streetwear'];
 
         foreach ($brands as $brand) {
             Brand::create([

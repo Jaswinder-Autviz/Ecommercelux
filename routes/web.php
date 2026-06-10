@@ -63,6 +63,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
         
         // Products CRUD
+        Route::delete('/products/gallery-images/{productImage}', [\App\Http\Controllers\Admin\ProductController::class, 'destroyGalleryImage'])->name('products.gallery-images.destroy');
+        Route::delete('/products/{product}/main-image', [\App\Http\Controllers\Admin\ProductController::class, 'destroyMainImage'])->name('products.main-image.destroy');
         Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
 
         // Categories CRUD

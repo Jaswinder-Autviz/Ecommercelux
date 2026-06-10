@@ -23,8 +23,8 @@
             <div class="flex items-center gap-3">
                 <select class="bg-gray-50 border border-gray-200 text-gray-600 text-sm rounded-lg focus:ring-primary focus:border-primary block p-2 transition-all">
                     <option selected>All Categories</option>
-                    <option value="low-top">Low Top</option>
-                    <option value="high-top">High Top</option>
+                    <option value="t-shirts">T-Shirts</option>
+                    <option value="apparel">Apparel</option>
                 </select>
                 <select class="bg-gray-50 border border-gray-200 text-gray-600 text-sm rounded-lg focus:ring-primary focus:border-primary block p-2 transition-all">
                     <option selected>Status: All</option>

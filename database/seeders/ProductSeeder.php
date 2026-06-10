@@ -23,6 +23,7 @@ class ProductSeeder extends Seeder
                 'price' => rand(1000, 5000),
                 'sku' => "SKU-00$i",
                 'stock_quantity' => rand(5, 50),
+                'sizes' => Product::DEFAULT_APPAREL_SIZES,
                 'main_image' => "$i.jpg",
                 'status' => true,
                 'is_featured' => $i % 3 == 0,

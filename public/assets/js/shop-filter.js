@@ -46,8 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const catMatch = activeCategories.length === 0 || activeCategories.includes(cat);
             const priceMatch = price >= minP && price <= maxP;
-            // Size match would need product size data, adding simple check
-            const sizeMatch = !activeSize || true; // Mocking size match for now
+            const itemSizes = (item.dataset.sizes || '').split(',').map(size => size.trim()).filter(Boolean);
+            const sizeMatch = !activeSize || itemSizes.includes(activeSize);
 
             if (catMatch && priceMatch && sizeMatch) {
                 item.classList.remove('hide');

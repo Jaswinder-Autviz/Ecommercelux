@@ -21,7 +21,18 @@
         </a>
     </div>
 
-    <form action="{{ route('admin.products.update', $product->id) }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    @if ($errors->any())
+    <div class="p-4 bg-red-50 border border-red-100 rounded-xl text-sm text-red-700">
+        <strong class="font-semibold">Please fix the following errors:</strong>
+        <ul class="mt-2 space-y-1 list-disc list-inside">
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <form id="productUpdateForm" action="{{ route('admin.products.update', $product->id) }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         @csrf
         @method('PUT')
         <!-- Left: Basic Info -->
@@ -32,7 +43,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="md:col-span-2">
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Product Name</label>
-                        <input type="text" name="name" id="product_name" value="{{ $product->name }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Nike Air Max 270">
+                        <input type="text" name="name" id="product_name" value="{{ $product->name }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Hustler Oversized Tee">
                     </div>
 
                     <div>
@@ -52,7 +63,7 @@
 
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">SKU</label>
-                        <input type="text" name="sku" value="{{ $product->sku }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. NIKE-AM270-001">
+                        <input type="text" name="sku" value="{{ $product->sku }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. HST-TEE-001">
                     </div>
 
                     <div>
@@ -80,6 +91,10 @@
             <!-- Inventory & Pricing -->
             <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
                 <h3 class="font-bold text-gray-900 border-b border-gray-50 pb-4">Inventory & Pricing</h3>
+                @php
+                    $apparelSizes = \App\Models\Product::DEFAULT_APPAREL_SIZES;
+                    $selectedSizes = old('sizes', $product->available_sizes);
+                @endphp
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Regular Price (₹)</label>
@@ -93,6 +108,18 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Stock Quantity</label>
                         <input type="number" name="stock_quantity" value="{{ $product->stock_quantity }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="0">
                     </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-3">T-Shirt Sizes</label>
+                    <div class="flex flex-wrap gap-3">
+                        @foreach($apparelSizes as $size)
+                        <label class="inline-flex items-center gap-2 px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm font-semibold text-gray-700 cursor-pointer hover:border-primary transition-all">
+                            <input type="checkbox" name="sizes[]" value="{{ $size }}" class="rounded border-gray-300 text-primary focus:ring-primary" {{ in_array($size, $selectedSizes) ? 'checked' : '' }}>
+                            {{ $size }}
+                        </label>
+                        @endforeach
+                    </div>
+                    <p class="mt-2 text-xs text-gray-400">Used on the product page and checkout for apparel size selection.</p>
                 </div>
             </div>
 
@@ -113,17 +140,39 @@
                     @foreach($product->images as $image)
                     <div class="aspect-square rounded-xl overflow-hidden border border-gray-100 relative group">
                         <img src="{{ asset('assets/images/products/' . $image->image_path) }}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-                            <i class="fas fa-trash text-gray-400 cursor-pointer"></i>
-                        </div>
+                        <button type="submit" form="deleteGalleryImage{{ $image->id }}" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-white text-red-500 opacity-0 group-hover:opacity-100 hover:bg-red-500 hover:text-white transition-all shadow-sm" title="Delete gallery image" aria-label="Delete gallery image">
+                            <i class="fas fa-times text-sm"></i>
+                        </button>
                     </div>
                     @endforeach
                 </div>
             </div>
         </div>
 
-        <!-- Right: Status & Main Image -->
+        <!-- Right: Main Image & Status -->
         <div class="space-y-6">
+            <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+                <h3 class="font-bold text-gray-900 border-b border-gray-50 pb-4">Main Image</h3>
+                <div class="space-y-4">
+                    <div class="w-full aspect-square bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center overflow-hidden relative group" id="main_image_container">
+                        <img id="main_image_preview" src="{{ asset('assets/images/products/' . $product->main_image) }}" class="{{ $product->main_image ? '' : 'hidden' }} w-full h-full object-cover">
+                        <div class="text-center group-hover:text-primary transition-all {{ $product->main_image ? 'hidden' : '' }}" id="main_image_placeholder">
+                            <i class="fas fa-image text-3xl mb-2 text-gray-300"></i>
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Upload Main Image</p>
+                        </div>
+                    </div>
+                    <input type="file" name="main_image" id="main_image_input" class="hidden" accept="image/*">
+                    <button type="button" onclick="document.getElementById('main_image_input').click()" class="w-full border border-gray-200 text-gray-600 text-xs font-bold py-3 rounded-xl hover:bg-gray-50 transition-all uppercase tracking-wider">
+                        Change Image
+                    </button>
+                    @if($product->main_image && $product->main_image !== \App\Models\Product::PLACEHOLDER_IMAGE)
+                    <button type="submit" form="deleteMainImageForm" class="w-full border border-red-100 text-red-500 text-xs font-bold py-3 rounded-xl hover:bg-red-50 transition-all uppercase tracking-wider">
+                        Remove Main Image
+                    </button>
+                    @endif
+                </div>
+            </div>
+
             <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
                 <h3 class="font-bold text-gray-900 border-b border-gray-50 pb-4">Product Status</h3>
                 
@@ -140,26 +189,9 @@
                         <label class="text-sm font-semibold text-gray-700">Featured Product</label>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" name="is_featured" value="1" {{ $product->is_featured ? 'checked' : '' }} class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:width-5 after:transition-all peer-checked:bg-primary"></div>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:border-gray-300 after:rounded-full after:h-5 after:width-5 after:transition-all peer-checked:bg-primary"></div>
                         </label>
                     </div>
-                </div>
-            </div>
-
-            <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
-                <h3 class="font-bold text-gray-900 border-b border-gray-50 pb-4">Main Image</h3>
-                <div class="space-y-4">
-                    <div class="w-full aspect-square bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center overflow-hidden relative group" id="main_image_container">
-                        <img id="main_image_preview" src="{{ asset('assets/images/products/' . $product->main_image) }}" class="{{ $product->main_image ? '' : 'hidden' }} w-full h-full object-cover">
-                        <div class="text-center group-hover:text-primary transition-all {{ $product->main_image ? 'hidden' : '' }}" id="main_image_placeholder">
-                            <i class="fas fa-image text-3xl mb-2 text-gray-300"></i>
-                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Upload Main Image</p>
-                        </div>
-                    </div>
-                    <input type="file" name="main_image" id="main_image_input" class="hidden" accept="image/*">
-                    <button type="button" onclick="document.getElementById('main_image_input').click()" class="w-full border border-gray-200 text-gray-600 text-xs font-bold py-3 rounded-xl hover:bg-gray-50 transition-all uppercase tracking-wider">
-                        Change Image
-                    </button>
                 </div>
             </div>
 
@@ -173,6 +205,20 @@
             </div>
         </div>
     </form>
+
+    @foreach($product->images as $image)
+    <form id="deleteGalleryImage{{ $image->id }}" action="{{ route('admin.products.gallery-images.destroy', $image->id) }}" method="POST" class="hidden" onsubmit="return confirm('Delete this gallery image?')">
+        @csrf
+        @method('DELETE')
+    </form>
+    @endforeach
+
+    @if($product->main_image && $product->main_image !== \App\Models\Product::PLACEHOLDER_IMAGE)
+    <form id="deleteMainImageForm" action="{{ route('admin.products.main-image.destroy', $product->id) }}" method="POST" class="hidden" onsubmit="return confirm('Remove this main image? Product will use a placeholder until you upload a new one.')">
+        @csrf
+        @method('DELETE')
+    </form>
+    @endif
 </div>
 
 <script>
@@ -205,6 +251,7 @@
     const dropZone = document.getElementById('drop_zone');
     const galleryInput = document.getElementById('gallery_input');
     const galleryPreview = document.getElementById('gallery_preview');
+    let selectedGalleryFiles = [];
 
     dropZone.addEventListener('click', () => galleryInput.click());
 
@@ -222,30 +269,44 @@
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         if (e.dataTransfer.files.length) {
-            galleryInput.files = e.dataTransfer.files;
-            handleGalleryPreview(e.dataTransfer.files);
+            selectedGalleryFiles = Array.from(e.dataTransfer.files);
+            syncGalleryInputFiles();
+            renderNewGalleryPreviews();
         }
         dropZone.classList.remove('drop-zone--over');
     });
 
     galleryInput.addEventListener('change', (e) => {
-        handleGalleryPreview(e.target.files);
+        selectedGalleryFiles = Array.from(e.target.files);
+        renderNewGalleryPreviews();
     });
 
-    function handleGalleryPreview(files) {
-        // Keep existing images (optional, or clear if you want to replace)
-        // For simplicity, we just append new ones
-        Array.from(files).forEach(file => {
+    function syncGalleryInputFiles() {
+        const dataTransfer = new DataTransfer();
+        selectedGalleryFiles.forEach(file => dataTransfer.items.add(file));
+        galleryInput.files = dataTransfer.files;
+    }
+
+    function renderNewGalleryPreviews() {
+        galleryPreview.querySelectorAll('[data-new-gallery-preview]').forEach(el => el.remove());
+
+        selectedGalleryFiles.forEach((file, index) => {
             const reader = new FileReader();
             reader.onload = function(e) {
                 const div = document.createElement('div');
                 div.className = 'aspect-square rounded-xl overflow-hidden border border-gray-100 relative group';
+                div.dataset.newGalleryPreview = 'true';
                 div.innerHTML = `
                     <img src="${e.target.result}" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-                        <i class="fas fa-times text-gray-400 cursor-pointer"></i>
-                    </div>
+                    <button type="button" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-white text-red-500 opacity-0 group-hover:opacity-100 hover:bg-red-500 hover:text-white transition-all shadow-sm" title="Remove selected image" aria-label="Remove selected image">
+                        <i class="fas fa-times text-sm"></i>
+                    </button>
                 `;
+                div.querySelector('button').addEventListener('click', () => {
+                    selectedGalleryFiles.splice(index, 1);
+                    syncGalleryInputFiles();
+                    renderNewGalleryPreviews();
+                });
                 galleryPreview.appendChild(div);
             }
             reader.readAsDataURL(file);
