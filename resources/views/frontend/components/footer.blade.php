@@ -26,6 +26,7 @@
                     <li><a href="{{ route('account') }}">My Account</a></li>
                     <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
                     <li><a href="{{ route('cart') }}">Cart</a></li>
+                    <li><a href="{{ route('affiliate.register') }}">Affiliate Program</a></li>
                 </ul>
             </div>
         </div>

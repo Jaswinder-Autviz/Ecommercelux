@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Frontend\ProductController;
+use App\Http\Controllers\Admin\AffiliateController;
+use App\Http\Controllers\Frontend\AffiliateAuthController;
+use App\Http\Controllers\Frontend\AffiliateCouponController;
 
 // ─── Frontend Routes ───────────────────────────────────────────────────────────
 
@@ -23,6 +26,17 @@ Route::get('/cart', function () {
 Route::get('/checkout', function () {
     return view('frontend.checkout');
 })->name('checkout');
+
+Route::post('/coupon/apply', [AffiliateCouponController::class, 'apply'])->name('coupon.apply');
+
+Route::get('/affiliate/register', [AffiliateAuthController::class, 'showRegister'])->name('affiliate.register');
+Route::post('/affiliate/register', [AffiliateAuthController::class, 'register'])->name('affiliate.register.post');
+Route::get('/affiliate/login', [AffiliateAuthController::class, 'showLogin'])->name('affiliate.login');
+Route::post('/affiliate/login', [AffiliateAuthController::class, 'login'])->name('affiliate.login.post');
+Route::post('/affiliate/logout', [AffiliateAuthController::class, 'logout'])->name('affiliate.logout');
+Route::middleware('affiliate.auth')->group(function () {
+    Route::get('/affiliate/dashboard', [AffiliateAuthController::class, 'dashboard'])->name('affiliate.dashboard');
+});
 
 // Payment Routes
 Route::post('/payment/create-order', [\App\Http\Controllers\Frontend\PaymentController::class, 'createOrder'])->name('payment.create');
@@ -72,6 +86,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Customers Management
         Route::resource('customers', \App\Http\Controllers\Admin\CustomerController::class)->only(['index', 'show', 'destroy']);
+
+        // Affiliators
+        Route::get('/affiliates', [AffiliateController::class, 'index'])->name('affiliates.index');
+        Route::get('/affiliates/create', [AffiliateController::class, 'create'])->name('affiliates.create');
+        Route::post('/affiliates', [AffiliateController::class, 'store'])->name('affiliates.store');
+        Route::get('/affiliates/{affiliate}/edit', [AffiliateController::class, 'edit'])->name('affiliates.edit');
+        Route::put('/affiliates/{affiliate}', [AffiliateController::class, 'update'])->name('affiliates.update');
+        Route::delete('/affiliates/{affiliate}', [AffiliateController::class, 'destroy'])->name('affiliates.destroy');
+        Route::post('/affiliates/{affiliate}/approve', [AffiliateController::class, 'approve'])->name('affiliates.approve');
+        Route::post('/affiliates/{affiliate}/reject', [AffiliateController::class, 'reject'])->name('affiliates.reject');
         
         // Orders
         Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');

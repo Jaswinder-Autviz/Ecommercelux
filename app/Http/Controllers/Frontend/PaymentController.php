@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Affiliate;
+use App\Models\AffiliateOrder;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -95,6 +97,7 @@ class PaymentController extends Controller
             'pin'     => 'required|string|max:20',
             'method'  => 'required|string|in:cod,googlepay,upi,card,netbanking',
             'amount'  => 'required|numeric|min:0.01',
+            'coupon_code' => 'nullable|string|max:50',
             'items'   => 'required|array|min:1',
             'items.*.product_name' => 'required|string|max:255',
             'items.*.quantity'     => 'required|integer|min:1',
@@ -102,16 +105,38 @@ class PaymentController extends Controller
             'items.*.size'         => ['required', 'string', Rule::in(Product::DEFAULT_APPAREL_SIZES)],
         ]);
 
+        $subtotal = collect($request->items)->sum(function ($item) {
+            return ((float) $item['price']) * ((int) $item['quantity']);
+        });
+
+        $affiliate = null;
+        $couponCode = strtoupper((string) ($request->coupon_code ?: session('affiliate_coupon.coupon_code')));
+        $discountAmount = 0;
+        $commissionAmount = 0;
+
+        if ($couponCode) {
+            $affiliate = Affiliate::where('coupon_code', $couponCode)->where('status', 'approved')->first();
+
+            if (!$affiliate) {
+                return response()->json(['success' => false, 'message' => 'Invalid or inactive affiliate coupon.'], 422);
+            }
+
+            $discountAmount = min($affiliate->calculateCommission($subtotal), $subtotal);
+            $commissionAmount = $discountAmount;
+        }
+
+        $finalAmount = max($subtotal - $discountAmount, 0);
+
         $orderData = [
             'order_number'     => $this->generateOrderNumber(),
             'customer_name'    => $request->name,
             'customer_email'   => $request->email,
             'customer_phone'   => $request->phone,
             'shipping_address' => trim($request->address . ', ' . $request->city . ', ' . $request->state . ' - ' . $request->pin),
-            'total_amount'     => $request->amount,
-            'discount_amount'  => 0,
+            'total_amount'     => $subtotal,
+            'discount_amount'  => $discountAmount,
             'shipping_amount'  => 0,
-            'final_amount'     => $request->amount,
+            'final_amount'     => $finalAmount,
             'payment_method'   => $request->method,
             'payment_status'   => $request->method === 'cod' ? 'pending' : 'paid',
             'order_status'     => 'pending',
@@ -132,6 +157,22 @@ class PaymentController extends Controller
                     'size'         => $item['size'] ?? null,
                     'total'        => $item['price'] * $item['quantity'],
                 ]);
+            }
+
+            if ($affiliate) {
+                AffiliateOrder::create([
+                    'affiliate_id' => $affiliate->id,
+                    'order_id' => $order->id,
+                    'coupon_code' => $affiliate->coupon_code,
+                    'order_amount' => $subtotal,
+                    'commission_amount' => $commissionAmount,
+                    'status' => 'pending',
+                ]);
+
+                $affiliate->increment('total_orders');
+                $affiliate->increment('total_sales', $subtotal);
+                $affiliate->increment('total_commission', $commissionAmount);
+                session()->forget('affiliate_coupon');
             }
 
             DB::commit();

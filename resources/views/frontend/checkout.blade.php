@@ -137,8 +137,17 @@
                 <div class="co-summary">
                     <h2 class="co-section-title">Order Summary</h2>
                     <div id="co-items" class="co-items"></div>
+                    <div class="co-coupon-box">
+                        <label for="affiliate-coupon-code">Affiliate Coupon</label>
+                        <div class="co-coupon-row">
+                            <input type="text" id="affiliate-coupon-code" placeholder="Enter coupon code">
+                            <button type="button" id="affiliate-coupon-apply">Apply</button>
+                        </div>
+                        <p id="affiliate-coupon-message"></p>
+                    </div>
                     <div class="co-summary-rows">
                         <div class="co-row"><span>Subtotal</span><span id="co-subtotal">₹0</span></div>
+                        <div class="co-row" id="co-discount-row" style="display:none"><span>Coupon Discount</span><span class="text-green-600" id="co-discount">-₹0</span></div>
                         <div class="co-row"><span>Shipping</span><span class="text-green-600">FREE</span></div>
                         <div class="co-row co-row-total"><span>Total</span><span id="co-total">₹0</span></div>
                     </div>
@@ -203,6 +212,15 @@
 .co-summary-rows { margin-bottom: 24px; }
 .co-row { display: flex; justify-content: space-between; font-size: 14px; color: #555; margin-bottom: 10px; }
 .co-row-total { font-size: 16px; font-weight: 800; color: #292b2c; padding-top: 12px; border-top: 1px solid #ebebeb; margin-top: 4px; }
+.co-coupon-box { border-bottom: 1px solid #f0f0f0; margin-bottom: 20px; padding-bottom: 18px; }
+.co-coupon-box label { display: block; font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #666; margin-bottom: 8px; }
+.co-coupon-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.co-coupon-row input { border: 1.5px solid #e0e0e0; padding: 11px 12px; font-size: 13px; outline: none; text-transform: uppercase; }
+.co-coupon-row input:focus { border-color: #292b2c; }
+.co-coupon-row button { border: none; background: #292b2c; color: #fff; padding: 0 16px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+.co-coupon-row button:hover { background: #e8353b; }
+.co-coupon-row button:disabled { opacity: 0.65; cursor: not-allowed; }
+#affiliate-coupon-message { min-height: 18px; margin-top: 8px; font-size: 12px; font-weight: 700; }
 .co-pay-btn { width: 100%; height: 52px; background: #292b2c; color: #fff; border: none; font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: background 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .co-pay-btn:hover { background: #e8353b; }
 .co-pay-btn:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -223,6 +241,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalEl    = document.getElementById('co-total');
     const payBtn     = document.getElementById('co-pay-btn');
     const payBtnText = document.getElementById('co-pay-btn-text');
+    const discountRow = document.getElementById('co-discount-row');
+    const discountEl = document.getElementById('co-discount');
+    const couponInput = document.getElementById('affiliate-coupon-code');
+    const couponApply = document.getElementById('affiliate-coupon-apply');
+    const couponMessage = document.getElementById('affiliate-coupon-message');
 
     // ── Render cart items + calculate total ──────────────────
     if (!cart.length) {
@@ -250,12 +273,68 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     itemsEl.innerHTML = html;
-    subtotalEl.textContent = '₹' + subtotal.toLocaleString('en-IN');
-    totalEl.textContent    = '₹' + subtotal.toLocaleString('en-IN');
-    if (payBtnText) payBtnText.textContent = 'Pay ₹' + subtotal.toLocaleString('en-IN');
+    function renderTotals() {
+        const discount = window._couponDiscount || 0;
+        const total = Math.max(subtotal - discount, 0);
 
-    // Store total for payment
+        subtotalEl.textContent = '₹' + subtotal.toLocaleString('en-IN');
+        totalEl.textContent = '₹' + total.toLocaleString('en-IN');
+        if (discount > 0) {
+            discountRow.style.display = 'flex';
+            discountEl.textContent = '-₹' + discount.toLocaleString('en-IN');
+        } else {
+            discountRow.style.display = 'none';
+        }
+        if (payBtnText) payBtnText.textContent = 'Pay ₹' + total.toLocaleString('en-IN');
+        window._cartTotal = total;
+    }
+
     window._cartTotal = subtotal;
+    window._cartSubtotal = subtotal;
+    window._couponCode = '';
+    window._couponDiscount = 0;
+    renderTotals();
+
+    couponApply?.addEventListener('click', async () => {
+        const code = couponInput.value.trim().toUpperCase();
+        if (!code) {
+            couponMessage.textContent = 'Please enter a coupon code.';
+            couponMessage.style.color = '#c62828';
+            return;
+        }
+
+        couponApply.disabled = true;
+        couponApply.textContent = 'Checking';
+        couponMessage.textContent = '';
+
+        try {
+            const res = await fetch('/coupon/apply', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                },
+                body: JSON.stringify({ coupon_code: code, amount: subtotal }),
+            });
+            const data = await res.json();
+            if (!data.success) throw new Error(data.message || 'Unable to apply coupon.');
+
+            window._couponCode = data.coupon_code;
+            window._couponDiscount = Number(data.discount || 0);
+            couponMessage.textContent = data.message;
+            couponMessage.style.color = '#2e7d32';
+            renderTotals();
+        } catch (error) {
+            window._couponCode = '';
+            window._couponDiscount = 0;
+            couponMessage.textContent = error.message;
+            couponMessage.style.color = '#c62828';
+            renderTotals();
+        } finally {
+            couponApply.disabled = false;
+            couponApply.textContent = 'Apply';
+        }
+    });
 
     // ── Payment method selection ─────────────────────────────
     document.querySelectorAll('.co-pay-option').forEach(opt => {
@@ -324,6 +403,7 @@ async function initiatePayment() {
         pin,
         method,
         amount,
+        coupon_code: window._couponCode || '',
         items: cartItems,
     };
 
