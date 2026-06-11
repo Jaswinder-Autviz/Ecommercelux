@@ -50,10 +50,6 @@
                     <a href="{{ route('contact') }}" class="nav-link">Contact</a>
                 </li>
 
-                <li class="nav-item {{ request()->routeIs('affiliate.*') ? 'active' : '' }}">
-                    <a href="{{ route('affiliate.register') }}" class="nav-link">Affiliate Program</a>
-                </li>
-
             </ul>
         </nav>
 
@@ -140,7 +136,6 @@
         <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop*') ? 'active' : '' }}">Shop</a></li>
         <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About</a></li>
         <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
-        <li><a href="{{ route('affiliate.register') }}" class="{{ request()->routeIs('affiliate.*') ? 'active' : '' }}">Affiliate Program</a></li>
         @if(Auth::guard('customer')->check())
             <li><a href="{{ route('customer.account') }}" class="{{ request()->routeIs('customer.account') ? 'active' : '' }}">My Account</a></li>
             <li><a href="{{ route('customer.orders') }}">My Orders</a></li>
