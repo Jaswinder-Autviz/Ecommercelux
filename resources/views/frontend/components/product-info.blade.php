@@ -20,6 +20,7 @@
             <span class="pi-price-new">₹ {{ number_format($product->price) }}</span>
         @endif
     </div>
+    <p class="pi-tax-note">Price incl. of all taxes</p>
 
     {{-- Stock --}}
     <div class="pi-stock">

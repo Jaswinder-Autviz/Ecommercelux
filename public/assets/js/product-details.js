@@ -60,6 +60,62 @@ document.addEventListener('DOMContentLoaded', function() {
         if (event.key === 'Escape') closeGuide();
     });
 
+    // Size guide unit conversion
+    const unitOptions = document.querySelectorAll('.pi-unit-toggle span');
+    const sizeChart = document.querySelector('.pi-size-chart');
+
+    if (unitOptions.length && sizeChart) {
+        const headers = Array.from(sizeChart.querySelectorAll('thead th'));
+        const measureCells = Array.from(sizeChart.querySelectorAll('tbody tr')).flatMap(row => {
+            return Array.from(row.querySelectorAll('td')).slice(1);
+        });
+
+        measureCells.forEach(cell => {
+            cell.dataset.inches = cell.textContent.trim();
+        });
+
+        function formatCm(value) {
+            const cm = parseFloat(value) * 2.54;
+            return Number.isInteger(cm) ? String(cm) : cm.toFixed(1);
+        }
+
+        function setUnit(unit) {
+            unitOptions.forEach(option => {
+                option.classList.toggle('active', option.dataset.unit === unit);
+            });
+
+            headers.forEach(header => {
+                if (header.textContent.includes('Inch') || header.textContent.includes('Cm')) {
+                    header.textContent = header.textContent
+                        .replace(/\(Inch\)/g, unit === 'cm' ? '(Cm)' : '(Inch)')
+                        .replace(/\(Cm\)/g, unit === 'cm' ? '(Cm)' : '(Inch)');
+                }
+            });
+
+            measureCells.forEach(cell => {
+                const inches = cell.dataset.inches;
+                cell.textContent = unit === 'cm' ? formatCm(inches) : inches;
+            });
+        }
+
+        unitOptions.forEach(option => {
+            const unit = option.textContent.trim().toLowerCase().startsWith('cm') ? 'cm' : 'in';
+            option.dataset.unit = unit;
+            option.setAttribute('role', 'button');
+            option.setAttribute('tabindex', '0');
+
+            option.addEventListener('click', () => setUnit(unit));
+            option.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    setUnit(unit);
+                }
+            });
+        });
+
+        setUnit('in');
+    }
+
     // Variant Image Selection
     const variantItems = document.querySelectorAll('.pi-variant-item');
     variantItems.forEach(item => {
