@@ -6,25 +6,25 @@
 <div class="space-y-7">
     <div>
         <p class="text-sm font-bold uppercase tracking-widest text-primary">Affiliate Dashboard</p>
-        <h1 class="mt-1 text-3xl font-extrabold text-gray-950">Welcome, {{ $affiliate->name }}</h1>
+        <h1 class="mt-1 text-3xl font-bold text-gray-950">Welcome, {{ $affiliate->name }}</h1>
     </div>
 
     <div class="grid gap-4 md:grid-cols-4">
         <div class="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
             <p class="text-xs font-bold uppercase tracking-widest text-gray-400">Coupon Code</p>
-            <p class="mt-3 text-2xl font-black uppercase tracking-widest text-gray-950">{{ $affiliate->coupon_code }}</p>
+            <p class="mt-3 text-2xl  uppercase tracking-widest text-gray-950">{{ $affiliate->coupon_code }}</p>
         </div>
         <div class="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
             <p class="text-xs font-bold uppercase tracking-widest text-gray-400">Total Orders Generated</p>
-            <p class="mt-3 text-3xl font-black text-gray-950">{{ $affiliate->total_orders }}</p>
+            <p class="mt-3 text-3xl  text-gray-950">{{ $affiliate->total_orders }}</p>
         </div>
         <div class="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
             <p class="text-xs font-bold uppercase tracking-widest text-gray-400">Total Sales Amount</p>
-            <p class="mt-3 text-3xl font-black text-gray-950">₹{{ number_format($affiliate->total_sales, 2) }}</p>
+            <p class="mt-3 text-3xl  text-gray-950">₹{{ number_format($affiliate->total_sales, 2) }}</p>
         </div>
         <div class="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
             <p class="text-xs font-bold uppercase tracking-widest text-gray-400">Total Commission</p>
-            <p class="mt-3 text-3xl font-black text-primary">₹{{ number_format($affiliate->total_commission, 2) }}</p>
+            <p class="mt-3 text-3xl  text-primary">₹{{ number_format($affiliate->total_commission, 2) }}</p>
         </div>
     </div>
 
