@@ -15,8 +15,17 @@ class CustomerAccountController extends Controller
     public function index()
     {
         $customer = Auth::guard('customer')->user();
-        $orders = Order::where('customer_id', $customer->id)
-            ->where('order_status', 'delivered')
+        $orders = Order::where(function ($query) use ($customer) {
+                $query->where('customer_id', $customer->id);
+
+                if ($customer->email) {
+                    $query->orWhere('customer_email', $customer->email);
+                }
+
+                if ($customer->phone) {
+                    $query->orWhere('customer_phone', $customer->phone);
+                }
+            })
             ->latest()
             ->get();
         $recentOrders = $orders->take(3);

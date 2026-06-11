@@ -341,7 +341,10 @@
         minutes = minutes < 10 ? '0' + minutes : minutes;
         seconds = seconds < 10 ? '0' + seconds : seconds;
         const strTime = (hours < 10 ? '0' + hours : hours) + ':' + minutes + ':' + seconds + ' ' + ampm;
-        document.getElementById('current-time').textContent = strTime;
+        const currentTime = document.getElementById('current-time');
+        if (currentTime) {
+            currentTime.textContent = strTime;
+        }
     }
     setInterval(updateClock, 1000);
     updateClock();
