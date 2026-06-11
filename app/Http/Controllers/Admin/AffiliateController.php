@@ -84,6 +84,7 @@ class AffiliateController extends Controller
             'name' => 'required|string|max:255',
             'email' => ['required', 'email', 'max:255', Rule::unique('affiliates', 'email')->ignore($affiliateId)],
             'phone' => 'nullable|string|max:30',
+            'social_media_url' => 'nullable|url|max:255',
             'password' => $passwordRule,
             'coupon_code' => ['required', 'string', 'max:50', Rule::unique('affiliates', 'coupon_code')->ignore($affiliateId)],
             'commission_type' => ['required', Rule::in(['percentage', 'fixed'])],

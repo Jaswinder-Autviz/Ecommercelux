@@ -23,11 +23,11 @@
         </div>
         <div class="stat-card rounded-2xl border bg-white p-5">
             <p class="text-xs font-bold uppercase tracking-widest text-gray-400">Sales</p>
-            <p class="mt-2 text-2xl font-extrabold text-gray-950">₹{{ number_format(\App\Models\Affiliate::sum('total_sales'), 2) }}</p>
+            <p class="mt-2 text-2xl font-extrabold text-gray-950">Rs. {{ number_format(\App\Models\Affiliate::sum('total_sales'), 2) }}</p>
         </div>
         <div class="stat-card rounded-2xl border bg-white p-5">
             <p class="text-xs font-bold uppercase tracking-widest text-gray-400">Commission</p>
-            <p class="mt-2 text-2xl font-extrabold text-primary">₹{{ number_format(\App\Models\Affiliate::sum('total_commission'), 2) }}</p>
+            <p class="mt-2 text-2xl font-extrabold text-primary">Rs. {{ number_format(\App\Models\Affiliate::sum('total_commission'), 2) }}</p>
         </div>
     </div>
 
@@ -49,13 +49,18 @@
                         <tr class="transition-all hover:bg-gray-50">
                             <td class="px-6 py-4">
                                 <p class="text-sm font-extrabold text-gray-900">{{ $affiliate->name }}</p>
-                                <p class="text-xs text-gray-400">{{ $affiliate->email }}{{ $affiliate->phone ? ' · ' . $affiliate->phone : '' }}</p>
+                                <p class="text-xs text-gray-400">{{ $affiliate->email }}{{ $affiliate->phone ? ' - ' . $affiliate->phone : '' }}</p>
+                                @if($affiliate->social_media_url)
+                                    <a href="{{ $affiliate->social_media_url }}" target="_blank" rel="noopener noreferrer" class="mt-1 inline-flex text-xs font-bold text-primary hover:text-gray-950">
+                                        Social Profile
+                                    </a>
+                                @endif
                             </td>
                             <td class="px-6 py-4">
                                 <span class="rounded-full bg-gray-950 px-3 py-1 text-xs font-extrabold uppercase tracking-widest text-white">{{ $affiliate->coupon_code }}</span>
                             </td>
                             <td class="px-6 py-4 text-sm font-bold text-gray-700">
-                                {{ $affiliate->commission_type === 'percentage' ? $affiliate->commission_value . '%' : '₹' . number_format($affiliate->commission_value, 2) }}
+                                {{ $affiliate->commission_type === 'percentage' ? $affiliate->commission_value . '%' : 'Rs. ' . number_format($affiliate->commission_value, 2) }}
                             </td>
                             <td class="px-6 py-4">
                                 @php
@@ -65,8 +70,8 @@
                             </td>
                             <td class="px-6 py-4 text-right text-xs font-bold text-gray-500">
                                 <p>{{ $affiliate->total_orders }} orders</p>
-                                <p>₹{{ number_format($affiliate->total_sales, 2) }} sales</p>
-                                <p class="text-primary">₹{{ number_format($affiliate->total_commission, 2) }} commission</p>
+                                <p>Rs. {{ number_format($affiliate->total_sales, 2) }} sales</p>
+                                <p class="text-primary">Rs. {{ number_format($affiliate->total_commission, 2) }} commission</p>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center justify-end gap-2">

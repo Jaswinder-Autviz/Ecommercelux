@@ -14,6 +14,7 @@ class Affiliate extends Authenticatable
         'name',
         'email',
         'phone',
+        'social_media_url',
         'password',
         'coupon_code',
         'commission_type',

@@ -36,6 +36,12 @@
                         @error('phone') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
                     </div>
                 </div>
+                <div>
+                    <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-gray-500">Social Media URL</label>
+                    <input type="url" name="social_media_url" value="{{ old('social_media_url') }}" required placeholder="https://www.instagram.com/yourprofile" class="w-full border border-gray-200 px-4 py-3 text-sm outline-none focus:border-gray-950">
+                    <p class="mt-2 text-xs font-semibold text-gray-400">Instagram, Facebook, YouTube, or any active profile link.</p>
+                    @error('social_media_url') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
+                </div>
                 <div class="grid gap-5 sm:grid-cols-2">
                     <div>
                         <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-gray-500">Password</label>

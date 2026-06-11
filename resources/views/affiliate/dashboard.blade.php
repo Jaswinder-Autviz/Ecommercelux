@@ -9,22 +9,29 @@
         <h1 class="mt-1 text-3xl font-bold text-gray-950">Welcome, {{ $affiliate->name }}</h1>
     </div>
 
-    <div class="grid gap-4 md:grid-cols-4">
+    <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         <div class="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
             <p class="text-xs font-bold uppercase tracking-widest text-gray-400">Coupon Code</p>
-            <p class="mt-3 text-2xl  uppercase tracking-widest text-gray-950">{{ $affiliate->coupon_code }}</p>
+            <p class="mt-3 text-2xl uppercase tracking-widest text-gray-950">{{ $affiliate->coupon_code }}</p>
         </div>
         <div class="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
             <p class="text-xs font-bold uppercase tracking-widest text-gray-400">Total Orders Generated</p>
-            <p class="mt-3 text-3xl  text-gray-950">{{ $affiliate->total_orders }}</p>
+            <p class="mt-3 text-3xl text-gray-950">{{ $affiliate->total_orders }}</p>
         </div>
         <div class="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
             <p class="text-xs font-bold uppercase tracking-widest text-gray-400">Total Sales Amount</p>
-            <p class="mt-3 text-3xl  text-gray-950">₹{{ number_format($affiliate->total_sales, 2) }}</p>
+            <p class="mt-3 text-3xl text-gray-950">Rs. {{ number_format($affiliate->total_sales, 2) }}</p>
         </div>
         <div class="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
             <p class="text-xs font-bold uppercase tracking-widest text-gray-400">Total Commission</p>
-            <p class="mt-3 text-3xl  text-primary">₹{{ number_format($affiliate->total_commission, 2) }}</p>
+            <p class="mt-3 text-3xl text-primary">Rs. {{ number_format($affiliate->total_commission, 2) }}</p>
+        </div>
+        <div class="rounded-2xl border border-primary/20 bg-primary/5 p-5 shadow-sm">
+            <p class="text-xs font-bold uppercase tracking-widest text-primary">Available Balance</p>
+            <p class="mt-3 text-3xl text-gray-950">Rs. {{ number_format($balance['available_balance'] ?? 0, 2) }}</p>
+            <a href="{{ route('affiliate.redeem') }}" class="mt-4 inline-flex text-xs font-extrabold uppercase tracking-widest text-primary hover:text-gray-950">
+                Redeem Now
+            </a>
         </div>
     </div>
 
@@ -49,9 +56,9 @@
                         <tr>
                             <td class="px-6 py-4 text-sm font-bold text-gray-900">#{{ $affiliateOrder->order?->order_number ?? $affiliateOrder->order_id }}</td>
                             <td class="px-6 py-4 text-sm text-gray-600">{{ $affiliateOrder->order?->customer_name ?? 'N/A' }}</td>
-                            <td class="px-6 py-4 text-sm font-bold text-gray-900">₹{{ number_format($affiliateOrder->order_amount, 2) }}</td>
+                            <td class="px-6 py-4 text-sm font-bold text-gray-900">Rs. {{ number_format($affiliateOrder->order_amount, 2) }}</td>
                             <td class="px-6 py-4 text-xs font-extrabold uppercase tracking-widest text-gray-500">{{ $affiliateOrder->coupon_code }}</td>
-                            <td class="px-6 py-4 text-sm font-bold text-primary">₹{{ number_format($affiliateOrder->commission_amount, 2) }}</td>
+                            <td class="px-6 py-4 text-sm font-bold text-primary">Rs. {{ number_format($affiliateOrder->commission_amount, 2) }}</td>
                             <td class="px-6 py-4 text-sm text-gray-500">{{ $affiliateOrder->created_at->format('d M Y') }}</td>
                         </tr>
                     @empty

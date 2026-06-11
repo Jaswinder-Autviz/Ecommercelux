@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Affiliate;
+use App\Support\AffiliateWithdrawalBalance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,6 +23,7 @@ class AffiliateAuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:affiliates,email',
             'phone' => 'nullable|string|max:30',
+            'social_media_url' => 'required|url|max:255',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -67,9 +69,10 @@ class AffiliateAuthController extends Controller
     public function dashboard()
     {
         $affiliate = Auth::guard('affiliate')->user();
+        $balance = AffiliateWithdrawalBalance::for($affiliate);
         $orders = $affiliate->orders()->with('order')->latest()->paginate(10);
 
-        return view('affiliate.dashboard', compact('affiliate', 'orders'));
+        return view('affiliate.dashboard', compact('affiliate', 'orders', 'balance'));
     }
 
     public function logout(Request $request)

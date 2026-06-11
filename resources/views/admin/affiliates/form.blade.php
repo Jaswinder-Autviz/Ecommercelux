@@ -22,6 +22,11 @@
                 @error('phone') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
             </div>
             <div>
+                <label class="mb-2 block text-sm font-semibold text-gray-700">Social Media URL</label>
+                <input type="url" name="social_media_url" value="{{ old('social_media_url', $affiliate?->social_media_url) }}" placeholder="https://www.instagram.com/username" class="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none transition-all">
+                @error('social_media_url') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
+            </div>
+            <div>
                 <label class="mb-2 block text-sm font-semibold text-gray-700">Password {{ $affiliate ? '(leave blank to keep)' : '' }}</label>
                 <input type="password" name="password" {{ $affiliate ? '' : 'required' }} class="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none transition-all">
                 @error('password') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
