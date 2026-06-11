@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Admin\AffiliateController;
 use App\Http\Controllers\Frontend\AffiliateAuthController;
 use App\Http\Controllers\Frontend\AffiliateCouponController;
+use App\Http\Controllers\Frontend\AffiliateWithdrawalController as FrontendAffiliateWithdrawalController;
 
 // ─── Frontend Routes ───────────────────────────────────────────────────────────
 
@@ -36,6 +37,8 @@ Route::post('/affiliate/login', [AffiliateAuthController::class, 'login'])->name
 Route::post('/affiliate/logout', [AffiliateAuthController::class, 'logout'])->name('affiliate.logout');
 Route::middleware('affiliate.auth')->group(function () {
     Route::get('/affiliate/dashboard', [AffiliateAuthController::class, 'dashboard'])->name('affiliate.dashboard');
+    Route::get('/affiliate/redeem', [FrontendAffiliateWithdrawalController::class, 'index'])->name('affiliate.redeem');
+    Route::post('/affiliate/redeem', [FrontendAffiliateWithdrawalController::class, 'store'])->name('affiliate.redeem.store');
 });
 
 // Payment Routes
@@ -96,6 +99,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/affiliates/{affiliate}', [AffiliateController::class, 'destroy'])->name('affiliates.destroy');
         Route::post('/affiliates/{affiliate}/approve', [AffiliateController::class, 'approve'])->name('affiliates.approve');
         Route::post('/affiliates/{affiliate}/reject', [AffiliateController::class, 'reject'])->name('affiliates.reject');
+
+        // Affiliate Withdrawals
+        Route::get('/affiliate-withdrawals', [\App\Http\Controllers\Admin\AffiliateWithdrawalController::class, 'index'])->name('affiliate-withdrawals.index');
+        Route::post('/affiliate-withdrawals/{id}/approve', [\App\Http\Controllers\Admin\AffiliateWithdrawalController::class, 'approve'])->name('affiliate-withdrawals.approve');
+        Route::post('/affiliate-withdrawals/{id}/mark-paid', [\App\Http\Controllers\Admin\AffiliateWithdrawalController::class, 'markPaid'])->name('affiliate-withdrawals.mark-paid');
+        Route::post('/affiliate-withdrawals/{id}/reject', [\App\Http\Controllers\Admin\AffiliateWithdrawalController::class, 'reject'])->name('affiliate-withdrawals.reject');
         
         // Orders
         Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');

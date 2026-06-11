@@ -19,9 +19,13 @@
                 <a href="{{ route('home') }}" class="text-xs font-bold uppercase tracking-widest text-white/50">Store</a>
             </div>
             <nav class="space-y-2 p-4">
-                <a href="{{ route('affiliate.dashboard') }}" class="flex items-center gap-3 rounded-xl bg-primary px-4 py-3 text-sm font-bold">
+                <a href="{{ route('affiliate.dashboard') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold transition-all {{ request()->routeIs('affiliate.dashboard') ? 'bg-primary text-white' : 'text-white/75 hover:bg-white/10 hover:text-white' }}">
                     <i class="fas fa-chart-line w-5"></i>
                     Dashboard
+                </a>
+                <a href="{{ route('affiliate.redeem') }}" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold transition-all {{ request()->routeIs('affiliate.redeem') ? 'bg-primary text-white' : 'text-white/75 hover:bg-white/10 hover:text-white' }}">
+                    <i class="fas fa-wallet w-5"></i>
+                    Redeem
                 </a>
                 <form action="{{ route('affiliate.logout') }}" method="POST">
                     @csrf

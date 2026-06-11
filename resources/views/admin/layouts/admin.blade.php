@@ -261,6 +261,10 @@
                 <i class="fas fa-handshake w-5 text-sm"></i>
                 <span>Affiliators</span>
             </a>
+            <a href="{{ route('admin.affiliate-withdrawals.index') }}" class="sidebar-link {{ Request::is('admin/affiliate-withdrawals*') ? 'active' : '' }}">
+                <i class="fas fa-wallet w-5 text-sm"></i>
+                <span>Affiliate Withdrawals</span>
+            </a>
             <a href="#" class="sidebar-link">
                 <i class="fas fa-star w-5 text-sm"></i>
                 <span>Reviews</span>

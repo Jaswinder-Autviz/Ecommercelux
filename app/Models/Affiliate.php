@@ -40,6 +40,11 @@ class Affiliate extends Authenticatable
         return $this->hasMany(AffiliateOrder::class);
     }
 
+    public function withdrawals()
+    {
+        return $this->hasMany(AffiliateWithdrawal::class);
+    }
+
     public function isApproved(): bool
     {
         return $this->status === 'approved';
