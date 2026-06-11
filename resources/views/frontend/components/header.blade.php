@@ -1,3 +1,9 @@
+@php
+    $customer = Auth::guard('customer')->user();
+    $customerName = $customer?->name ?: $customer?->phone ?: 'Account';
+    $customerInitial = strtoupper(substr(trim($customerName), 0, 1));
+@endphp
+
 {{-- Announcement Bar --}}
 <!-- <div class="announcement-bar" id="announcementBar">
     <div class="announcement-inner">
@@ -75,25 +81,27 @@
 
             {{-- Account --}}
             @if(Auth::guard('customer')->check())
-                <div class="relative group">
-                    <button class="action-btn account-btn flex items-center space-x-1" aria-label="Account">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M2 18c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                        <span class="text-xs font-medium hidden md:block">{{ Auth::guard('customer')->user()->name ?? 'Account' }}</span>
+                <div class="account-menu group">
+                    <button class="action-btn account-btn account-avatar-btn" aria-label="Account">
+                        <span class="account-avatar">{{ $customerInitial }}</span>
                     </button>
                     {{-- Dropdown --}}
-                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                        <div class="p-4 border-b border-gray-50">
-                            <p class="text-xs text-gray-400">Welcome,</p>
-                            <p class="text-sm font-bold text-gray-900 truncate">{{ Auth::guard('customer')->user()->name ?? Auth::guard('customer')->user()->phone }}</p>
+                    <div class="account-dropdown">
+                        <div class="account-dropdown-head">
+                            <span class="account-avatar account-avatar-lg">{{ $customerInitial }}</span>
+                            <div>
+                                <p class="account-welcome">Welcome back</p>
+                                <p class="account-name">{{ $customerName }}</p>
+                            </div>
                         </div>
-                        <ul class="p-2">
-                            <li><a href="{{ route('customer.account') }}" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-all"><i class="far fa-user w-5"></i> My Account</a></li>
-                            <li><a href="{{ route('customer.account') }}?tab=orders" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-all"><i class="fas fa-shopping-bag w-5"></i> My Orders</a></li>
-                            <li><a href="{{ route('customer.account') }}?tab=address" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-all"><i class="far fa-address-card w-5"></i> Addresses</a></li>
-                            <li class="border-t border-gray-50 mt-2 pt-2">
+                        <ul class="account-dropdown-list">
+                            <li><a href="{{ route('customer.account') }}"><i class="far fa-user"></i> My Account</a></li>
+                            <li><a href="{{ route('customer.account') }}?tab=orders"><i class="fas fa-shopping-bag"></i> My Orders</a></li>
+                            <li><a href="{{ route('customer.account') }}?tab=address"><i class="far fa-address-card"></i> Addresses</a></li>
+                            <li class="account-logout-row">
                                 <form action="{{ route('customer.logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="flex items-center w-full px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg transition-all"><i class="fas fa-sign-out-alt w-5"></i> Logout</button>
+                                    <button type="submit"><i class="fas fa-sign-out-alt"></i> Logout</button>
                                 </form>
                             </li>
                         </ul>
@@ -131,6 +139,23 @@
             <svg width="20" height="20" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </button>
     </div>
+    @if(Auth::guard('customer')->check())
+        <div class="mobile-account-card">
+            <span class="account-avatar account-avatar-lg">{{ $customerInitial }}</span>
+            <div>
+                <p>Signed in as</p>
+                <strong>{{ $customerName }}</strong>
+            </div>
+        </div>
+    @else
+        <div class="mobile-account-card mobile-account-card-guest">
+            <span class="account-avatar account-avatar-lg"><i class="far fa-user"></i></span>
+            <div>
+                <p>Welcome to Hustler</p>
+                <strong>Sign in for faster checkout</strong>
+            </div>
+        </div>
+    @endif
     <ul class="mobile-nav-list">
         <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
         <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop*') ? 'active' : '' }}">Shop</a></li>
@@ -138,9 +163,9 @@
         <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
         @if(Auth::guard('customer')->check())
             <li><a href="{{ route('customer.account') }}" class="{{ request()->routeIs('customer.account') ? 'active' : '' }}">My Account</a></li>
-            <li><a href="{{ route('customer.orders') }}">My Orders</a></li>
+            <li><a href="{{ route('customer.account') }}?tab=orders">My Orders</a></li>
         @else
-            <li><button class="openLoginModalTrigger w-full text-left" style="color: inherit;">Account</button></li>
+            <li><button class="openLoginModalTrigger mobile-nav-button">Account</button></li>
         @endif
         <li><a href="{{ route('wishlist') }}" class="{{ request()->routeIs('wishlist') ? 'active' : '' }}">Wishlist</a></li>
         <li><a href="{{ route('cart') }}" class="{{ request()->routeIs('cart') ? 'active' : '' }}">Cart</a></li>

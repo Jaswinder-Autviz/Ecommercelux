@@ -1,5 +1,5 @@
 /* new-arrivals-slider.css */
-.na-section { width: 100%; padding: 76px 0; overflow: hidden; background: linear-gradient(180deg,#fff 0%,#fbfbf8 100%); }
+.na-section { width: 100%; padding: 76px 0; overflow: hidden; }
 .na-header { display: flex; align-items: center; justify-content: center; margin-bottom: 26px; text-align: center; }
 .na-header-left { display: flex; flex-direction: column; align-items: center; gap: 7px; max-width: 620px; }
 .na-header-left span { color: #e71318; font-size: 11px; font-weight: 900; letter-spacing: 0; line-height: 1; text-transform: uppercase; }

@@ -1,8 +1,9 @@
 /* footer.css */
 .site-footer {
-    background: #fff;
+    background: #e6e7e8;
     color: #fff;
     padding: 60px 0 0;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .footer-inner {

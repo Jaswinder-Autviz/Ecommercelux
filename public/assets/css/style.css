@@ -11,7 +11,7 @@
     --color-white:     #ffffff;
     --color-light-bg:  #F5F5F2;
     --color-border:    #E8E8E4;
-    --container-max:        1540px;
+    --container-max:        1280px;
     --header-height:        70px;
     --announcement-height:  40px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
