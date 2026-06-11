@@ -1,5 +1,5 @@
 {{-- Announcement Bar --}}
-<div class="announcement-bar" id="announcementBar">
+<!-- <div class="announcement-bar" id="announcementBar">
     <div class="announcement-inner">
         <div class="announcement-track">
             <div class="announcement-content">
@@ -14,7 +14,7 @@
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </button>
     </div>
-</div>
+</div> -->
 
 {{-- Main Header --}}
 <header class="site-header" id="siteHeader">

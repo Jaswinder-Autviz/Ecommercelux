@@ -55,9 +55,6 @@ class CustomerAccountController extends Controller
             'last_name' => 'nullable|string|max:255',
             'email' => 'required|email|unique:customers,email,' . $customer->id,
             'phone' => 'required|string|max:20',
-            'gender' => 'nullable|in:male,female,other',
-            'dob' => 'nullable|date',
-            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         $name = trim($request->first_name . ' ' . $request->last_name);
@@ -65,15 +62,7 @@ class CustomerAccountController extends Controller
             'name' => $name,
             'email' => $request->email,
             'phone' => preg_replace('/\D+/', '', $request->phone),
-            'gender' => $request->gender,
-            'dob' => $request->dob,
         ];
-
-        if ($request->hasFile('profile_image')) {
-            $imageName = time() . '.' . $request->profile_image->extension();
-            $request->profile_image->move(public_path('assets/images/customers'), $imageName);
-            $data['profile_image'] = $imageName;
-        }
 
         $customer->update($data);
 

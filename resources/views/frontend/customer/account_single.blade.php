@@ -104,7 +104,7 @@
                             <h2 class="text-xl font-bold text-gray-800">Profile Details</h2>
                         </div>
 
-                        <form action="{{ route('customer.profile.update') }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+                        <form action="{{ route('customer.profile.update') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
                             @csrf
                             <div class="space-y-2">
                                 <label class="text-sm font-bold text-gray-600 ml-1">First name</label>
@@ -121,31 +121,6 @@
                             <div class="space-y-2">
                                 <label class="text-sm font-bold text-gray-600 ml-1">Contact number</label>
                                 <input type="text" name="phone" value="{{ old('phone', Auth::guard('customer')->user()->phone ?? '') }}" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all font-medium text-gray-800">
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-sm font-bold text-gray-600 ml-1">Birthdate</label>
-                                <input type="date" name="dob" value="{{ old('dob', optional(Auth::guard('customer')->user())->dob ? Auth::guard('customer')->user()->dob->format('Y-m-d') : '') }}" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all font-medium text-gray-800">
-                            </div>
-                            <div class="space-y-2 md:col-span-2">
-                                <label class="text-sm font-bold text-gray-600 ml-1">Profile image</label>
-                                <input type="file" name="profile_image" accept="image/*" class="w-full px-6 py-4 bg-[#f0f4f9] border-none rounded-2xl focus:ring-2 focus:ring-primary/20 transition-all text-gray-800">
-                            </div>
-                            <div class="md:col-span-2 space-y-4">
-                                <label class="text-sm font-bold text-gray-600 ml-1">Gender</label>
-                                <div class="flex items-center gap-8">
-                                    <label class="flex items-center space-x-3 cursor-pointer group">
-                                        <input type="radio" name="gender" value="male" class="w-5 h-5 text-primary focus:ring-primary/20 bg-[#f0f4f9] border-none" {{ old('gender', Auth::guard('customer')->user()->gender) === 'male' ? 'checked' : '' }}>
-                                        <span class="font-bold text-gray-700 group-hover:text-primary transition-all">Male</span>
-                                    </label>
-                                    <label class="flex items-center space-x-3 cursor-pointer group">
-                                        <input type="radio" name="gender" value="female" class="w-5 h-5 text-primary focus:ring-primary/20 bg-[#f0f4f9] border-none" {{ old('gender', Auth::guard('customer')->user()->gender) === 'female' ? 'checked' : '' }}>
-                                        <span class="font-bold text-gray-700 group-hover:text-primary transition-all">Female</span>
-                                    </label>
-                                    <label class="flex items-center space-x-3 cursor-pointer group">
-                                        <input type="radio" name="gender" value="other" class="w-5 h-5 text-primary focus:ring-primary/20 bg-[#f0f4f9] border-none" {{ old('gender', Auth::guard('customer')->user()->gender) === 'other' ? 'checked' : '' }}>
-                                        <span class="font-bold text-gray-700 group-hover:text-primary transition-all">Other</span>
-                                    </label>
-                                </div>
                             </div>
                             <div class="md:col-span-2 flex justify-end pt-4">
                                 <button type="submit" class="bg-primary text-white px-8 py-4 rounded-2xl shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all font-bold">Save changes</button>
