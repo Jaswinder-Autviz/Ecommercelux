@@ -33,28 +33,28 @@
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                     </div>
                     <h3>Premium Fabric</h3>
-                    <p>Soft cotton blends selected for shape, comfort, and everyday wear.</p>
+                    <p>Soft cotton blends selected for shape, comfort, and all-day street movement.</p>
                 </div>
                 <div class="wl-row-card reveal" style="transition-delay:0.1s">
                     <div class="wl-row-icon">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
                     </div>
                     <h3>2-Day Delivery</h3>
-                    <p>Same-day dispatch on all orders placed before 3PM.</p>
+                    <p>Fast dispatch with careful packing so your fresh fit reaches clean and ready.</p>
                 </div>
                 <div class="wl-row-card reveal" style="transition-delay:0.2s">
                     <div class="wl-row-icon">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
                     </div>
                     <h3>Easy Exchanges</h3>
-                    <p>Size not right? Exchange within 7 days without the drama.</p>
+                    <p>Size not right? Exchange within 7 days with a simple, no-drama process.</p>
                 </div>
                 <div class="wl-row-card reveal" style="transition-delay:0.3s">
                     <div class="wl-row-icon">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
                     </div>
                     <h3>Exclusive Drops</h3>
-                    <p>Early access to limited releases before they sell out.</p>
+                    <p>Early access to limited graphics, seasonal colors, and pieces that move fast.</p>
                 </div>
             </div>
         </div>

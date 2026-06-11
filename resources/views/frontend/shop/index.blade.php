@@ -6,14 +6,7 @@
 <div class="shop-page-wrapper">
 
     {{-- PREMIUM SHOP BANNER --}}
-    <div class="shop-hero">
-        <img src="{{ asset('assets/images/banners/Banner2.png') }}" alt="Shop" class="shop-hero-img">
-        <div class="shop-hero-overlay">
-            <p class="shop-hero-sub">All Collections</p>
-            <h1 class="shop-hero-title">SHOP ALL</h1>
-            <p class="shop-hero-count">{{ $products->total() }} Products</p>
-        </div>
-    </div>
+  
 
     <div class="container">
 
@@ -25,8 +18,7 @@
                     <span>/</span>
                     <span>Shop</span>
                 </nav>
-                <p class="sp-result-count"><span>{{ $products->total() }}</span> products found</p>
-            </div>
+                </div>
             <div class="sp-topbar-right">
                 <button class="sp-filter-btn mobile-filter-trigger">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h6"/></svg>
@@ -44,6 +36,11 @@
                     <button class="mobile-sidebar-close">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
                     </button>
+                </div>
+
+                <div class="sf-intro">
+                    <span>Refine the drop</span>
+                    <p>Use quick filters to narrow the collection without losing your place.</p>
                 </div>
 
                 {{-- Category Filter --}}
@@ -77,11 +74,11 @@
                     <button class="sf-block-title">Price <span class="sf-arrow">+</span></button>
                     <div class="sf-block-body">
                         @foreach([
-                            ['label'=>'Under ₹2,000','min'=>0,'max'=>2000],
-                            ['label'=>'₹2,000 – ₹3,000','min'=>2000,'max'=>3000],
-                            ['label'=>'₹3,000 – ₹4,000','min'=>3000,'max'=>4000],
-                            ['label'=>'₹4,000 – ₹5,000','min'=>4000,'max'=>5000],
-                            ['label'=>'Over ₹5,000','min'=>5000,'max'=>999999],
+                            ['label'=>'Under Rs. 2,000','min'=>0,'max'=>2000],
+                            ['label'=>'Rs. 2,000 - Rs. 3,000','min'=>2000,'max'=>3000],
+                            ['label'=>'Rs. 3,000 - Rs. 4,000','min'=>3000,'max'=>4000],
+                            ['label'=>'Rs. 4,000 - Rs. 5,000','min'=>4000,'max'=>5000],
+                            ['label'=>'Over Rs. 5,000','min'=>5000,'max'=>999999],
                         ] as $range)
                         <label class="sf-radio-item">
                             <input type="radio" name="price-filter" class="price-radio-filter"
@@ -148,7 +145,7 @@ document.querySelectorAll('.sf-block-title').forEach(btn => {
     btn.addEventListener('click', () => {
         const block = btn.closest('.sf-block');
         block.classList.toggle('open');
-        btn.querySelector('.sf-arrow').textContent = block.classList.contains('open') ? '−' : '+';
+        btn.querySelector('.sf-arrow').textContent = block.classList.contains('open') ? '-' : '+';
     });
     // open by default
     btn.click();

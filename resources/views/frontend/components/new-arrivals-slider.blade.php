@@ -8,7 +8,9 @@
 
     <div class="na-header container">
         <div class="na-header-left reveal">
+            <span>Latest heat</span>
             <h2 class="na-title">FRESH OUT THE LAB</h2>
+            <p>Fresh tees, sharp graphics, and limited pieces ready for your next rotation.</p>
         </div>
     </div>
 
