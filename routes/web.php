@@ -122,6 +122,8 @@ use App\Http\Controllers\Frontend\CustomerAuthController;
 use App\Http\Controllers\Frontend\CustomerAccountController;
 
 // Customer Auth Routes
+Route::post('/customer/login', [CustomerAuthController::class, 'login'])->name('customer.login');
+Route::post('/customer/register', [CustomerAuthController::class, 'register'])->name('customer.register');
 Route::post('/customer/send-otp', [CustomerAuthController::class, 'sendOtp'])->name('customer.sendOtp');
 Route::post('/customer/verify-otp', [CustomerAuthController::class, 'verifyOtp'])->name('customer.verifyOtp');
 Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');

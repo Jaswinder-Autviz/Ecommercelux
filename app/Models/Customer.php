@@ -13,6 +13,7 @@ class Customer extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'password',
         'phone',
         'gender',
         'dob',
@@ -21,10 +22,12 @@ class Customer extends Authenticatable
     ];
 
     protected $hidden = [
+        'password',
         'remember_token',
     ];
 
     protected $casts = [
+        'password' => 'hashed',
         'phone_verified_at' => 'datetime',
         'dob' => 'date',
     ];

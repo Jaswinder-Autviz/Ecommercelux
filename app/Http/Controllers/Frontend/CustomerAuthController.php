@@ -8,11 +8,59 @@ use App\Models\OtpVerification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class CustomerAuthController extends Controller
 {
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
+        ]);
+
+        if (!Auth::guard('customer')->attempt($credentials, true)) {
+            throw ValidationException::withMessages([
+                'email' => 'Invalid email or password.',
+            ]);
+        }
+
+        $request->session()->regenerate();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Logged in successfully.',
+            'redirect' => route('customer.account'),
+        ]);
+    }
+
+    public function register(Request $request)
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:customers,email'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+
+        $customer = Customer::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+
+        Auth::guard('customer')->login($customer, true);
+        $request->session()->regenerate();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Account created successfully.',
+            'redirect' => route('customer.account'),
+        ]);
+    }
+
     public function sendOtp(Request $request)
     {
         $request->validate([
