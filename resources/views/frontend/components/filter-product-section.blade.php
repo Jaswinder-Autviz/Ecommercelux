@@ -1,4 +1,4 @@
-<section class="fp-section mt-5">
+<section class="fp-section">
 
     {{-- PREMIUM PROMO SLIDER --}}
     <div class="container p-0">
@@ -7,7 +7,7 @@
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="promo-slide">
-                        <img src="{{ asset('assets/images/banners/Banner1.png') }}" alt="Classic fit t-shirts" class="promo-slide-img">
+                        <img src="{{ asset('assets/images/banners/swiper-banner.png') }}" alt="Classic fit t-shirts" class="promo-slide-img">
                     </div>
                 </div>
                 <!-- <div class="swiper-slide">
@@ -15,19 +15,19 @@
                         <img src="{{ asset('assets/images/banners/Banner1.png') }}" alt="Oversized t-shirts" class="promo-slide-img">
                     </div>
                 </div> -->
-                <div class="swiper-slide">
+                <!-- <div class="swiper-slide">
                     <div class="promo-slide">
                         <img src="{{ asset('assets/images/banners/Banner3.png') }}" alt="Graphic t-shirts" class="promo-slide-img">
                     </div>
-                </div>
+                </div> -->
             </div>
-            <div class="promo-pagination"></div>
-            <button class="promo-nav promo-nav-prev">
+            <!-- <div class="promo-pagination"></div> -->
+            <!-- <button class="promo-nav promo-nav-prev">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
             <button class="promo-nav promo-nav-next">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
+            </button> -->
         </div>
     </div>
 </div>
@@ -38,7 +38,7 @@
             <div class="fp-filter-bar">
                 <div class="fp-filter-left">
                     <div class="fp-filter-tabs">
-                        <button class="fp-filter-btn active" data-filter="all">Trending</button>
+                        <button class="fp-filter-btn active" data-filter="all">Products</button>
                         @foreach(\App\Models\Category::where('status', true)->get() as $cat)
                             <button class="fp-filter-btn" data-filter="{{ strtolower($cat->name) }}">{{ $cat->name }}</button>
                         @endforeach

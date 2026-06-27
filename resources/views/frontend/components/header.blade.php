@@ -24,6 +24,10 @@
 
 {{-- Main Header --}}
 <header class="site-header" id="siteHeader">
+    <div class="brand-topbar">
+        <span>Built for the bold. Printed for the streets.</span>
+    </div>
+
     <div class="header-inner">
 
         {{-- Mobile Menu Toggle --}}
@@ -34,7 +38,9 @@
         </button>
 
         {{-- Logo --}}
-        <a href="{{ route('home') }}" class="site-logo">HUSTLER</a>
+        <a href="{{ route('home') }}" class="site-logo" aria-label="Hustler home">
+            <img src="{{ asset('assets/images/logo/hustler-logo.png') }}" alt="Hustler">
+        </a>
 
         {{-- Primary Navigation --}}
         <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
@@ -134,7 +140,9 @@
 <div class="mobile-overlay" id="mobileOverlay"></div>
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
     <div class="mobile-nav-header">
-        <span class="mobile-logo">HUSTLER</span>
+        <span class="mobile-logo">
+            <img src="{{ asset('assets/images/logo/hustler-logo.png') }}" alt="Hustler">
+        </span>
         <button class="mobile-close" id="mobileClose" aria-label="Close menu">
             <svg width="20" height="20" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         </button>

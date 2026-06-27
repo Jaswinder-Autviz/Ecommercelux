@@ -9,31 +9,29 @@
                 <div class="choose-image">
                     <img src="{{ asset('assets/images/choose/choose1.png') }}" alt="Oversized Hustler tees">
                 </div>
-                <div class="choose-caption">
+                <!-- <div class="choose-caption">
                     <span>Oversized</span>
                     <strong>Relaxed fits for daily movement</strong>
-                </div>
+                </div> -->
          
             </a>
             <a href="{{ route('shop') }}" class="choose-item reveal" style="transition-delay:0.1s">
                 <div class="choose-image">
                     <img src="{{ asset('assets/images/choose/choose2.png') }}" alt="Graphic Hustler tees">
                 </div>
-                <div class="choose-caption">
+                <!-- <div class="choose-caption">
                     <span>Graphic</span>
                     <strong>Bold prints with street energy</strong>
-                </div>
-          
+                </div> -->
             </a>
             <a href="{{ route('shop') }}" class="choose-item reveal-right">
                 <div class="choose-image">
                     <img src="{{ asset('assets/images/choose/choose3.png') }}" alt="Everyday Hustler basics">
                 </div>
-                <div class="choose-caption">
+                <!-- <div class="choose-caption">
                     <span>Essentials</span>
                     <strong>Clean staples made to repeat</strong>
-                </div>
-             
+                </div> -->
             </a>
         </div>
     </div>

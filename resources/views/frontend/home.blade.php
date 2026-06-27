@@ -62,7 +62,7 @@
 
     @include('frontend.components.choose')
     @include('frontend.components.new-arrivals-slider')
-    @include('frontend.components.categories-grid')
+    <!-- @include('frontend.components.categories-grid') -->
     @include('frontend.components.filter-product-section')
 
     @if(isset($reels) && $reels->count())
