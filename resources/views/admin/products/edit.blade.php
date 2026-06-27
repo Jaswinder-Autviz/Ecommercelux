@@ -53,8 +53,8 @@
 
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Category</label>
-                        <select name="category_id" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
-                            <option value="">Select Category</option>
+                        <select name="category_id" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+                            <option value="">No Category</option>
                             @foreach($categories as $category)
                             <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
@@ -140,7 +140,7 @@
                     @foreach($product->images as $image)
                     <div class="aspect-square rounded-xl overflow-hidden border border-gray-100 relative group">
                         <img src="{{ asset('assets/images/products/' . $image->image_path) }}" class="w-full h-full object-cover">
-                        <button type="submit" form="deleteGalleryImage{{ $image->id }}" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-white text-red-500 opacity-0 group-hover:opacity-100 hover:bg-red-500 hover:text-white transition-all shadow-sm" title="Delete gallery image" aria-label="Delete gallery image">
+                        <button type="button" class="js-delete-gallery-image absolute top-2 right-2 w-8 h-8 rounded-full bg-white text-red-500 opacity-0 group-hover:opacity-100 hover:bg-red-500 hover:text-white transition-all shadow-sm" data-delete-url="{{ route('admin.products.gallery-images.destroy', $image->id) }}" title="Delete gallery image" aria-label="Delete gallery image">
                             <i class="fas fa-times text-sm"></i>
                         </button>
                     </div>
@@ -154,7 +154,7 @@
             <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
                 <h3 class="font-bold text-gray-900 border-b border-gray-50 pb-4">Main Image</h3>
                 <div class="space-y-4">
-                    <div class="w-full aspect-square bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center overflow-hidden relative group" id="main_image_container">
+                    <div class="w-full aspect-square bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center overflow-hidden relative group cursor-pointer" id="main_image_container">
                         <img id="main_image_preview" src="{{ asset('assets/images/products/' . $product->main_image) }}" class="{{ $product->main_image ? '' : 'hidden' }} w-full h-full object-cover">
                         <div class="text-center group-hover:text-primary transition-all {{ $product->main_image ? 'hidden' : '' }}" id="main_image_placeholder">
                             <i class="fas fa-image text-3xl mb-2 text-gray-300"></i>
@@ -162,11 +162,11 @@
                         </div>
                     </div>
                     <input type="file" name="main_image" id="main_image_input" class="hidden" accept="image/*">
-                    <button type="button" onclick="document.getElementById('main_image_input').click()" class="w-full border border-gray-200 text-gray-600 text-xs font-bold py-3 rounded-xl hover:bg-gray-50 transition-all uppercase tracking-wider">
+                    <button type="button" id="main_image_button" class="w-full border border-gray-200 text-gray-600 text-xs font-bold py-3 rounded-xl hover:bg-gray-50 transition-all uppercase tracking-wider">
                         Change Image
                     </button>
                     @if($product->main_image && $product->main_image !== \App\Models\Product::PLACEHOLDER_IMAGE)
-                    <button type="submit" form="deleteMainImageForm" class="w-full border border-red-100 text-red-500 text-xs font-bold py-3 rounded-xl hover:bg-red-50 transition-all uppercase tracking-wider">
+                    <button type="button" id="remove_main_image_button" data-delete-url="{{ route('admin.products.main-image.destroy', $product->id) }}" class="w-full border border-red-100 text-red-500 text-xs font-bold py-3 rounded-xl hover:bg-red-50 transition-all uppercase tracking-wider">
                         Remove Main Image
                     </button>
                     @endif
@@ -206,19 +206,6 @@
         </div>
     </form>
 
-    @foreach($product->images as $image)
-    <form id="deleteGalleryImage{{ $image->id }}" action="{{ route('admin.products.gallery-images.destroy', $image->id) }}" method="POST" class="hidden" onsubmit="return confirm('Delete this gallery image?')">
-        @csrf
-        @method('DELETE')
-    </form>
-    @endforeach
-
-    @if($product->main_image && $product->main_image !== \App\Models\Product::PLACEHOLDER_IMAGE)
-    <form id="deleteMainImageForm" action="{{ route('admin.products.main-image.destroy', $product->id) }}" method="POST" class="hidden" onsubmit="return confirm('Remove this main image? Product will use a placeholder until you upload a new one.')">
-        @csrf
-        @method('DELETE')
-    </form>
-    @endif
 </div>
 
 <script>
@@ -233,18 +220,43 @@
         document.getElementById('product_slug').value = slug;
     });
 
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
     // Main Image Preview
-    document.getElementById('main_image_input').addEventListener('change', function(e) {
+    const mainImageContainer = document.getElementById('main_image_container');
+    const mainImageInput = document.getElementById('main_image_input');
+    const mainImageButton = document.getElementById('main_image_button');
+    const mainImagePreview = document.getElementById('main_image_preview');
+    const mainImagePlaceholder = document.getElementById('main_image_placeholder');
+    const removeMainImageButton = document.getElementById('remove_main_image_button');
+
+    mainImageContainer.addEventListener('click', () => mainImageInput.click());
+    mainImageButton.addEventListener('click', () => mainImageInput.click());
+
+    mainImageInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                document.getElementById('main_image_preview').src = e.target.result;
-                document.getElementById('main_image_preview').classList.remove('hidden');
-                document.getElementById('main_image_placeholder').classList.add('hidden');
+                mainImagePreview.src = e.target.result;
+                mainImagePreview.classList.remove('hidden');
+                mainImagePlaceholder.classList.add('hidden');
             }
             reader.readAsDataURL(file);
         }
+    });
+
+    removeMainImageButton?.addEventListener('click', async () => {
+        await deleteImage(removeMainImageButton.dataset.deleteUrl, {
+            successMessage: 'Main image removed successfully.',
+            onSuccess: (data) => {
+                mainImageInput.value = '';
+                mainImagePreview.src = data.placeholder || '';
+                mainImagePreview.classList.add('hidden');
+                mainImagePlaceholder.classList.remove('hidden');
+                removeMainImageButton.remove();
+            },
+        });
     });
 
     // Gallery Preview & Drag/Drop
@@ -252,6 +264,19 @@
     const galleryInput = document.getElementById('gallery_input');
     const galleryPreview = document.getElementById('gallery_preview');
     let selectedGalleryFiles = [];
+
+    document.querySelectorAll('.js-delete-gallery-image').forEach(button => {
+        button.addEventListener('click', async (event) => {
+            event.stopPropagation();
+
+            await deleteImage(button.dataset.deleteUrl, {
+                successMessage: 'Gallery image removed successfully.',
+                onSuccess: () => {
+                    button.closest('.group')?.remove();
+                },
+            });
+        });
+    });
 
     dropZone.addEventListener('click', () => galleryInput.click());
 
@@ -269,17 +294,34 @@
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         if (e.dataTransfer.files.length) {
-            selectedGalleryFiles = Array.from(e.dataTransfer.files);
-            syncGalleryInputFiles();
+            addGalleryFiles(e.dataTransfer.files);
             renderNewGalleryPreviews();
         }
         dropZone.classList.remove('drop-zone--over');
     });
 
     galleryInput.addEventListener('change', (e) => {
-        selectedGalleryFiles = Array.from(e.target.files);
+        addGalleryFiles(e.target.files);
         renderNewGalleryPreviews();
     });
+
+    function addGalleryFiles(files) {
+        Array.from(files)
+            .filter(file => file.type.startsWith('image/'))
+            .forEach(file => {
+                const alreadySelected = selectedGalleryFiles.some(selectedFile =>
+                    selectedFile.name === file.name &&
+                    selectedFile.size === file.size &&
+                    selectedFile.lastModified === file.lastModified
+                );
+
+                if (!alreadySelected) {
+                    selectedGalleryFiles.push(file);
+                }
+            });
+
+        syncGalleryInputFiles();
+    }
 
     function syncGalleryInputFiles() {
         const dataTransfer = new DataTransfer();
@@ -306,11 +348,35 @@
                     selectedGalleryFiles.splice(index, 1);
                     syncGalleryInputFiles();
                     renderNewGalleryPreviews();
+                    window.showAdminToast?.('Selected gallery image removed.');
                 });
                 galleryPreview.appendChild(div);
             }
             reader.readAsDataURL(file);
         });
+    }
+
+    async function deleteImage(url, { successMessage, onSuccess }) {
+        try {
+            const response = await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                },
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Image could not be removed.');
+            }
+
+            onSuccess?.(data);
+            window.showAdminToast?.(data.message || successMessage);
+        } catch (error) {
+            window.showAdminToast?.(error.message || 'Image could not be removed.', 'error');
+        }
     }
 </script>
 @endsection

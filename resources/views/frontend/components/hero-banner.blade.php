@@ -29,7 +29,7 @@
 
 
             {{-- SLIDE 2 --}}
- 
+<!--  
             <div class="swiper-slide">
                 <div class="hero-slide-inner">
                     <img src="{{ asset('assets/images/banners/Banner_2.png') }}"
@@ -45,10 +45,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             {{-- SLIDE 3 --}}
-            <div class="swiper-slide">
+            <!-- <div class="swiper-slide">
                 <div class="hero-slide-inner">
                     <img src="{{ asset('assets/images/banners/Banner_3.png') }}"
                          alt="Premium Hustler T-shirts" class="hero-slide-img" loading="lazy">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>

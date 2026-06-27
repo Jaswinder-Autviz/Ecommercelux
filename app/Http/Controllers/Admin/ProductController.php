@@ -27,7 +27,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'nullable|exists:categories,id',
             'brand' => 'nullable|string|max:255',
             'price' => 'required|numeric',
             'stock_quantity' => 'required|integer',
@@ -44,6 +44,7 @@ class ProductController extends Controller
         }
 
         $data = $request->except(['main_image', 'gallery_images']);
+        $data['category_id'] = $request->filled('category_id') ? $request->input('category_id') : null;
         $data['slug'] = $slug;
         $data['status'] = $request->has('status');
         $data['is_featured'] = $request->has('is_featured');
@@ -80,7 +81,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'nullable|exists:categories,id',
             'brand' => 'nullable|string|max:255',
             'price' => 'required|numeric',
             'stock_quantity' => 'required|integer',
@@ -97,6 +98,7 @@ class ProductController extends Controller
         }
 
         $data = $request->except(['main_image', 'gallery_images']);
+        $data['category_id'] = $request->filled('category_id') ? $request->input('category_id') : null;
         $data['slug'] = $slug;
         $data['status'] = $request->has('status');
         $data['is_featured'] = $request->has('is_featured');
@@ -141,6 +143,10 @@ class ProductController extends Controller
         $productImage->delete();
         $this->deleteProductImageFileIfUnused($imagePath);
 
+        if (request()->expectsJson()) {
+            return response()->json(['message' => 'Gallery image removed successfully.']);
+        }
+
         return back()->with('success', 'Gallery image deleted successfully.');
     }
 
@@ -150,6 +156,13 @@ class ProductController extends Controller
 
         $product->update(['main_image' => Product::PLACEHOLDER_IMAGE]);
         $this->deleteProductImageFileIfUnused($imagePath);
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'message' => 'Main image removed successfully.',
+                'placeholder' => asset('assets/images/products/' . Product::PLACEHOLDER_IMAGE),
+            ]);
+        }
 
         return back()->with('success', 'Main image removed successfully.');
     }

@@ -58,8 +58,8 @@
 
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Category</label>
-                        <select name="category_id" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
-                            <option value="">Select Category</option>
+                        <select name="category_id" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+                            <option value="">No Category</option>
                             @foreach($categories as $category)
                             <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
@@ -174,7 +174,7 @@
             <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
                 <h3 class="font-bold text-gray-900 border-b border-gray-50 pb-4">Main Image</h3>
                 <div class="space-y-4">
-                    <div class="w-full aspect-square bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center overflow-hidden relative group" id="main_image_container">
+                    <div class="w-full aspect-square bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center overflow-hidden relative group cursor-pointer" id="main_image_container">
                         <img id="main_image_preview" src="" class="hidden w-full h-full object-cover">
                         <div class="text-center group-hover:text-primary transition-all" id="main_image_placeholder">
                             <i class="fas fa-image text-3xl mb-2 text-gray-300"></i>
@@ -182,7 +182,7 @@
                         </div>
                     </div>
                     <input type="file" name="main_image" id="main_image_input" required class="hidden" accept="image/*">
-                    <button type="button" onclick="document.getElementById('main_image_input').click()" class="w-full border border-gray-200 text-gray-600 text-xs font-bold py-3 rounded-xl hover:bg-gray-50 transition-all uppercase tracking-wider">
+                    <button type="button" id="main_image_button" class="w-full border border-gray-200 text-gray-600 text-xs font-bold py-3 rounded-xl hover:bg-gray-50 transition-all uppercase tracking-wider">
                         Select Image
                     </button>
                 </div>
@@ -213,14 +213,23 @@
     });
 
     // Main Image Preview
-    document.getElementById('main_image_input').addEventListener('change', function(e) {
+    const mainImageContainer = document.getElementById('main_image_container');
+    const mainImageInput = document.getElementById('main_image_input');
+    const mainImageButton = document.getElementById('main_image_button');
+    const mainImagePreview = document.getElementById('main_image_preview');
+    const mainImagePlaceholder = document.getElementById('main_image_placeholder');
+
+    mainImageContainer.addEventListener('click', () => mainImageInput.click());
+    mainImageButton.addEventListener('click', () => mainImageInput.click());
+
+    mainImageInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                document.getElementById('main_image_preview').src = e.target.result;
-                document.getElementById('main_image_preview').classList.remove('hidden');
-                document.getElementById('main_image_placeholder').classList.add('hidden');
+                mainImagePreview.src = e.target.result;
+                mainImagePreview.classList.remove('hidden');
+                mainImagePlaceholder.classList.add('hidden');
             }
             reader.readAsDataURL(file);
         }
@@ -230,6 +239,7 @@
     const dropZone = document.getElementById('drop_zone');
     const galleryInput = document.getElementById('gallery_input');
     const galleryPreview = document.getElementById('gallery_preview');
+    let selectedGalleryFiles = [];
 
     dropZone.addEventListener('click', () => galleryInput.click());
 
@@ -247,29 +257,60 @@
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         if (e.dataTransfer.files.length) {
-            galleryInput.files = e.dataTransfer.files;
-            handleGalleryPreview(e.dataTransfer.files);
+            addGalleryFiles(e.dataTransfer.files);
+            renderGalleryPreviews();
         }
         dropZone.classList.remove('drop-zone--over');
     });
 
     galleryInput.addEventListener('change', (e) => {
-        handleGalleryPreview(e.target.files);
+        addGalleryFiles(e.target.files);
+        renderGalleryPreviews();
     });
 
-    function handleGalleryPreview(files) {
+    function addGalleryFiles(files) {
+        Array.from(files)
+            .filter(file => file.type.startsWith('image/'))
+            .forEach(file => {
+                const alreadySelected = selectedGalleryFiles.some(selectedFile =>
+                    selectedFile.name === file.name &&
+                    selectedFile.size === file.size &&
+                    selectedFile.lastModified === file.lastModified
+                );
+
+                if (!alreadySelected) {
+                    selectedGalleryFiles.push(file);
+                }
+            });
+
+        syncGalleryInputFiles();
+    }
+
+    function syncGalleryInputFiles() {
+        const dataTransfer = new DataTransfer();
+        selectedGalleryFiles.forEach(file => dataTransfer.items.add(file));
+        galleryInput.files = dataTransfer.files;
+    }
+
+    function renderGalleryPreviews() {
         galleryPreview.innerHTML = '';
-        Array.from(files).forEach(file => {
+        selectedGalleryFiles.forEach((file, index) => {
             const reader = new FileReader();
             reader.onload = function(e) {
                 const div = document.createElement('div');
                 div.className = 'aspect-square rounded-xl overflow-hidden border border-gray-100 relative group';
                 div.innerHTML = `
                     <img src="${e.target.result}" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-                        <i class="fas fa-times text-gray-400 cursor-pointer"></i>
-                    </div>
+                    <button type="button" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-white text-red-500 opacity-0 group-hover:opacity-100 hover:bg-red-500 hover:text-white transition-all shadow-sm" title="Remove selected image" aria-label="Remove selected image">
+                        <i class="fas fa-times text-sm"></i>
+                    </button>
                 `;
+                div.querySelector('button').addEventListener('click', () => {
+                    selectedGalleryFiles.splice(index, 1);
+                    syncGalleryInputFiles();
+                    renderGalleryPreviews();
+                    window.showAdminToast?.('Selected gallery image removed.');
+                });
                 galleryPreview.appendChild(div);
             }
             reader.readAsDataURL(file);

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Admin Dashboard - Hustler</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -210,6 +211,34 @@
 
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+        .admin-toast {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: min(360px, calc(100vw - 32px));
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: #111214;
+            color: #fff;
+            box-shadow: 0 18px 48px rgba(17, 18, 20, 0.22);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(14px);
+            transition: opacity 0.22s ease, transform 0.22s ease;
+        }
+
+        .admin-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .admin-toast.success { background: #111214; }
+        .admin-toast.error { background: #b90f13; }
     </style>
     @stack('styles')
 </head>
@@ -336,21 +365,13 @@
     </header>
 
     <main class="admin-main">
-        @if(session('success'))
-            <div class="mb-6 p-4 bg-red-50 text-red-600 rounded-2xl border border-red-100 flex items-center gap-3 shadow-sm">
-                <i class="fas fa-check-circle"></i>
-                <span class="text-sm font-bold">{{ session('success') }}</span>
-            </div>
-        @endif
-        @if(session('error'))
-            <div class="mb-6 p-4 bg-white text-gray-700 rounded-2xl border border-gray-100 flex items-center gap-3 shadow-sm">
-                <i class="fas fa-exclamation-circle text-primary"></i>
-                <span class="text-sm font-bold">{{ session('error') }}</span>
-            </div>
-        @endif
-
         @yield('admin_content')
     </main>
+
+    <div id="adminToast" class="admin-toast" role="status" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <span class="text-sm font-bold" id="adminToastMessage"></span>
+    </div>
 
     <script>
         const sidebar  = document.getElementById('adminSidebar');
@@ -373,6 +394,40 @@
         openBtn?.addEventListener('click', openSidebar);
         closeBtn?.addEventListener('click', closeSidebar);
         overlay?.addEventListener('click', closeSidebar);
+
+        window.showAdminToast = function(message, type = 'success') {
+            const toast = document.getElementById('adminToast');
+            const toastMessage = document.getElementById('adminToastMessage');
+            const toastIcon = toast?.querySelector('i');
+
+            if (!toast || !toastMessage) {
+                return;
+            }
+
+            toast.classList.remove('success', 'error', 'show');
+            toast.classList.add(type === 'error' ? 'error' : 'success');
+            toastMessage.textContent = message;
+
+            if (toastIcon) {
+                toastIcon.className = type === 'error'
+                    ? 'fas fa-exclamation-circle'
+                    : 'fas fa-check-circle';
+            }
+
+            requestAnimationFrame(() => toast.classList.add('show'));
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2600);
+        };
+
+        @if(session('success'))
+            window.showAdminToast(@json(session('success')), 'success');
+        @endif
+
+        @if(session('error'))
+            window.showAdminToast(@json(session('error')), 'error');
+        @endif
     </script>
 
     @stack('scripts')
