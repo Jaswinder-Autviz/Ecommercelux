@@ -37,17 +37,17 @@
                 </div>
                 <div class="wl-row-card reveal" style="transition-delay:0.1s">
                     <div class="wl-row-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/><path d="M17 17l3 3"/></svg>
                     </div>
-                    <h3>2-Day Delivery</h3>
-                    <p>Fast dispatch with careful packing so your fresh fit reaches clean and ready.</p>
+                    <h3>Original Graphics</h3>
+                    <p>Bold artwork built in-house for tees that feel loud without trying too hard.</p>
                 </div>
                 <div class="wl-row-card reveal" style="transition-delay:0.2s">
                     <div class="wl-row-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 4h8l3 4-7 12L5 8z"/><path d="M8 4l4 16 4-16"/><path d="M5 8h14"/></svg>
                     </div>
-                    <h3>Easy Exchanges</h3>
-                    <p>Size not right? Exchange within 7 days with a simple, no-drama process.</p>
+                    <h3>Drop-Ready Fit</h3>
+                    <p>Clean silhouettes made for everyday styling, late plans, and statement layers.</p>
                 </div>
                 <div class="wl-row-card reveal" style="transition-delay:0.3s">
                     <div class="wl-row-icon">
@@ -128,15 +128,17 @@
 .reveal-right { opacity:0; transform:translateX(40px); transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1); }
 .reveal-right.visible { opacity:1; transform:translateX(0); }
 
-.why-luxe-section { background:#f2f7f4; margin:50px 0; border:1px solid #e3ece6; }
+.why-luxe-section { background:linear-gradient(135deg,#fff 0%,#faf7f2 55%,#f4eee5 100%); margin:50px 0; border:1px solid #eadfce; box-shadow:0 22px 58px rgba(45,35,24,.10); overflow:hidden; }
 .wl-row { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
-.wl-row-card { padding:28px 30px; border-right:1px solid #dce8e0; display:flex; flex-direction:column; align-items:flex-start; gap:7px; transition:background .3s ease; }
+.wl-row-card { position:relative; padding:30px 30px; border-right:1px solid #eadfce; display:flex; flex-direction:column; align-items:flex-start; gap:8px; background:rgba(255,255,255,.58); transition:background .3s ease,border-color .3s ease,transform .3s ease,box-shadow .3s ease; }
+.wl-row-card::before { content:''; position:absolute; left:30px; right:30px; top:0; height:3px; background:#e71318; transform:scaleX(.24); transform-origin:left; opacity:.68; transition:transform .3s ease,opacity .3s ease; }
 .wl-row-card:last-child { border-right:none; }
-.wl-row-card:hover { background:#fff; }
-.wl-row-icon { width:52px; height:52px; border:1px solid #d7e2dc; background:#fff; display:flex; align-items:center; justify-content:center; color:#e71318; transition:all .3s ease; }
-.wl-row-card:hover .wl-row-icon { background:#e71318; color:#fff; border-color:#e71318; }
-.wl-row-card h3 { font-size:14px; font-weight:800; color:#111; letter-spacing:.5px; margin:0; }
-.wl-row-card p { font-size:12px; color:#111; line-height:1.7; margin:0; }
+.wl-row-card:hover { background:#fff; border-color:#e5d7c2; transform:translateY(-4px); box-shadow:0 18px 38px rgba(45,35,24,.12); z-index:1; }
+.wl-row-card:hover::before { transform:scaleX(1); opacity:1; }
+.wl-row-icon { width:52px; height:52px; border:1px solid rgba(231,19,24,.18); background:#fff; display:flex; align-items:center; justify-content:center; color:#e71318; box-shadow:0 10px 26px rgba(231,19,24,.10); transition:all .3s ease; }
+.wl-row-card:hover .wl-row-icon { background:#e71318; color:#fff; border-color:#e71318; box-shadow:0 14px 28px rgba(231,19,24,.22); }
+.wl-row-card h3 { font-size:14px; font-weight:900; color:#171717; letter-spacing:.5px; margin:0; text-transform:uppercase; }
+.wl-row-card p { font-size:12px; color:#68615a; line-height:1.75; margin:0; }
 
 .brand-story-section { padding:66px 0 18px; background:linear-gradient(180deg,#fff 0%,#f7f7f2 100%); overflow:hidden; }
 .brand-story-grid { position:relative; display:grid; grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr); gap:14px; align-items:stretch; }
@@ -177,7 +179,7 @@
 
 @media(max-width:1024px) {
     .wl-row { grid-template-columns:repeat(2,1fr); }
-    .wl-row-card { border-right:none; border-bottom:1px solid #dce8e0; }
+    .wl-row-card { border-right:none; border-bottom:1px solid #eadfce; }
     .reels-grid { grid-template-columns:repeat(2,1fr); }
 }
 @media(max-width:900px) {
