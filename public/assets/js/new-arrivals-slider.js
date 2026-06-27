@@ -13,7 +13,7 @@
 
             /* ── Layout ───────────────────────────────── */
             slidesPerView:  1.2,
-            spaceBetween:   20,
+            spaceBetween:   5,
             centeredSlides: false,
             grabCursor:     true,
             loop:           true,
@@ -22,19 +22,19 @@
             breakpoints: {
                 480: {
                     slidesPerView: 1.5,
-                    spaceBetween:  20,
+                    spaceBetween:  5,
                 },
                 640: {
                     slidesPerView: 2,
-                    spaceBetween:  24,
+                    spaceBetween:  5,
                 },
                 1024: {
                     slidesPerView: 3,
-                    spaceBetween:  28,
+                    spaceBetween:  5,
                 },
                 1280: {
                     slidesPerView: 4,
-                    spaceBetween:  30,
+                    spaceBetween:  5,
                 },
             },
 
