@@ -60,7 +60,7 @@
 
         <!-- Product Grid -->
         <div class="fp-grid" id="fp-product-grid">
-            @foreach(\App\Models\Product::where('status', true)->with('category')->latest()->get() as $product)
+            @foreach(\App\Models\Product::where('status', true)->with(['category', 'images'])->latest()->get() as $product)
                 <div class="fp-item"
                      data-category="{{ strtolower($product->category->name ?? '') }}"
                      data-price="{{ $product->price }}">

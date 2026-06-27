@@ -17,7 +17,7 @@
     <div class="na-slider-wrap container p-0">
         <div class="swiper na-swiper">
             <div class="swiper-wrapper">
-                @foreach(\App\Models\Product::where('status', true)->latest()->take(6)->get() as $product)
+                @foreach(\App\Models\Product::where('status', true)->with(['category', 'images'])->latest()->take(6)->get() as $product)
                 <div class="swiper-slide">
                     @include('frontend.components.product-card', ['product' => $product])
                 </div>

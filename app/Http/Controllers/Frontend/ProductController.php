@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::where('status', true)->latest()->paginate(12);
+        $products = Product::where('status', true)->with(['category', 'images'])->latest()->paginate(12);
         return view('frontend.shop.index', compact('products'));
     }
 
@@ -20,6 +20,7 @@ class ProductController extends Controller
 
         $relatedProducts = Product::where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
+            ->with(['category', 'images'])
             ->take(4)
             ->get();
 
