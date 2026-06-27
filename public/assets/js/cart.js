@@ -194,6 +194,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Product Page: Add to Cart & Buy Now ──────────────────
     document.addEventListener('click', (e) => {
+        const cardCartButton = e.target.closest('.pcp-cart');
+        if (cardCartButton) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            Cart.add({
+                id: cardCartButton.dataset.id,
+                name: cardCartButton.dataset.name,
+                image: cardCartButton.dataset.image,
+                price: parseFloat(cardCartButton.dataset.price) || 0,
+                oldPrice: cardCartButton.dataset.oldPrice ? parseFloat(cardCartButton.dataset.oldPrice) : null,
+            }, cardCartButton.dataset.size || 'S', 1);
+
+            cardCartButton.classList.add('pcp-cart-added');
+            setTimeout(() => cardCartButton.classList.remove('pcp-cart-added'), 800);
+            return;
+        }
+
         const isAddToCart = e.target.closest('.pi-add-to-cart');
         const isBuyNow    = e.target.closest('.pi-buy-now');
         if (!isAddToCart && !isBuyNow) return;
