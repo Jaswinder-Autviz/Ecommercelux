@@ -97,8 +97,8 @@
             <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
                 <h3 class="font-bold text-gray-900 border-b border-gray-50 pb-4">Inventory & Pricing</h3>
                 @php
-                    $apparelSizes = \App\Models\Product::DEFAULT_APPAREL_SIZES;
-                    $selectedSizes = old('sizes', $apparelSizes);
+                    $posterSizes = \App\Models\Product::DEFAULT_POSTER_SIZES;
+                    $selectedSizes = old('sizes', $posterSizes);
                 @endphp
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
@@ -115,16 +115,16 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-3">T-Shirt Sizes</label>
+                    <label class="block text-sm font-semibold text-gray-700 mb-3">Poster Sizes</label>
                     <div class="flex flex-wrap gap-3">
-                        @foreach($apparelSizes as $size)
+                        @foreach($posterSizes as $size)
                         <label class="inline-flex items-center gap-2 px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm font-semibold text-gray-700 cursor-pointer hover:border-primary transition-all">
                             <input type="checkbox" name="sizes[]" value="{{ $size }}" class="rounded border-gray-300 text-primary focus:ring-primary" {{ in_array($size, $selectedSizes) ? 'checked' : '' }}>
                             {{ $size }}
                         </label>
                         @endforeach
                     </div>
-                    <p class="mt-2 text-xs text-gray-400">Used on the product page and checkout for apparel size selection.</p>
+                    <p class="mt-2 text-xs text-gray-400">Available poster sizes: 8×12, 12×18, 18×24, 24×36 inches.</p>
                 </div>
             </div>
 

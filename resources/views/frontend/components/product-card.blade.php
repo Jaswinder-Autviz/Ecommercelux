@@ -5,7 +5,7 @@
             ? optional($product->images->first())->image_path
             : optional($product->images()->oldest()->first())->image_path;
         $cardPrice = $product->discount_price ?? $product->price;
-        $defaultSize = $product->available_sizes[0] ?? 'S';
+        $defaultSize = $product->available_sizes[0] ?? '8×12';
     @endphp
 
     {{-- Image --}}

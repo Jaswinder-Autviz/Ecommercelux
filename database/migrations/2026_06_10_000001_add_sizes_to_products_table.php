@@ -14,7 +14,7 @@ return new class extends Migration
         });
 
         Product::query()->whereNull('sizes')->update([
-            'sizes' => json_encode(Product::DEFAULT_APPAREL_SIZES),
+            'sizes' => json_encode(Product::DEFAULT_POSTER_SIZES),
         ]);
     }
 

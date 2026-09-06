@@ -1,4 +1,39 @@
 <div class="product-info">
+    <style>
+        .poster-option-group { margin-top: 18px; }
+        .poster-option-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 10px;
+        }
+        .poster-option-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .poster-option-btn {
+            min-width: 120px;
+            border: 1px solid #cfcfcf;
+            background: #efefef;
+            color: #111;
+            padding: 14px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .poster-option-btn.active {
+            background: #fff;
+            border: 1px solid #111;
+            box-shadow: inset 0 0 0 1px #111;
+        }
+        .poster-option-btn:hover { background: #f7f7f7; }
+    </style>
+
     <script>
         window.currentProduct = {
             id:       {{ $product->id }},
@@ -9,8 +44,7 @@
         };
     </script>
 
-    {{-- Header --}}
-    <span class="pi-subtitle">{{ $product->category->name ?? 'Collection' }}</span>
+    <span class="pi-subtitle">{{ $product->category->name ?? 'Wall Art' }}</span>
     <h1 class="pi-title">{{ $product->name }}</h1>
     <div class="pi-price">
         @if($product->discount_price)
@@ -22,7 +56,6 @@
     </div>
     <p class="pi-tax-note">Price incl. of all taxes</p>
 
-    {{-- Stock --}}
     <div class="pi-stock">
         @if($product->stock_quantity > 0)
             <span class="pi-in-stock"><i class="fas fa-check-circle"></i> In Stock ({{ $product->stock_quantity }} units)</span>
@@ -31,71 +64,25 @@
         @endif
     </div>
 
-    {{-- Size Selector --}}
-    <div class="pi-size-selector">
-        <div class="pi-size-header">
-            <span class="pi-label">Select Size</span>
-            <button class="pi-size-guide" type="button" aria-expanded="false" aria-controls="sizeGuideModal">Size Guide</button>
-        </div>
-        <div class="pi-size-grid">
-            @foreach($product->available_sizes as $size)
-                <button class="pi-size-btn" data-size="{{ $size }}" type="button">{{ $size }}</button>
+    <div class="poster-option-group">
+        <span class="poster-option-label">Frame</span>
+        <div class="poster-option-row">
+            @foreach(\App\Models\Product::DEFAULT_POSTER_FRAMES as $frame)
+                <button type="button" class="poster-option-btn {{ $loop->first ? 'active' : '' }}" data-frame="{{ $frame }}">{{ $frame }}</button>
             @endforeach
         </div>
-        <p id="sizeError" style="display:none;color:#e8353b;font-size:12px;margin-top:8px;">
-            <i class="fas fa-exclamation-circle"></i> Please select a size first
-        </p>
     </div>
 
-    <div class="pi-size-guide-modal" id="sizeGuideModal" aria-hidden="true">
-        <div class="pi-size-guide-backdrop" data-close-size-guide></div>
-        <div class="pi-size-guide-panel" role="dialog" aria-modal="true" aria-labelledby="sizeGuideTitle">
-            <button class="pi-size-guide-close" type="button" data-close-size-guide aria-label="Close size guide">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="pi-tee-guide-art" aria-hidden="true">
-                <div class="pi-tee-neck"></div>
-                <div class="pi-tee-body">
-                    <span class="pi-tee-chest">Chest</span>
-                    <span class="pi-tee-length">Length</span>
-                </div>
-            </div>
-            <h2 id="sizeGuideTitle" class="pi-size-guide-title">T-Shirt Size Guide</h2>
-            <div class="pi-unit-toggle" aria-label="Measurement unit">
-                <span class="active">In</span>
-                <span>Cms</span>
-            </div>
-            <table class="pi-size-chart">
-                <thead>
-                    <tr>
-                        <th>Size</th>
-                        <th>Chest (Inch)</th>
-                        <th>Front Length (Inch)</th>
-                        <th>Sleeve Length (Inch)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach([
-                        ['S', '42', '29', '9.75'],
-                        ['M', '44', '29.75', '10'],
-                        ['L', '46', '30.5', '10.25'],
-                        ['XL', '48', '31.25', '10.5'],
-                        ['2XL', '50', '32', '10.75'],
-                    ] as $row)
-                    <tr>
-                        <td>{{ $row[0] }}</td>
-                        <td>{{ $row[1] }}</td>
-                        <td>{{ $row[2] }}</td>
-                        <td>{{ $row[3] }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+    <div class="poster-option-group">
+        <span class="poster-option-label">Size</span>
+        <div class="poster-option-row">
+            @foreach(\App\Models\Product::DEFAULT_POSTER_SIZES as $size)
+                <button type="button" class="poster-option-btn {{ $loop->first ? 'active' : '' }}" data-size="{{ $size }}">{{ $size }}</button>
+            @endforeach
         </div>
     </div>
 
-    {{-- Actions --}}
-    <div class="pi-actions">
+    <div class="pi-actions" style="margin-top: 20px;">
         <div class="pi-qty">
             <button class="pi-qty-btn minus" type="button">−</button>
             <input type="number" value="1" min="1" max="{{ $product->stock_quantity }}" class="pi-qty-input">
@@ -119,16 +106,12 @@
         </button>
     </div>
 
-    {{-- Buy Now --}}
     @if($product->stock_quantity > 0)
     <div class="pi-buy-now-wrap">
-        <button class="pi-buy-now" type="button">
-            <i class="fas fa-bolt"></i> BUY NOW
-        </button>
+        <button class="pi-buy-now" type="button"><i class="fas fa-bolt"></i> BUY NOW</button>
     </div>
     @endif
 
-    {{-- Accordion --}}
     <div class="pi-accordion">
         <div class="pi-acc-item active">
             <button class="pi-acc-btn" type="button">Product Description</button>
@@ -140,15 +123,14 @@
             </div>
         </div>
         <div class="pi-acc-item">
-            <button class="pi-acc-btn" type="button">Specifications</button>
+            <button class="pi-acc-btn" type="button">Poster Details</button>
             <div class="pi-acc-content">
                 <ul style="padding-left:0;list-style:none">
                     <li style="padding:6px 0;border-bottom:1px solid #f5f5f5"><strong>SKU:</strong> {{ $product->sku }}</li>
-                    <li style="padding:6px 0;border-bottom:1px solid #f5f5f5"><strong>Category:</strong> {{ $product->category->name ?? 'N/A' }}</li>
+                    <li style="padding:6px 0;border-bottom:1px solid #f5f5f5"><strong>Category:</strong> {{ $product->category->name ?? 'Wall Art' }}</li>
                     <li style="padding:6px 0"><strong>Stock:</strong> {{ $product->stock_quantity }} units</li>
                 </ul>
             </div>
         </div>
     </div>
-
 </div>

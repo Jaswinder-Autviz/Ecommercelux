@@ -62,7 +62,7 @@
                     <button class="sf-block-title">Size <span class="sf-arrow">+</span></button>
                     <div class="sf-block-body">
                         <div class="sf-size-grid">
-                            @foreach(\App\Models\Product::DEFAULT_APPAREL_SIZES as $size)
+                            @foreach(\App\Models\Product::DEFAULT_POSTER_SIZES as $size)
                             <button class="sf-size-btn size-filter-btn" data-size="{{ $size }}">{{ $size }}</button>
                             @endforeach
                         </div>

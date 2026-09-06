@@ -24,14 +24,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Apparel Size Selection
-    const sizeButtons = document.querySelectorAll('.pi-size-btn');
+    // Poster option selection
+    const sizeButtons = document.querySelectorAll('.poster-option-btn[data-size]');
     sizeButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            sizeButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            sizeButtons.forEach(b => {
+                if (b.dataset.size === btn.dataset.size) b.classList.add('active');
+                else b.classList.remove('active');
+            });
             const sizeError = document.getElementById('sizeError');
             if (sizeError) sizeError.style.display = 'none';
+        });
+    });
+
+    const frameButtons = document.querySelectorAll('.poster-option-btn[data-frame]');
+    frameButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            frameButtons.forEach(b => {
+                if (b.dataset.frame === btn.dataset.frame) b.classList.add('active');
+                else b.classList.remove('active');
+            });
         });
     });
 

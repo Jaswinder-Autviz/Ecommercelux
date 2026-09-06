@@ -181,7 +181,7 @@ class ProductController extends Controller
 
     private function normalizeProductSizes(array $sizes): array
     {
-        $allowedSizes = Product::DEFAULT_APPAREL_SIZES;
+        $allowedSizes = Product::DEFAULT_POSTER_SIZES;
 
         $selectedSizes = array_values(array_intersect($allowedSizes, $sizes));
 

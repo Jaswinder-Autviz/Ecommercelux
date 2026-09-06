@@ -102,7 +102,7 @@ class PaymentController extends Controller
             'items.*.product_name' => 'required|string|max:255',
             'items.*.quantity'     => 'required|integer|min:1',
             'items.*.price'        => 'required|numeric|min:0',
-            'items.*.size'         => ['required', 'string', Rule::in(Product::DEFAULT_APPAREL_SIZES)],
+            'items.*.size'         => ['required', 'string', Rule::in(Product::DEFAULT_POSTER_SIZES)],
         ]);
 
         $subtotal = collect($request->items)->sum(function ($item) {

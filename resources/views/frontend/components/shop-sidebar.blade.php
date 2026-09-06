@@ -36,7 +36,7 @@
             </div>
             <div class="size-grid">
                 @php
-                    $sizes = collect(\App\Models\Product::DEFAULT_APPAREL_SIZES)
+                    $sizes = collect(\App\Models\Product::DEFAULT_POSTER_SIZES)
                         ->map(fn ($size) => ['val' => $size, 'count' => \App\Models\Product::whereJsonContains('sizes', $size)->count()])
                         ->all();
                 @endphp

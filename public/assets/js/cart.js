@@ -216,14 +216,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const isBuyNow    = e.target.closest('.pi-buy-now');
         if (!isAddToCart && !isBuyNow) return;
 
-        // Size validation
-        const selectedSize = document.querySelector('.pi-size-btn.active')?.dataset.size;
-        const sizeError    = document.getElementById('sizeError');
+        const selectedSize = document.querySelector('.poster-option-btn[data-size].active')?.dataset.size;
+        const selectedFrame = document.querySelector('.poster-option-btn[data-frame].active')?.dataset.frame || 'Unframed (Rolled)';
+        const sizeError = document.getElementById('sizeError');
 
         if (!selectedSize) {
             if (sizeError) {
                 sizeError.style.display = 'block';
-                document.querySelector('.pi-size-selector')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                document.querySelector('.poster-option-group')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
             return;
         }
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const product = window.currentProduct;
         if (!product) return;
 
-        Cart.add(product, selectedSize, qty);
+        Cart.add({ ...product, frame: selectedFrame }, selectedSize, qty);
 
         // Both Add to Cart AND Buy Now → go to cart page
         // On cart page, user clicks "Place Order" to go to checkout
