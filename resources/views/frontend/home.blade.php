@@ -23,7 +23,7 @@
     @include('frontend.components.hero-banner')
 
     {{-- Why Choose Us --}}
-    <section class="container p-0">
+    <!-- <section class="container p-0">
         <div class="why-section">
             <div class="why-grid">
                 <div class="why-card reveal" style="transition-delay:0s">
@@ -56,28 +56,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     @include('frontend.components.choose')
     @include('frontend.components.new-arrivals-slider')
     @include('frontend.components.filter-product-section')
-
-    {{-- Promo Banner --}}
-    <section class="promo-banner-section reveal">
-        <div class="container p-0">
-            <div class="promo-banner-inner">
-                <div class="promo-banner-text">
-                    <span class="promo-banner-eyebrow">Limited Time</span>
-                    <h2>Transform Your Space<br>with Premium Wall Art</h2>
-                    <p>Discover hundreds of exclusive poster designs. Free shipping on orders above ₹999.</p>
-                    <a href="{{ route('shop') }}" class="promo-banner-btn">Shop All Posters</a>
-                </div>
-                <div class="promo-banner-deco" aria-hidden="true">
-                    <span>ART</span>
-                </div>
-            </div>
-        </div>
-    </section>
 
     {{-- Instagram Reels --}}
     @if(isset($reels) && $reels->count())

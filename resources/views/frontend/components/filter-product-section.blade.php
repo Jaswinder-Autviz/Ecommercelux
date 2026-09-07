@@ -1,7 +1,7 @@
 <section class="fp-section">
 
     {{-- PREMIUM PROMO SLIDER --}}
-    <div class="container p-0">
+    <!-- <div class="container p-0">
     <div class="promo-slider-wrap">
         <div class="swiper promo-swiper">
             <div class="swiper-wrapper">
@@ -11,16 +11,16 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="promo-pagination"></div> -->
-            <!-- <button class="promo-nav promo-nav-prev">
+            <div class="promo-pagination"></div>
+            <button class="promo-nav promo-nav-prev">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
             <button class="promo-nav promo-nav-next">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-            </button> -->
+            </button>
         </div>
     </div>
-</div>
+</div> -->
 
     <div class="container p-0">
         <!-- Filter Bar -->

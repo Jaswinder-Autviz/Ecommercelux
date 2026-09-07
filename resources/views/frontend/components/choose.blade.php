@@ -1,4 +1,4 @@
-<section class="choose-section">
+<!-- <section class="choose-section">
     <div class="container p-0">
         <div class="choose-title reveal">
             <h2>SHOP BY STYLE</h2>
@@ -22,7 +22,7 @@
             </a>
         </div>
     </div>
-</section>
+</section> -->
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/choose.css') }}">
