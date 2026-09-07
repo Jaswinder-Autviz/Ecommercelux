@@ -25,7 +25,7 @@
 }
 .product-card-premium:hover .pcp-overlay { opacity: 0; }
 .pcp-cta {
-    display: inline-block; background: #e71318; color: #fff;
+    display: inline-block; background: #4a0010; color: #fff;
     font-size: 11px; font-weight: 700; letter-spacing: 2px;
     text-transform: uppercase; padding: 10px 24px; border-radius: 2px;
     transform: translateY(10px); transition: transform 0.35s ease, background 0.3s ease;
@@ -41,9 +41,9 @@
     opacity: 1; transform: none;
     transition: none; z-index: 3;
 }
-.pcp-cart:hover { color: #e71318; }
+.pcp-cart:hover { color: #4a0010; }
 .pcp-cart.pcp-cart-added {
-    background: #e71318;
+    background: #4a0010;
     color: #fff;
 }
 

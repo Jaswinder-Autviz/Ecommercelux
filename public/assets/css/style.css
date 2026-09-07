@@ -4,10 +4,10 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-    --color-primary:   #111111;
+    --color-primary:   #4a0010;
     --color-secondary: #555555;
-    --color-accent:    #e71318;
-    --color-gold:      #e71318;
+    --color-accent:    #4a0010;
+    --color-gold:      #4a0010;
     --color-white:     #ffffff;
     --color-light-bg:  #F5F5F2;
     --color-border:    #E8E8E4;
@@ -63,14 +63,14 @@ input[type="button"],
 .btn-primary,
 a.btn,
 a.bg-primary {
-    background-color: #e31837!important;
+    background-color: #4a0010!important;
     color: #ffffff !important;
-    border-color: #e31837!important;
+    border-color: #4a0010!important;
 }
 
 /* Make any element using .bg-primary use white text by default */
 .bg-primary {
-    background-color: #e31837!important;
+    background-color: #4a0010!important;
     color: #ffffff !important;
 }
 
@@ -80,6 +80,6 @@ a.bg-primary {
 }
 
 /* Small variants */
-.bg-primary\/10 { background-color: rgba(231,19,24,0.10) !important; }
-.bg-primary\/5  { background-color: rgba(231,19,24,0.05) !important; }
+.bg-primary\/10 { background-color: rgba(74,0,16,0.10) !important; }
+.bg-primary\/5  { background-color: rgba(74,0,16,0.05) !important; }
 

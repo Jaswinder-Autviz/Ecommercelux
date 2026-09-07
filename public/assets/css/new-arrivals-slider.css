@@ -2,13 +2,13 @@
 .na-section { width: 100%; padding: 76px 0; overflow: hidden; }
 .na-header { display: flex; align-items: center; justify-content: center; margin-bottom: 26px; text-align: center; }
 .na-header-left { display: flex; flex-direction: column; align-items: center; gap: 7px; max-width: 620px; }
-.na-header-left span { color: #e71318; font-size: 11px; font-weight: 900; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
+.na-header-left span { color: #4a0010; font-size: 11px; font-weight: 900; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
 .na-title { font-size: 26px; font-weight: 900; color: #111; text-transform: uppercase; letter-spacing: 0; margin: 0; }
 .na-header-left p { margin: 0; color: #666; font-size: 14px; line-height: 1.7; }
 .na-slider-wrap { position: relative; }
 .na-swiper { overflow: hidden; padding-bottom: 4px; }
 .na-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--color-border); background: var(--color-white); color: var(--color-primary); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease; outline: none; }
-.na-nav:hover { background: #e71318; border-color: #e71318; color: #fff; }
+.na-nav:hover { background: #4a0010; border-color: #4a0010; color: #fff; }
 .na-nav.swiper-button-disabled { opacity: 0.35; pointer-events: none; }
 .na-nav-prev { left: 5px; }
 .na-nav-next { right: 5px; }

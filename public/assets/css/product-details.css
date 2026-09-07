@@ -58,7 +58,7 @@
 }
 
 .pg-thumb:hover { border-color: #292b2c; }
-.pg-thumb.active { border-color: #e8353b; }
+.pg-thumb.active { border-color: #4a0010; }
 
 /* ── PRODUCT INFO ─────────────────────────────────────────── */
 .product-info { }
@@ -76,7 +76,7 @@
 .pi-title {
     font-size: 28px;
     font-weight: 800;
-    color: #292b2c;
+    color: #4a0010;
     line-height: 1.2;
     margin-bottom: 16px;
     letter-spacing: -0.5px;
@@ -92,7 +92,7 @@
 .pi-price-new {
     font-size: 24px;
     font-weight: 800;
-    color: #292b2c;
+    color: #4a0010;
 }
 
 .pi-price-old {
@@ -104,7 +104,7 @@
 /* Stock */
 .pi-stock { margin-bottom: 24px; font-size: 13px; font-weight: 600; }
 .pi-in-stock { color: #2e7d32; }
-.pi-out-stock { color: #e8353b; }
+.pi-out-stock { color: #4a0010; }
 .pi-in-stock i, .pi-out-stock i { margin-right: 5px; }
 
 /* ── ACTIONS ─────────────────────────────────────────────── */
@@ -130,7 +130,7 @@
     border: none;
     font-size: 20px;
     cursor: pointer;
-    color: #292b2c;
+    color: #4a0010;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -156,7 +156,7 @@
 .pi-add-to-cart {
     flex: 1;
     height: 50px;
-    background: #292b2c;
+    background: #4a0010;
     color: #fff;
     border: none;
     font-size: 12px;
@@ -166,9 +166,9 @@
     cursor: pointer;
     transition: background 0.3s;
 }
-.pi-add-to-cart:hover { background: #e8353b; }
+.pi-add-to-cart:hover { background: #3a000c; }
 .pi-add-to-cart.pi-disabled { opacity: 0.5; cursor: not-allowed; }
-.pi-add-to-cart.pi-disabled:hover { background: #292b2c; }
+.pi-add-to-cart.pi-disabled:hover { background: #4a0010; }
 
 .pi-wishlist-btn {
     width: 50px;
@@ -183,9 +183,9 @@
     transition: all 0.2s;
     color: #999;
 }
-.pi-wishlist-btn:hover { border-color: #e8353b; color: #e8353b; }
-.pi-wishlist-btn.wl-active { color: #e8353b; border-color: #e8353b; }
-.pi-wishlist-btn.wl-active path { fill: #e8353b; stroke: #e8353b; }
+.pi-wishlist-btn:hover { border-color: #4a0010; color: #4a0010; }
+.pi-wishlist-btn.wl-active { color: #4a0010; border-color: #4a0010; }
+.pi-wishlist-btn.wl-active path { fill: #4a0010; stroke: #4a0010; }
 
 /* Buy Now */
 .pi-buy-now-wrap { margin-bottom: 28px; }
@@ -193,8 +193,8 @@
     width: 100%;
     height: 50px;
     background: #fff;
-    color: #292b2c;
-    border: 2px solid #292b2c;
+    color: #4a0010;
+    border: 2px solid #4a0010;
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 2px;
@@ -206,7 +206,7 @@
     justify-content: center;
     gap: 8px;
 }
-.pi-buy-now:hover { background: #292b2c; color: #fff; }
+.pi-buy-now:hover { background: #4a0010; color: #fff; }
 
 /* ── ACCORDION ───────────────────────────────────────────── */
 .pi-accordion { border-top: 1px solid #ebebeb; }
@@ -223,7 +223,7 @@
     font-weight: 800;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: #292b2c;
+    color: #4a0010;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -287,7 +287,7 @@
 }
 
 .pi-title {
-    color: #2f3742;
+    color: #4a0010;
     font-size: clamp(22px, 2.1vw, 28px);
     font-weight: 800;
     line-height: 1.18;
@@ -303,7 +303,7 @@
 }
 
 .pi-price-new {
-    color: #303843;
+    color: #4a0010;
     font-size: 22px;
     font-weight: 800;
     line-height: 1;

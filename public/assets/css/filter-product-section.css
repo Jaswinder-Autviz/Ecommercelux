@@ -9,7 +9,7 @@
 .promo-pagination .swiper-pagination-bullet { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.5); opacity: 1; transition: all 0.3s ease; }
 .promo-pagination .swiper-pagination-bullet-active { width: 28px; border-radius: 4px; background: #fff; }
 .promo-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 48px; height: 48px; border: 1px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.3); backdrop-filter: blur(8px); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
-.promo-nav:hover { background: #e71318; border-color: #e71318; }
+.promo-nav:hover { background: #4a0010; border-color: #4a0010; }
 .promo-nav-prev { left: 24px; }
 .promo-nav-next { right: 24px; }
 @media(max-width:768px) { .promo-slide-img { height: 300px; } .promo-nav { display: none; } }

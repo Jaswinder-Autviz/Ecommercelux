@@ -10,7 +10,7 @@
 .choose-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.4,0,0.2,1), filter .35s ease; }
 .choose-item:hover .choose-image img { transform: scale(1.05); filter: brightness(.9); }
 .choose-caption { position: absolute; left: 22px; right: 22px; bottom: 22px; z-index: 2; display: flex; flex-direction: column; gap: 7px; }
-.choose-caption span { width: fit-content; background: #e71318; color: #fff; padding: 6px 9px; font-size: 10px; font-weight: 900; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
+.choose-caption span { width: fit-content; background: #4a0010; color: #fff; padding: 6px 9px; font-size: 10px; font-weight: 900; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
 .choose-caption strong { color: #fff; font-size: clamp(17px, 2vw, 24px); line-height: 1.1; font-weight: 900; text-transform: uppercase; max-width: 260px; }
 @media (max-width: 991px) { .choose-grid { gap: 14px; } .choose-caption { left: 16px; right: 16px; bottom: 16px; } }
 @media (max-width: 768px) { .choose-section { padding: 40px 0; } .choose-grid { grid-template-columns: 1fr; gap: 18px; } .choose-image { aspect-ratio: 16/10; } }

@@ -2,7 +2,7 @@
 .cart-page-wrapper { background-color: #fff; padding: 40px 0 80px; }
 .checkout-steps { display: flex; align-items: center; justify-content: center; margin-bottom: 50px; gap: 15px; }
 .step { font-size: 13px; font-weight: 700; letter-spacing: 2px; color: #999; }
-.step.active { color: #e8353b; border-bottom: 2px solid #e8353b; }
+.step.active { color: #4a0010; border-bottom: 2px solid #4a0010; }
 .step-line { width: 40px; height: 1px; background: #e0e0e0; }
 .cart-main-layout { display: grid; grid-template-columns: 1fr 380px; gap: 40px; }
 .cart-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border: 1px solid #e0e0e0; margin-bottom: 20px; font-size: 14px; font-weight: 700; }
@@ -20,13 +20,13 @@
 .ci-right { text-align: right; display: flex; flex-direction: column; justify-content: space-between; width: 140px; }
 .ci-current-price { font-size: 16px; font-weight: 700; }
 .ci-old-price { font-size: 13px; color: #999; text-decoration: line-through; margin: 4px 0; }
-.ci-savings { font-size: 12px; color: #e8353b; font-weight: 700; }
+.ci-savings { font-size: 12px; color: #4a0010; font-weight: 700; }
 .ci-qty-select { width: 100%; padding: 8px; border: 1px solid #e0e0e0; font-size: 13px; outline: none; }
 .ci-total { font-size: 16px; font-weight: 700; color: #000; }
 .cart-empty-state { text-align: center; padding: 60px 20px; }
 .cart-empty-state h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
 .cart-empty-state p { color: #777; margin-bottom: 30px; }
-.shop-now-btn { display: inline-block; padding: 12px 40px; border: 1px solid #e8353b; color: #e8353b; text-decoration: none; font-weight: 700; transition: all 0.3s; }
-.shop-now-btn:hover { background: #e8353b; color: #fff; }
+.shop-now-btn { display: inline-block; padding: 12px 40px; border: 1px solid #4a0010; color: #4a0010; text-decoration: none; font-weight: 700; transition: all 0.3s; }
+.shop-now-btn:hover { background: #4a0010; color: #fff; }
 @media (max-width: 991px) { .cart-main-layout { grid-template-columns: 1fr; } }
 @media (max-width: 576px) { .cart-item { flex-direction: column; gap: 20px; } .ci-right { width: 100%; flex-direction: row; align-items: center; text-align: left; } .ci-img-wrap { width: 100px; } }
