@@ -9,10 +9,6 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->json('sizes')->nullable()->after('brand');
-        });
-
         Product::query()->whereNull('sizes')->update([
             'sizes' => json_encode(Product::DEFAULT_POSTER_SIZES),
         ]);
@@ -20,8 +16,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('sizes');
-        });
+        // The sizes column is owned by the products table migration.
     }
 };
