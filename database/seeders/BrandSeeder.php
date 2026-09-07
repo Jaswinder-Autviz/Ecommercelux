@@ -10,7 +10,7 @@ class BrandSeeder extends Seeder
 {
     public function run(): void
     {
-        $brands = ['Hustler', 'Marvel', 'DC Comics', 'Anime Streetwear'];
+        $brands = ['Hustler Studio', 'Hustler Editions', 'Hustler Canvas', 'Hustler Monochrome'];
 
         foreach ($brands as $brand) {
             Brand::create([

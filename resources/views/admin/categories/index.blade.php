@@ -87,7 +87,7 @@
 </div>
 
 <!-- Add Category Modal -->
-<div id="addCategoryModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+<div id="addCategoryModal" class="hidden fixed inset-0  backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl w-full max-w-md p-8 shadow-2xl">
         <div class="flex items-center justify-between mb-6">
             <h3 class="text-xl font-bold text-gray-900">Add New Category</h3>
@@ -101,7 +101,7 @@
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Category Name <span class="text-red-500">*</span></label>
                 <input type="text" name="name" required
                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm"
-                    placeholder="e.g. T-Shirts">
+                    placeholder="e.g. Abstract">
             </div>
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Category Image</label>

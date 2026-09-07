@@ -13,7 +13,6 @@ class Product extends Model
     public const DEFAULT_POSTER_FRAMES = ['Unframed (Rolled)', 'Black', 'White'];
     public const DEFAULT_POSTER_MATERIALS = ['Paper', 'Premium Matte', 'Canvas'];
     public const DEFAULT_POSTER_ORIENTATIONS = ['Portrait', 'Landscape', 'Square'];
-    public const DEFAULT_APPAREL_SIZES = self::DEFAULT_POSTER_SIZES;
     public const PLACEHOLDER_IMAGE = 'placeholder-product.svg';
 
     protected $fillable = [

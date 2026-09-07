@@ -5,30 +5,21 @@
 @endphp
 
 {{-- Announcement Bar --}}
-<!-- <div class="announcement-bar" id="announcementBar">
-    <div class="announcement-inner">
+<div class="announcement-bar" id="announcementBar">
+    <div class="announcement-inner container">
         <div class="announcement-track">
             <div class="announcement-content">
-                @for ($i = 0; $i < 4; $i++)
-                    <span class="announcement-text">
-                        ✦ Free shipping on orders over $150 &nbsp;&nbsp;|&nbsp;&nbsp; New Hustler tees every Friday &nbsp;&nbsp;|&nbsp;&nbsp; Use code <strong>HUSTLER10</strong> for 10% off
-                    </span>
-                @endfor
+                <span class="announcement-text">
+                    Handcrafted. Personalized. Delivered across India
+                </span>
             </div>
         </div>
-        <button class="announcement-close" id="closeAnnouncement" aria-label="Close announcement">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </button>
     </div>
-</div> -->
+</div>
 
 {{-- Main Header --}}
 <header class="site-header" id="siteHeader">
-    <div class="brand-topbar">
-        <span>Built for the bold. Printed for the streets.</span>
-    </div>
-
-    <div class="header-inner">
+    <div class="header-inner container">
 
         {{-- Mobile Menu Toggle --}}
         <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu" aria-expanded="false">
@@ -39,29 +30,27 @@
 
         {{-- Logo --}}
         <a href="{{ route('home') }}" class="site-logo" aria-label="Hustler home">
-            <img src="{{ asset('assets/images/logo/hustler-logo.png') }}" alt="Hustler">
+            <img src="{{ asset('assets/images/logo/hustler-logo.png') }}" alt="Hustler Posters">
         </a>
 
         {{-- Primary Navigation --}}
         <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
             <ul class="nav-list">
-
                 <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
                     <a href="{{ route('home') }}" class="nav-link">Home</a>
                 </li>
-
                 <li class="nav-item {{ request()->routeIs('shop*') ? 'active' : '' }}">
                     <a href="{{ route('shop') }}" class="nav-link">Shop</a>
                 </li>
-
+                <li class="nav-item {{ request()->routeIs('shop*') ? '' : '' }}">
+                    <a href="{{ route('shop') }}" class="nav-link">New Arrivals</a>
+                </li>
+                <li class="nav-item {{ request()->routeIs('shop*') ? '' : '' }}">
+                    <a href="{{ route('shop') }}" class="nav-link">Best Sellers</a>
+                </li>
                 <li class="nav-item {{ request()->routeIs('about') ? 'active' : '' }}">
-                    <a href="{{ route('about') }}" class="nav-link">About</a>
+                    <a href="{{ route('about') }}" class="nav-link">About Us</a>
                 </li>
-
-                <li class="nav-item {{ request()->routeIs('contact') ? 'active' : '' }}">
-                    <a href="{{ route('contact') }}" class="nav-link">Contact</a>
-                </li>
-
             </ul>
         </nav>
 
@@ -91,7 +80,6 @@
                     <button class="action-btn account-btn account-avatar-btn" aria-label="Account">
                         <span class="account-avatar">{{ $customerInitial }}</span>
                     </button>
-                    {{-- Dropdown --}}
                     <div class="account-dropdown">
                         <div class="account-dropdown-head">
                             <span class="account-avatar account-avatar-lg">{{ $customerInitial }}</span>
@@ -127,7 +115,7 @@
         <div class="search-overlay-inner container">
             <form action="{{ route('shop') }}" method="GET" class="search-form" role="search">
                 <svg width="22" height="22" viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M13.5 13.5L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                <input type="search" name="q" class="search-input" placeholder="Search for products, brands..." autocomplete="off" id="searchInput">
+                <input type="search" name="q" class="search-input" placeholder="Search posters, styles, themes..." autocomplete="off" id="searchInput">
                 <button type="button" class="search-close" id="searchClose" aria-label="Close search">
                     <svg width="18" height="18" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                 </button>
@@ -141,7 +129,7 @@
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
     <div class="mobile-nav-header">
         <span class="mobile-logo">
-            <img src="{{ asset('assets/images/logo/hustler-logo.png') }}" alt="Hustler">
+            <img src="{{ asset('assets/images/logo/hustler-logo.png') }}" alt="Hustler Posters">
         </span>
         <button class="mobile-close" id="mobileClose" aria-label="Close menu">
             <svg width="20" height="20" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -166,16 +154,18 @@
     @endif
     <ul class="mobile-nav-list">
         <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-        <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop*') ? 'active' : '' }}">Shop</a></li>
-        <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About</a></li>
+        <li><a href="{{ route('shop') }}" class="{{ request()->routeIs('shop*') ? 'active' : '' }}">Shop All Posters</a></li>
+        <li><a href="{{ route('shop') }}">New Arrivals</a></li>
+        <li><a href="{{ route('shop') }}">Best Sellers</a></li>
+        <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
         <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
         @if(Auth::guard('customer')->check())
-            <li><a href="{{ route('customer.account') }}" class="{{ request()->routeIs('customer.account') ? 'active' : '' }}">My Account</a></li>
+            <li><a href="{{ route('customer.account') }}">My Account</a></li>
             <li><a href="{{ route('customer.account') }}?tab=orders">My Orders</a></li>
         @else
-            <li><button class="openLoginModalTrigger mobile-nav-button">Account</button></li>
+            <li><button class="openLoginModalTrigger mobile-nav-button">Sign In</button></li>
         @endif
-        <li><a href="{{ route('wishlist') }}" class="{{ request()->routeIs('wishlist') ? 'active' : '' }}">Wishlist</a></li>
-        <li><a href="{{ route('cart') }}" class="{{ request()->routeIs('cart') ? 'active' : '' }}">Cart</a></li>
+        <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
+        <li><a href="{{ route('cart') }}">Cart</a></li>
     </ul>
 </nav>

@@ -308,7 +308,7 @@
                 <i class="fas fa-cog w-5 text-sm"></i>
                 <span>Settings</span>
             </a>
-            <form action="{{ route('logout') }}" method="POST">
+            <form action="{{ route('admin.logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="sidebar-link">
                     <i class="fas fa-sign-out-alt w-5 text-sm"></i>

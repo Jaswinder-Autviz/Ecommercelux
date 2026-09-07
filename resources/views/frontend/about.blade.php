@@ -7,18 +7,18 @@
     <section class="about-hero">
         <div class="container about-hero-grid">
             <div class="about-hero-copy">
-                <span class="about-eyebrow">Built for the everyday hustle</span>
-                <h1>Hustler makes graphic tees for people who move with intent.</h1>
+                <span class="about-eyebrow">Designed for considered spaces</span>
+                <h1>Hustler turns blank walls into visual statements.</h1>
                 <p>
-                    We design easy-wearing T-shirts with bold artwork, solid fabric, and a fit that feels right from first wear. No overthinking, no noisy fashion talk, just pieces you can throw on and still look sharp.
+                    We curate bold wall posters and modern art prints with gallery-inspired composition, dependable print quality, and a finish made for everyday spaces.
                 </p>
             </div>
             <div class="about-hero-panel">
-                <img src="{{ asset('assets/images/products/1781092919.png') }}" alt="Hustler oversized graphic T-shirt fit" loading="eager">
+                <img src="{{ asset('assets/images/banners/swiper-banner.png') }}" alt="Hustler wall art collection" loading="eager">
                 <div class="about-hero-badge">
                     <span>01</span>
-                    <strong>Premium tees</strong>
-                    <p>Oversized fits, clean prints, and fabric picked for repeat wear.</p>
+                    <strong>Premium wall art</strong>
+                    <p>Sharp compositions, rich color, and poster formats made to transform a room.</p>
                 </div>
             </div>
         </div>
@@ -28,29 +28,29 @@
         <div class="container about-story-grid">
             <div class="about-story-lead">
                 <span class="about-eyebrow">Our design point</span>
-                <h2>Streetwear energy, everyday comfort.</h2>
+                <h2>Gallery energy, everyday spaces.</h2>
             </div>
             <div class="about-story-copy">
                 <p>
-                    Hustler started with a simple idea: a T-shirt should carry attitude without compromising comfort. Every drop is shaped around strong graphics, wearable colors, and silhouettes that work with denim, cargos, shorts, or layered fits.
+                    Hustler started with a simple idea: wall art should change the feeling of a room in an instant. Every collection is shaped around strong composition, expressive color, and pieces that reward a closer look.
                 </p>
                 <p>
-                    We keep the collection focused so each product has a clear reason to exist. The goal is not to fill your wardrobe with more noise, but to give you tees that become your usual rotation.
+                    We keep the collection focused so every poster has a clear point of view, whether it belongs above a desk, in a living room, or at the center of a personal gallery wall.
                 </p>
             </div>
         </div>
         <div class="container about-design-strip">
             <figure>
-                <img src="{{ asset('assets/images/choose/choose1.png') }}" alt="Purple anime-inspired Hustler T-shirt graphic" loading="lazy">
-                <figcaption>Anime heat</figcaption>
+                <img src="{{ asset('assets/images/choose/choose1.png') }}" alt="Expressive anime wall art" loading="lazy">
+                <figcaption>Expressive worlds</figcaption>
             </figure>
             <figure>
-                <img src="{{ asset('assets/images/choose/choose2.png') }}" alt="Red Hustler graphic T-shirt artwork" loading="lazy">
-                <figcaption>Bold statement prints</figcaption>
+                <img src="{{ asset('assets/images/choose/choose2.png') }}" alt="Bold red wall art print" loading="lazy">
+                <figcaption>Statement prints</figcaption>
             </figure>
             <figure>
-                <img src="{{ asset('assets/images/choose/choose3.png') }}" alt="Orange streetwear Hustler T-shirt graphic" loading="lazy">
-                <figcaption>Street-ready artwork</figcaption>
+                <img src="{{ asset('assets/images/choose/choose3.png') }}" alt="Modern orange wall art" loading="lazy">
+                <figcaption>Modern energy</figcaption>
             </figure>
         </div>
     </section>
@@ -59,24 +59,24 @@
         <div class="container">
             <div class="about-values-header">
                 <span class="about-eyebrow">What we care about</span>
-                <h2>Made to look good, feel good, and last.</h2>
+                <h2>Made to elevate a room and last beyond a trend.</h2>
             </div>
 
             <div class="about-values-grid">
                 <article class="about-value-card">
                     <span>01</span>
                     <h3>Quality First</h3>
-                    <p>Soft fabric, reliable stitching, and prints chosen for real daily wear.</p>
+                    <p>Thoughtful materials and dependable print quality for art you can live with every day.</p>
                 </article>
                 <article class="about-value-card">
                     <span>02</span>
                     <h3>Bold Graphics</h3>
-                    <p>Artwork with personality, made to stand out without making the fit hard to style.</p>
+                    <p>Artwork with personality, composed to become a focal point without overwhelming the room.</p>
                 </article>
                 <article class="about-value-card">
                     <span>03</span>
                     <h3>Easy Rotation</h3>
-                    <p>Colors, cuts, and details that work across your week, not just one outfit.</p>
+                    <p>Curated colors, formats, and themes that work across bedrooms, studios, offices, and living spaces.</p>
                 </article>
             </div>
         </div>

@@ -13,7 +13,10 @@ const Cart = {
 
     add(product, size, quantity = 1) {
         let cart = this.get();
-        const existing = cart.find(i => i.id == product.id && i.size === size);
+        const frame = product.frame || 'Unframed (Rolled)';
+        const material = product.material || '';
+        const orientation = product.orientation || '';
+        const existing = cart.find(i => i.id == product.id && i.size === size && i.frame === frame && i.material === material && i.orientation === orientation);
         if (existing) {
             existing.quantity += quantity;
         } else {
@@ -24,6 +27,9 @@ const Cart = {
                 price:    product.price,
                 oldPrice: product.oldPrice || null,
                 size:     size,
+                frame:    frame,
+                material: material,
+                orientation: orientation,
                 quantity: quantity,
             });
         }
@@ -102,6 +108,9 @@ const Cart = {
                     <h3 class="ci-title">${name}</h3>
                     <div class="ci-meta">
                         <span class="ci-size">Size: <strong>${item.size}</strong></span>
+                        ${item.frame ? `<span class="ci-size">Frame: <strong>${item.frame}</strong></span>` : ''}
+                        ${item.material ? `<span class="ci-size">Material: <strong>${item.material}</strong></span>` : ''}
+                        ${item.orientation ? `<span class="ci-size">Orientation: <strong>${item.orientation}</strong></span>` : ''}
                     </div>
                     <div class="ci-actions">
                         <button class="ci-action-btn move-wishlist">Move to Wishlist</button>
@@ -205,6 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 image: cardCartButton.dataset.image,
                 price: parseFloat(cardCartButton.dataset.price) || 0,
                 oldPrice: cardCartButton.dataset.oldPrice ? parseFloat(cardCartButton.dataset.oldPrice) : null,
+                frame: cardCartButton.dataset.frame || 'Unframed (Rolled)',
             }, cardCartButton.dataset.size || 'S', 1);
 
             cardCartButton.classList.add('pcp-cart-added');
@@ -218,6 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const selectedSize = document.querySelector('.poster-option-btn[data-size].active')?.dataset.size;
         const selectedFrame = document.querySelector('.poster-option-btn[data-frame].active')?.dataset.frame || 'Unframed (Rolled)';
+        const selectedMaterial = document.querySelector('.poster-option-btn[data-material].active')?.dataset.material || '';
+        const selectedOrientation = document.querySelector('.poster-option-btn[data-orientation].active')?.dataset.orientation || '';
         const sizeError = document.getElementById('sizeError');
 
         if (!selectedSize) {
@@ -234,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const product = window.currentProduct;
         if (!product) return;
 
-        Cart.add({ ...product, frame: selectedFrame }, selectedSize, qty);
+        Cart.add({ ...product, frame: selectedFrame, material: selectedMaterial, orientation: selectedOrientation }, selectedSize, qty);
 
         // Both Add to Cart AND Buy Now → go to cart page
         // On cart page, user clicks "Place Order" to go to checkout

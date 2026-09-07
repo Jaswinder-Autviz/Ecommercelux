@@ -28,6 +28,7 @@
             data-old-price="{{ $product->discount_price ? $product->price : '' }}"
             data-image="{{ asset('assets/images/products/' . $mainImage) }}"
             data-size="{{ $defaultSize }}"
+            data-frame="Unframed (Rolled)"
             title="Add to Cart"
             aria-label="Add to Cart">
             <i class="fas fa-shopping-bag"></i>

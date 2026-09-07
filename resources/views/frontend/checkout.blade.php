@@ -267,6 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="co-item-info">
                 <div class="co-item-name">${item.name}</div>
                 <div class="co-item-size">Size: ${item.size} &middot; Qty: ${item.quantity}</div>
+                ${item.frame ? `<div class="co-item-size">Frame: ${item.frame}</div>` : ''}
+                ${item.material ? `<div class="co-item-size">Material: ${item.material}</div>` : ''}
+                ${item.orientation ? `<div class="co-item-size">Orientation: ${item.orientation}</div>` : ''}
             </div>
             <div class="co-item-price">₹${(price * item.quantity).toLocaleString('en-IN')}</div>
         </div>`;
@@ -391,6 +394,11 @@ async function initiatePayment() {
         quantity: item.quantity || 1,
         price: item.price || 0,
         size: item.size || null,
+        options: {
+            frame: item.frame || null,
+            material: item.material || null,
+            orientation: item.orientation || null,
+        },
     }));
 
     const orderPayload = {

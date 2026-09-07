@@ -145,12 +145,7 @@
                         </button>
                     </form>
 
-                    <div class="mt-8 rounded-2xl border border-gray-100 bg-gray-50 p-4 text-center">
-                        <p class="text-sm font-semibold text-gray-500">
-                            Don't have an account?
-                            <a href="{{ route('register') }}" class="font-extrabold text-primary hover:underline">Create one</a>
-                        </p>
-                    </div>
+
 
                     <p class="mt-6 text-center text-xs font-semibold text-gray-400">
                         &copy; 2026 Hustler eCommerce. All rights reserved.

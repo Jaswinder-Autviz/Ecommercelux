@@ -1,6 +1,6 @@
 /* footer.css */
 .site-footer {
-    background: #e6e7e8;
+    background: #000;
     color: #fff;
     padding: 60px 0 0;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -24,7 +24,7 @@
     font-size: 24px;
     font-weight: 900;
     letter-spacing: 4px;
-    color: #e71318;
+    color: #fff;
     margin-bottom: 14px;
     text-decoration: none;
 }
@@ -32,7 +32,7 @@
 .footer-tagline {
     font-size: 14px;
     line-height: 1.7;
-    color: #000;
+    color: #fff;
 }
 
 /* Cols */
@@ -41,7 +41,7 @@
     font-weight: 700;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: #000;
+    color: #fff;
     margin-bottom: 20px;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .footer-col ul li a {
-    color: #000;
+    color: #fff;
     text-decoration: none;
     font-size: 14px;
     transition: color 0.25s ease, padding-left 0.25s ease;
@@ -75,7 +75,7 @@
     align-items: center;
     justify-content: center;
     font-size: 13px;
-    color: #000;
+    color: #fff;
 }
 
 /* Responsive */

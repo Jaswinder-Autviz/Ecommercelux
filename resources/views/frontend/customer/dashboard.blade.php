@@ -25,7 +25,7 @@
     <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
         <div class="p-8 border-b border-gray-50 flex items-center justify-between">
             <h3 class="font-bold text-gray-900 text-lg">Recent Orders</h3>
-            <a href="{{ route('customer.orders') }}" class="text-xs font-bold text-primary uppercase tracking-widest hover:underline">View All</a>
+            <a href="{{ route('customer.account', ['tab' => 'orders']) }}" class="text-xs font-bold text-primary uppercase tracking-widest hover:underline">View All</a>
         </div>
         <div class="p-8">
             @forelse($recentOrders as $order)

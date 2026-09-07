@@ -9,21 +9,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CustomerAuthMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Closure(Request): (Response)  $next
-     */
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::guard('customer')->check()) {
             return $next($request);
         }
 
-        if ($request->ajax() || $request->wantsJson()) {
-            return response()->json(['error' => 'Unauthorized.'], 401);
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        return redirect()->route('home')->with('error', 'Please login to access this page.');
+        return redirect()->route('customer.login')->with('error', 'Please sign in to continue.');
     }
 }

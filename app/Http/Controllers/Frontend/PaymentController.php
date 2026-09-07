@@ -103,6 +103,10 @@ class PaymentController extends Controller
             'items.*.quantity'     => 'required|integer|min:1',
             'items.*.price'        => 'required|numeric|min:0',
             'items.*.size'         => ['required', 'string', Rule::in(Product::DEFAULT_POSTER_SIZES)],
+            'items.*.options'      => 'nullable|array',
+            'items.*.options.frame' => 'nullable|string|max:100',
+            'items.*.options.material' => 'nullable|string|max:100',
+            'items.*.options.orientation' => 'nullable|string|max:100',
         ]);
 
         $subtotal = collect($request->items)->sum(function ($item) {
@@ -155,6 +159,7 @@ class PaymentController extends Controller
                     'quantity'     => $item['quantity'],
                     'price'        => $item['price'],
                     'size'         => $item['size'] ?? null,
+                    'options'      => $item['options'] ?? null,
                     'total'        => $item['price'] * $item['quantity'],
                 ]);
             }

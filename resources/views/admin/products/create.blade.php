@@ -48,7 +48,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="md:col-span-2">
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Product Name</label>
-                        <input type="text" name="name" id="product_name" value="{{ old('name') }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Hustler Oversized Tee">
+                        <input type="text" name="name" id="product_name" value="{{ old('name') }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. Midnight Geometry Poster">
                     </div>
 
                     <div>
@@ -68,7 +68,7 @@
 
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">SKU</label>
-                        <input type="text" name="sku" value="{{ old('sku') }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. HST-TEE-001">
+                        <input type="text" name="sku" value="{{ old('sku') }}" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. HST-POSTER-001">
                     </div>
 
                     <div>

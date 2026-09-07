@@ -35,19 +35,19 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('customer.orders') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-all {{ Request::routeIs('customer.orders') ? 'bg-primary/10 text-primary font-bold' : 'text-gray-600 hover:bg-gray-50' }}">
+                                <a href="{{ route('customer.account', ['tab' => 'orders']) }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-all text-gray-600 hover:bg-gray-50">
                                     <i class="fas fa-shopping-bag w-5"></i>
                                     <span>My Orders</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('customer.profile') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-all {{ Request::routeIs('customer.profile') ? 'bg-primary/10 text-primary font-bold' : 'text-gray-600 hover:bg-gray-50' }}">
+                                <a href="{{ route('customer.account', ['tab' => 'profile']) }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-all text-gray-600 hover:bg-gray-50">
                                     <i class="far fa-user w-5"></i>
                                     <span>Profile Information</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('customer.addresses') }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-all {{ Request::routeIs('customer.addresses') ? 'bg-primary/10 text-primary font-bold' : 'text-gray-600 hover:bg-gray-50' }}">
+                                <a href="{{ route('customer.account', ['tab' => 'address']) }}" class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-all text-gray-600 hover:bg-gray-50">
                                     <i class="far fa-address-card w-5"></i>
                                     <span>Saved Addresses</span>
                                 </a>

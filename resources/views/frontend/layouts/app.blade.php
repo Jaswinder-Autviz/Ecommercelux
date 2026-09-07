@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', config('app.name', 'Hustler'))</title>
-    <meta name="description" content="@yield('meta_description', 'Premium fashion & lifestyle store')">
+    <meta name="description" content="@yield('meta_description', 'Premium wall posters and modern wall art for considered spaces')">
 
     {{-- Google Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -9,17 +9,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->is_admin) {
+        // Must be authenticated via the 'web' guard AND have is_admin flag
+        if (Auth::guard('web')->check() && Auth::guard('web')->user()->is_admin) {
             return $next($request);
         }
 
+        // Customers authenticated via 'customer' guard must NOT access admin
         return redirect()->route('admin.login')->with('error', 'Unauthorized access.');
     }
 }

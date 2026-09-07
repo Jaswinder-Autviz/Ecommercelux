@@ -56,18 +56,10 @@
     </div>
     <p class="pi-tax-note">Price incl. of all taxes</p>
 
-    <div class="pi-stock">
-        @if($product->stock_quantity > 0)
-            <span class="pi-in-stock"><i class="fas fa-check-circle"></i> In Stock ({{ $product->stock_quantity }} units)</span>
-        @else
-            <span class="pi-out-stock"><i class="fas fa-times-circle"></i> Out of Stock</span>
-        @endif
-    </div>
-
     <div class="poster-option-group">
         <span class="poster-option-label">Frame</span>
         <div class="poster-option-row">
-            @foreach(\App\Models\Product::DEFAULT_POSTER_FRAMES as $frame)
+            @foreach($product->frames ?: \App\Models\Product::DEFAULT_POSTER_FRAMES as $frame)
                 <button type="button" class="poster-option-btn {{ $loop->first ? 'active' : '' }}" data-frame="{{ $frame }}">{{ $frame }}</button>
             @endforeach
         </div>
@@ -76,11 +68,33 @@
     <div class="poster-option-group">
         <span class="poster-option-label">Size</span>
         <div class="poster-option-row">
-            @foreach(\App\Models\Product::DEFAULT_POSTER_SIZES as $size)
+            @foreach($product->available_sizes as $size)
                 <button type="button" class="poster-option-btn {{ $loop->first ? 'active' : '' }}" data-size="{{ $size }}">{{ $size }}</button>
             @endforeach
         </div>
     </div>
+
+    @if($product->materials)
+        <div class="poster-option-group">
+            <span class="poster-option-label">Material</span>
+            <div class="poster-option-row">
+                @foreach($product->materials as $material)
+                    <button type="button" class="poster-option-btn {{ $loop->first ? 'active' : '' }}" data-material="{{ $material }}">{{ $material }}</button>
+                @endforeach
+            </div>
+        </div>
+    @endif
+
+    @if($product->orientations)
+        <div class="poster-option-group">
+            <span class="poster-option-label">Orientation</span>
+            <div class="poster-option-row">
+                @foreach($product->orientations as $orientation)
+                    <button type="button" class="poster-option-btn {{ $loop->first ? 'active' : '' }}" data-orientation="{{ $orientation }}">{{ $orientation }}</button>
+                @endforeach
+            </div>
+        </div>
+    @endif
 
     <div class="pi-actions" style="margin-top: 20px;">
         <div class="pi-qty">

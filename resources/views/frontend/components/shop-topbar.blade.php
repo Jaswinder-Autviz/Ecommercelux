@@ -5,9 +5,9 @@
             <span class="separator">/</span>
             <a href="{{ route('shop') }}">Marvel™</a>
             <span class="separator">/</span>
-            <span class="current">Hustler Graphic T-Shirts</span>
+            <span class="current">Hustler Wall Posters</span>
         </nav>
-        <h1 class="collection-title">Hustler Graphic T-Shirts - <span id="filtered-count">{{ isset($products) ? count($products) : 0 }}</span> items</h1>
+        <h1 class="collection-title">Hustler Wall Posters - <span id="filtered-count">{{ isset($products) ? count($products) : 0 }}</span> items</h1>
     </div>
     <div class="topbar-right">
         <button class="mobile-filter-trigger">
