@@ -33,15 +33,21 @@
                             @foreach($order->items as $item)
                             <tr>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center space-x-3">
-                                        <img src="{{ asset('assets/images/products/' . ($item->product->main_image ?? '1.jpg')) }}" class="w-12 h-12 rounded-lg object-cover border border-gray-100">
-                                        <div>
-                                            <p class="text-sm font-bold text-gray-900">{{ $item->product->name ?? 'Deleted Product' }}</p>
-                                            <p class="text-[11px] ">SKU: {{ $item->product->sku ?? 'N/A' }}</p>
-                                            @if($item->size)
-                                            <p class="text-[11px] text-gray-400">Size: {{ $item->size }}</p>
-                                            @endif
-                                        </div>
+                                    <div class="space-y-1">
+                                        <p class="text-sm font-bold text-gray-900">{{ $item->product_name }}</p>
+                                        <p class="text-[11px] text-gray-500">Standard Size: 12 &times; 8 inches</p>
+                                        @if(!empty($item->options['posters']))
+                                            <div class="mt-2 flex flex-wrap gap-2">
+                                                @foreach($item->options['posters'] as $p)
+                                                    <div class="flex items-center gap-2 px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-xs">
+                                                        @if(!empty($p['image']))
+                                                            <img src="{{ $p['image'] }}" class="w-6 h-8 object-cover rounded shadow-sm">
+                                                        @endif
+                                                        <span class="font-semibold text-gray-800">{{ $p['name'] ?? 'Poster' }}</span>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-600">₹{{ number_format($item->price) }}</td>

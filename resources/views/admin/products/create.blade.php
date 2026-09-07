@@ -115,16 +115,14 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-3">Poster Sizes</label>
+                    <label class="block text-sm font-semibold text-gray-700 mb-3">Poster Size</label>
                     <div class="flex flex-wrap gap-3">
-                        @foreach($posterSizes as $size)
-                        <label class="inline-flex items-center gap-2 px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm font-semibold text-gray-700 cursor-pointer hover:border-primary transition-all">
-                            <input type="checkbox" name="sizes[]" value="{{ $size }}" class="rounded border-gray-300 text-primary focus:ring-primary" {{ in_array($size, $selectedSizes) ? 'checked' : '' }}>
-                            {{ $size }}
+                        <label class="inline-flex items-center gap-2 px-4 py-3 rounded-xl border border-primary/40 bg-primary/5 text-sm font-bold text-gray-800">
+                            <input type="checkbox" name="sizes[]" value="12 × 8 inches" class="rounded border-gray-300 text-primary focus:ring-primary" checked readonly>
+                            12 × 8 inches
                         </label>
-                        @endforeach
                     </div>
-                    <p class="mt-2 text-xs text-gray-400">Available poster sizes: 8×12, 12×18, 18×24, 24×36 inches.</p>
+                    <p class="mt-2 text-xs text-gray-500">Standard poster size: 12 × 8 inches (Fixed for wall posters).</p>
                 </div>
             </div>
 

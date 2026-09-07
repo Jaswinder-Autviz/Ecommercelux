@@ -12,7 +12,7 @@
     </div>
 
     <div class="cs-block billing-details">
-        <h3 class="cs-title">PRICE DETAILS (<span id="summary-count">0</span> Items)</h3>
+        <h3 class="cs-title">PRICE DETAILS (<span id="summary-count">0</span> Bundles)</h3>
         <div class="bill-row">
             <span>Total MRP</span>
             <span id="bill-mrp">₹ 0</span>

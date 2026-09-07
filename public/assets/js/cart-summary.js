@@ -4,29 +4,32 @@ const CartSummary = {
         this.updateSummary();
     },
 
-    bindEvents() {},
+    bindEvents() {
+        window.addEventListener('cart:updated', () => {
+            this.updateSummary();
+        });
+    },
 
     calculateSubtotal() {
-        const cart = Cart.get();
+        const cart = typeof Cart !== 'undefined' ? Cart.get() : [];
         return cart.reduce((total, item) => {
-            return total + (parseFloat(item.price) || 0) * item.quantity;
+            return total + (parseFloat(item.price) || 0) * (item.quantity || 1);
         }, 0);
     },
 
     calculateMRP() {
-        const cart = Cart.get();
+        const cart = typeof Cart !== 'undefined' ? Cart.get() : [];
         return cart.reduce((total, item) => {
-            const price = item.oldPrice ? parseFloat(item.oldPrice) : parseFloat(item.price) || 0;
-            return total + price * item.quantity;
+            const price = item.oldPrice ? parseFloat(item.oldPrice) : (parseFloat(item.price) || 0);
+            return total + price * (item.quantity || 1);
         }, 0);
     },
 
     updateSummary() {
-        const cart = Cart.get();
+        const cart = typeof Cart !== 'undefined' ? Cart.get() : [];
         const subtotal = this.calculateSubtotal();
         const mrp = this.calculateMRP();
-        const discountOnMRP = mrp - subtotal;
-        
+        const discountOnMRP = Math.max(0, mrp - subtotal);
         const finalTotal = subtotal;
 
         // Update UI
@@ -36,14 +39,14 @@ const CartSummary = {
         const billTotal = document.getElementById('bill-total');
 
         if (summaryCount) summaryCount.textContent = cart.length;
-        if (billMrp) billMrp.textContent = `₹ ${mrp.toLocaleString()}`;
-        if (billDiscount) billDiscount.textContent = `-₹ ${discountOnMRP.toLocaleString()}`;
-        if (billTotal) billTotal.textContent = `₹ ${finalTotal.toLocaleString()}`;
-        
+        if (billMrp) billMrp.textContent = `₹ ${mrp.toLocaleString('en-IN')}`;
+        if (billDiscount) billDiscount.textContent = `-₹ ${discountOnMRP.toLocaleString('en-IN')}`;
+        if (billTotal) billTotal.textContent = `₹ ${finalTotal.toLocaleString('en-IN')}`;
+
         // Update selected count text in main cart
         const selectedText = document.getElementById('selected-count-text');
         if (selectedText) {
-            selectedText.textContent = `${cart.length}/${cart.length} ITEMS SELECTED`;
+            selectedText.textContent = `${cart.length}/${cart.length} BUNDLE${cart.length === 1 ? '' : 'S'} SELECTED`;
         }
     }
 };

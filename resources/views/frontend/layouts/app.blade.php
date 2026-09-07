@@ -37,6 +37,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/toast.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bundle-dock.css') }}">
 
     {{-- Page / component CSS pushed from child views --}}
     @stack('styles')
@@ -54,10 +56,15 @@
     {{-- Customer Login Modal --}}
     @include('frontend.components.customer-login-modal')
 
+    {{-- Floating Bundle Dock --}}
+    @include('frontend.components.bundle-dock')
+
     {{-- Core JS --}}
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/toast.js') }}"></script>
     <script src="{{ asset('assets/js/cart.js') }}"></script>
     <script src="{{ asset('assets/js/wishlist.js') }}"></script>
+    <script src="{{ asset('assets/js/bundle-manager.js') }}"></script>
 
     {{-- Page / component JS pushed from child views --}}
     @stack('scripts')

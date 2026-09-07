@@ -181,11 +181,7 @@ class ProductController extends Controller
 
     private function normalizeProductSizes(array $sizes): array
     {
-        $allowedSizes = Product::DEFAULT_POSTER_SIZES;
-
-        $selectedSizes = array_values(array_intersect($allowedSizes, $sizes));
-
-        return $selectedSizes ?: $allowedSizes;
+        return [Product::POSTER_SIZE];
     }
 
     private function deleteProductImageFileIfUnused(?string $imagePath): void

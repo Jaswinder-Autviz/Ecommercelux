@@ -88,29 +88,76 @@ class PaymentController extends Controller
     public function submitOrder(Request $request)
     {
         $request->validate([
-            'name'    => 'required|string|max:255',
-            'email'   => 'required|email|max:255',
-            'phone'   => 'required|string|max:50',
-            'address' => 'required|string|max:1000',
-            'city'    => 'required|string|max:255',
-            'state'   => 'required|string|max:255',
-            'pin'     => 'required|string|max:20',
-            'method'  => 'required|string|in:cod,googlepay,upi,card,netbanking',
-            'amount'  => 'required|numeric|min:0.01',
+            'name'        => 'required|string|max:255',
+            'email'       => 'required|email|max:255',
+            'phone'       => 'required|string|max:50',
+            'address'     => 'required|string|max:1000',
+            'city'        => 'required|string|max:255',
+            'state'       => 'required|string|max:255',
+            'pin'         => 'required|string|max:20',
+            'method'      => 'required|string|in:cod,googlepay,upi,card,netbanking',
+            'amount'      => 'required|numeric|min:0.01',
             'coupon_code' => 'nullable|string|max:50',
-            'items'   => 'required|array|min:1',
+            'items'       => 'required|array|min:1',
+            'items.*.bundle_size'  => 'required|integer|in:5,10',
             'items.*.product_name' => 'required|string|max:255',
-            'items.*.quantity'     => 'required|integer|min:1',
             'items.*.price'        => 'required|numeric|min:0',
-            'items.*.size'         => ['required', 'string', Rule::in(Product::DEFAULT_POSTER_SIZES)],
-            'items.*.options'      => 'nullable|array',
-            'items.*.options.frame' => 'nullable|string|max:100',
-            'items.*.options.material' => 'nullable|string|max:100',
-            'items.*.options.orientation' => 'nullable|string|max:100',
+            'items.*.size'         => 'required|string',
+            'items.*.posters'      => 'required|array',
         ]);
 
+        // ── STRICT BUNDLE VALIDATION ──────────────────────────────────────────
+        foreach ($request->items as $item) {
+            $bundleSize = (int) ($item['bundle_size'] ?? 0);
+            if (!in_array($bundleSize, [5, 10], true)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Orders are only allowed for 5 Poster or 10 Poster Bundles.'
+                ], 422);
+            }
+
+            $posters = $item['posters'] ?? [];
+            if (count($posters) !== $bundleSize) {
+                return response()->json([
+                    'success' => false,
+                    'message' => "The {$bundleSize} Poster Bundle must contain exactly {$bundleSize} posters."
+                ], 422);
+            }
+
+            // Extract IDs and check for duplicates
+            $posterIds = array_values(array_filter(array_map(fn($p) => $p['id'] ?? null, $posters)));
+            if (count($posterIds) !== $bundleSize || count(array_unique($posterIds)) !== $bundleSize) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Duplicate posters are not allowed in a bundle. Each poster in a bundle must be unique.'
+                ], 422);
+            }
+
+            // Verify all posters exist in DB and are active
+            $validPostersCount = Product::whereIn('id', $posterIds)->where('status', true)->count();
+            if ($validPostersCount !== $bundleSize) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'One or more posters in your bundle are invalid or unavailable.'
+                ], 422);
+            }
+
+            // Verify size is 12 x 8 inches
+            $size = trim((string)($item['size'] ?? ''));
+            $allowedSizes = [
+                '12 × 8 inches', '12×8 inches', '12 × 8', '12×8', '12 x 8 inches', '12x8',
+                Product::POSTER_SIZE
+            ];
+            if (!in_array($size, $allowedSizes, true)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'All posters must be in standard 12 × 8 inches size.'
+                ], 422);
+            }
+        }
+
         $subtotal = collect($request->items)->sum(function ($item) {
-            return ((float) $item['price']) * ((int) $item['quantity']);
+            return (float) $item['price'];
         });
 
         $affiliate = null;
@@ -152,15 +199,23 @@ class PaymentController extends Controller
             $order = Order::create($orderData);
 
             foreach ($request->items as $item) {
+                $bundleSize = (int) $item['bundle_size'];
+                $posters = $item['posters'];
+                $firstPosterId = $posters[0]['id'] ?? null;
+
                 OrderItem::create([
                     'order_id'     => $order->id,
-                    'product_id'   => $item['product_id'] ?? null,
-                    'product_name' => $item['product_name'],
-                    'quantity'     => $item['quantity'],
+                    'product_id'   => $firstPosterId,
+                    'product_name' => $item['product_name'] ?? "{$bundleSize} Poster Bundle (12 × 8 inches)",
+                    'quantity'     => 1,
                     'price'        => $item['price'],
-                    'size'         => $item['size'] ?? null,
-                    'options'      => $item['options'] ?? null,
-                    'total'        => $item['price'] * $item['quantity'],
+                    'size'         => Product::POSTER_SIZE,
+                    'options'      => [
+                        'type'        => 'bundle',
+                        'bundle_size' => $bundleSize,
+                        'posters'     => $posters,
+                    ],
+                    'total'        => $item['price'],
                 ]);
             }
 

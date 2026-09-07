@@ -19,16 +19,11 @@
             <div class="cart-left">
                 <div class="cart-header">
                     <div class="ch-select-all">
-                        <label class="ci-checkbox">
-                            <input type="checkbox" id="select-all-cart" checked>
-                            <span class="ci-checkmark"></span>
-                        </label>
-                        <span id="selected-count-text">1/1 ITEMS SELECTED</span>
+                        <i class="fas fa-layer-group" style="color:#111;margin-right:4px;"></i>
+                        <span id="selected-count-text">0 BUNDLES SELECTED</span>
                     </div>
                     <div class="ch-actions">
-                        <button id="remove-selected">REMOVE</button>
-                        <span class="ci-divider">|</span>
-                        <button id="wishlist-selected">MOVE TO WISHLIST</button>
+                        <button id="remove-selected"><i class="fas fa-trash-alt"></i> CLEAR ALL</button>
                     </div>
                 </div>
 

@@ -1,32 +1,305 @@
-/* cart.css */
-.cart-page-wrapper { background-color: #fff; padding: 40px 0 80px; }
-.checkout-steps { display: flex; align-items: center; justify-content: center; margin-bottom: 50px; gap: 15px; }
-.step { font-size: 13px; font-weight: 700; letter-spacing: 2px; color: #999; }
-.step.active { color: #4a0010; border-bottom: 2px solid #4a0010; }
-.step-line { width: 40px; height: 1px; background: #e0e0e0; }
-.cart-main-layout { display: grid; grid-template-columns: 1fr 380px; gap: 40px; }
-.cart-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border: 1px solid #e0e0e0; margin-bottom: 20px; font-size: 14px; font-weight: 700; }
-.cart-item { display: flex; justify-content: space-between; padding: 20px; border: 1px solid #e0e0e0; margin-bottom: 15px; background: #fff; position: relative; }
-.ci-left { display: flex; gap: 20px; }
-.ci-img-wrap { width: 120px; aspect-ratio: 1/1; background: #f7f7f7; display: flex; align-items: center; justify-content: center; }
-.ci-img-wrap img { width: 100%; height: 100%; object-fit: contain; }
-.ci-details { display: flex; flex-direction: column; }
-.ci-title { font-size: 16px; font-weight: 700; margin-bottom: 5px; }
-.ci-subtitle { font-size: 13px; color: #777; margin-bottom: 10px; }
-.ci-meta { margin-bottom: 15px; font-size: 13px; }
-.ci-actions { margin-top: auto; display: flex; gap: 15px; font-size: 12px; font-weight: 700; }
-.ci-action-btn { background: none; border: none; cursor: pointer; color: #333; padding: 0; }
-.ci-divider { color: #e0e0e0; }
-.ci-right { text-align: right; display: flex; flex-direction: column; justify-content: space-between; width: 140px; }
-.ci-current-price { font-size: 16px; font-weight: 700; }
-.ci-old-price { font-size: 13px; color: #999; text-decoration: line-through; margin: 4px 0; }
-.ci-savings { font-size: 12px; color: #4a0010; font-weight: 700; }
-.ci-qty-select { width: 100%; padding: 8px; border: 1px solid #e0e0e0; font-size: 13px; outline: none; }
-.ci-total { font-size: 16px; font-weight: 700; color: #000; }
-.cart-empty-state { text-align: center; padding: 60px 20px; }
-.cart-empty-state h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
-.cart-empty-state p { color: #777; margin-bottom: 30px; }
-.shop-now-btn { display: inline-block; padding: 12px 40px; border: 1px solid #4a0010; color: #4a0010; text-decoration: none; font-weight: 700; transition: all 0.3s; }
-.shop-now-btn:hover { background: #4a0010; color: #fff; }
-@media (max-width: 991px) { .cart-main-layout { grid-template-columns: 1fr; } }
-@media (max-width: 576px) { .cart-item { flex-direction: column; gap: 20px; } .ci-right { width: 100%; flex-direction: row; align-items: center; text-align: left; } .ci-img-wrap { width: 100px; } }
+/* ============================================================
+   CART STYLES — cart.css
+   Support for 5 & 10 Poster Bundles, No Single Products
+   ============================================================ */
+
+.cart-page-wrapper {
+    background-color: #fafafa;
+    padding: 40px 0 100px;
+    min-height: 70vh;
+}
+
+.checkout-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    gap: 15px;
+}
+
+.step {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #999999;
+    text-transform: uppercase;
+}
+
+.step.active {
+    color: #111111;
+    border-bottom: 2px solid #111111;
+    padding-bottom: 4px;
+}
+
+.step-line {
+    width: 40px;
+    height: 1px;
+    background: #e0e0e0;
+}
+
+.cart-main-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 36px;
+    align-items: start;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: #ffffff;
+    border: 1px solid #ebebeb;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.ch-select-all {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #111111;
+}
+
+.ch-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 800;
+    color: #777777;
+    transition: color 0.2s;
+}
+
+.ch-actions button:hover {
+    color: #e71318;
+}
+
+/* ── Bundle Item in Cart ── */
+.cart-bundle-card {
+    background: #ffffff;
+    border: 1px solid #ebebeb;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.cbc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 18px;
+    gap: 16px;
+}
+
+.cbc-badge {
+    display: inline-block;
+    background: #111111;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.cbc-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #111111;
+    margin: 0 0 4px;
+}
+
+.cbc-subtitle {
+    font-size: 12px;
+    color: #666666;
+    margin: 0;
+}
+
+.cbc-pricing {
+    text-align: right;
+}
+
+.cbc-current-price {
+    font-size: 20px;
+    font-weight: 900;
+    color: #111111;
+}
+
+.cbc-old-price {
+    font-size: 13px;
+    color: #999999;
+    text-decoration: line-through;
+    margin: 2px 0;
+}
+
+.cbc-savings {
+    font-size: 11px;
+    color: #1b873f;
+    font-weight: 800;
+}
+
+/* Posters Grid Inside Bundle Card */
+.cbc-posters-title {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #777777;
+    margin-bottom: 12px;
+}
+
+.cbc-posters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.cbc-poster-item {
+    background: #fbfbfb;
+    border: 1px solid #ebebeb;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.cbc-poster-thumb {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.cbc-poster-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cbc-poster-info {
+    padding: 8px;
+}
+
+.cbc-poster-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: #111111;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+}
+
+.cbc-poster-size {
+    font-size: 10px;
+    color: #888888;
+}
+
+/* Footer / Actions of Bundle Card */
+.cbc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.cbc-bundle-qty {
+    font-size: 12px;
+    font-weight: 700;
+    color: #555555;
+    background: #f5f5f7;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.cbc-remove-btn {
+    background: none;
+    border: none;
+    color: #777777;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+}
+
+.cbc-remove-btn:hover {
+    color: #e71318;
+}
+
+/* ── Empty State ── */
+.cart-empty-state {
+    background: #ffffff;
+    border: 1px solid #ebebeb;
+    border-radius: 16px;
+    text-align: center;
+    padding: 70px 24px;
+}
+
+.cart-empty-state h3 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #111111;
+    margin-bottom: 10px;
+}
+
+.cart-empty-state p {
+    color: #777777;
+    font-size: 14px;
+    margin-bottom: 28px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.shop-now-btn {
+    display: inline-block;
+    padding: 14px 36px;
+    background: #111111;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 10px;
+    transition: background 0.2s;
+}
+
+.shop-now-btn:hover {
+    background: #e71318;
+}
+
+@media (max-width: 991px) {
+    .cart-main-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .cbc-header {
+        flex-direction: column;
+    }
+    .cbc-pricing {
+        text-align: left;
+    }
+    .cbc-posters-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+}

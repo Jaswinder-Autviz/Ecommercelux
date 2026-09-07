@@ -31,21 +31,12 @@
     <div class="sidebar-block">
         <h3 class="sidebar-title">SIZE</h3>
         <div class="sidebar-content">
-            <div class="size-search-wrap">
-                <input type="text" class="size-search-input" placeholder="Search for Size">
-            </div>
             <div class="size-grid">
-                @php
-                    $sizes = collect(\App\Models\Product::DEFAULT_POSTER_SIZES)
-                        ->map(fn ($size) => ['val' => $size, 'count' => \App\Models\Product::whereJsonContains('sizes', $size)->count()])
-                        ->all();
-                @endphp
-                @foreach($sizes as $size)
-                    <button class="size-filter-btn" data-size="{{ $size['val'] }}">
-                        {{ $size['val'] }} <span class="btn-count">({{ $size['count'] }})</span>
-                    </button>
-                @endforeach
+                <button class="size-filter-btn active" data-size="12 × 8 inches" style="width: 100%;">
+                    12 × 8 inches <span class="btn-count">({{ \App\Models\Product::where('status', true)->count() }})</span>
+                </button>
             </div>
+            <p style="font-size: 11px; color: #888; margin-top: 8px;">All posters standard 12 &times; 8 inches</p>
         </div>
     </div>
 

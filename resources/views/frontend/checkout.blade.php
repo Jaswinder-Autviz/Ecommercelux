@@ -254,24 +254,30 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    let subtotal = 0;
-    let html = '';
-
     cart.forEach(item => {
         const price = parseFloat(item.price) || 0;
-        subtotal += price * item.quantity;
+        const bundleSize = item.bundle_size || item.posters?.length || 5;
+        subtotal += price * (item.quantity || 1);
+
+        let posterThumbs = '';
+        if (Array.isArray(item.posters)) {
+            posterThumbs = item.posters.map(p => `
+                <div style="width:34px;height:48px;border-radius:4px;overflow:hidden;border:1px solid #ddd;flex-shrink:0" title="${p.name}">
+                    <img src="${p.image}" style="width:100%;height:100%;object-fit:cover" onerror="this.src='/assets/images/placeholders/placeholder-product.svg'">
+                </div>
+            `).join('');
+        }
+
         html += `
-        <div class="co-item">
-            <img src="${item.image || ''}" alt="${item.name}" class="co-item-img"
-                 onerror="this.style.background='#f4f4f4';this.src=''">
+        <div class="co-item" style="align-items:flex-start;padding-bottom:14px;border-bottom:1px solid #f0f0f0;">
             <div class="co-item-info">
-                <div class="co-item-name">${item.name}</div>
-                <div class="co-item-size">Size: ${item.size} &middot; Qty: ${item.quantity}</div>
-                ${item.frame ? `<div class="co-item-size">Frame: ${item.frame}</div>` : ''}
-                ${item.material ? `<div class="co-item-size">Material: ${item.material}</div>` : ''}
-                ${item.orientation ? `<div class="co-item-size">Orientation: ${item.orientation}</div>` : ''}
+                <div class="co-item-name" style="font-weight:800">${item.name}</div>
+                <div class="co-item-size" style="margin:4px 0;color:#666">Standard Size: 12 &times; 8 inches &middot; ${bundleSize} Unique Posters</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">
+                    ${posterThumbs}
+                </div>
             </div>
-            <div class="co-item-price">₹${(price * item.quantity).toLocaleString('en-IN')}</div>
+            <div class="co-item-price" style="font-weight:800;white-space:nowrap;">₹${price.toLocaleString('en-IN')}</div>
         </div>`;
     });
 
@@ -388,17 +394,43 @@ async function initiatePayment() {
     btn.disabled = true;
     btnText.textContent = 'Processing...';
 
-    const cartItems = JSON.parse(localStorage.getItem('luxe_cart') || '[]').map(item => ({
-        product_id: item.product_id || item.id || null,
-        product_name: item.name || 'Item',
-        quantity: item.quantity || 1,
+    const rawCart = JSON.parse(localStorage.getItem('luxe_cart') || '[]');
+    if (!rawCart.length) {
+        alert('Cart is empty!');
+        btn.disabled = false;
+        btnText.textContent = 'Pay Now';
+        return;
+    }
+
+    // Ensure all items are complete bundles
+    for (const item of rawCart) {
+        const bSize = item.bundle_size || (Array.isArray(item.posters) ? item.posters.length : 0);
+        if (!Array.isArray(item.posters) || (bSize !== 5 && bSize !== 10) || item.posters.length !== bSize) {
+            alert('Please select all posters required for your bundle before checkout.');
+            btn.disabled = false;
+            btnText.textContent = 'Pay ₹' + amount.toLocaleString('en-IN');
+            return;
+        }
+    }
+
+    const cartItems = rawCart.map(item => ({
+        product_id: null,
+        product_name: item.name || `${item.bundle_size} Poster Bundle (12 × 8 inches)`,
+        type: 'bundle',
+        bundle_size: item.bundle_size || item.posters.length,
+        quantity: 1,
         price: item.price || 0,
-        size: item.size || null,
+        size: '12 × 8 inches',
+        posters: item.posters.map(p => ({
+            id: p.id,
+            name: p.name,
+            price: p.price,
+            image: p.image
+        })),
         options: {
-            frame: item.frame || null,
-            material: item.material || null,
-            orientation: item.orientation || null,
-        },
+            bundle_size: item.bundle_size || item.posters.length,
+            posters: item.posters
+        }
     }));
 
     const orderPayload = {

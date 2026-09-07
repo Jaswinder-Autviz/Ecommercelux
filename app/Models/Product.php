@@ -9,10 +9,11 @@ class Product extends Model
 {
     use HasFactory;
 
-    public const DEFAULT_POSTER_SIZES = ['8×12', '12×18', '18×24', '24×36'];
-    public const DEFAULT_POSTER_FRAMES = ['Unframed (Rolled)', 'Black', 'White'];
-    public const DEFAULT_POSTER_MATERIALS = ['Paper', 'Premium Matte', 'Canvas'];
-    public const DEFAULT_POSTER_ORIENTATIONS = ['Portrait', 'Landscape', 'Square'];
+    public const POSTER_SIZE = '12 × 8 inches';
+    public const DEFAULT_POSTER_SIZES = ['12 × 8 inches'];
+    public const DEFAULT_POSTER_FRAMES = [];
+    public const DEFAULT_POSTER_MATERIALS = ['Premium Matte 300 GSM'];
+    public const DEFAULT_POSTER_ORIENTATIONS = ['Portrait'];
     public const PLACEHOLDER_IMAGE = 'placeholder-product.svg';
 
     protected $fillable = [
@@ -49,16 +50,12 @@ class Product extends Model
 
     public function getAvailableSizesAttribute(): array
     {
-        return is_array($this->sizes) && count($this->sizes) > 0
-            ? $this->sizes
-            : self::DEFAULT_POSTER_SIZES;
+        return [self::POSTER_SIZE];
     }
 
     public function getAvailableFramesAttribute(): array
     {
-        return is_array($this->frames) && count($this->frames) > 0
-            ? $this->frames
-            : self::DEFAULT_POSTER_FRAMES;
+        return [];
     }
 
     public function category()

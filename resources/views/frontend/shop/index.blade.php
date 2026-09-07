@@ -62,10 +62,9 @@
                     <button class="sf-block-title">Size <span class="sf-arrow">+</span></button>
                     <div class="sf-block-body">
                         <div class="sf-size-grid">
-                            @foreach(\App\Models\Product::DEFAULT_POSTER_SIZES as $size)
-                            <button class="sf-size-btn size-filter-btn" data-size="{{ $size }}">{{ $size }}</button>
-                            @endforeach
+                            <button class="sf-size-btn size-filter-btn active" data-size="12 × 8 inches">12 × 8 inches</button>
                         </div>
+                        <p style="font-size:11px;color:#777;margin-top:8px;">All posters are standard 12 &times; 8 inches.</p>
                     </div>
                 </div>
 
