@@ -5,17 +5,24 @@
 @endphp
 
 {{-- Announcement Bar --}}
-<div class="announcement-bar" id="announcementBar">
-    <div class="announcement-inner container">
-        <div class="announcement-track">
+<!-- <div class="announcement-bar" id="announcementBar">
+    <div class="announcement-inner container" style="display:flex; align-items:center; justify-content:space-between; position:relative;">
+        <div style="flex:1;"></div>
+        <div class="announcement-track" style="flex:1; text-align:center;">
             <div class="announcement-content">
                 <span class="announcement-text">
                     Handcrafted. Personalized. Delivered across India
                 </span>
             </div>
         </div>
+        <div style="flex:1; text-align:right;">
+            <a href="tel:9779082731" style="color:inherit; text-decoration:none; font-size:13px; font-weight:500; letter-spacing:0.3px; display:inline-flex; align-items:center; gap:5px;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+                9779082731
+            </a>
+        </div>
     </div>
-</div>
+</div> -->
 
 {{-- Main Header --}}
 <header class="site-header" id="siteHeader">
@@ -102,12 +109,18 @@
                     </div>
                 </div>
             @else
-                <button class="action-btn account-btn openLoginModalTrigger" aria-label="Account">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M2 18c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <button class="openLoginModalTrigger header-login-link" style="background:none;border:none;cursor:pointer;padding:0;" aria-label="Login">
+                    Login
                 </button>
             @endif
 
+            {{-- Shop Now CTA --}}
+            <a href="{{ route('shop') }}" class="header-cta-btn" id="headerCtaBtn">
+                Shop Now
+            </a>
+
         </div>
+
     </div>
 
     {{-- Search Overlay --}}
