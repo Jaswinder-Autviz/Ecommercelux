@@ -7,6 +7,10 @@
 <section class="categories-grid-section">
     <div class="container p-0">
         <div class="content-width">
+        <div class="categories-header">
+            <h2 class="categories-title">CATEGORIES</h2>
+            <a href="{{ route('shop') }}" class="categories-view-all">View All</a>
+        </div>
         <div class="categories-grid">
             @foreach(\App\Models\Category::where('status', true)->get() as $index => $category)
                 <a href="{{ route('shop', ['category' => $category->slug]) }}"

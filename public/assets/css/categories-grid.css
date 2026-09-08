@@ -4,6 +4,36 @@
     background: #fff;
 }
 
+.categories-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.categories-title {
+    font-size: 28px;
+    font-weight: 900;
+    color: #000;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.categories-view-all {
+    font-size: 13px;
+    font-weight: 700;
+    color: #e71318;
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.categories-view-all:hover {
+    color: #000;
+}
+
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
