@@ -22,10 +22,8 @@
 
     @include('frontend.components.hero-banner')
 
-    @include('frontend.components.categories-grid')
-
-    {{-- Why Choose Us --}}
-    <!-- <section class="container p-0">
+       {{-- Why Choose Us --}}
+    <section class="container p-0">
         <div class="why-section">
             <div class="why-grid">
                 <div class="why-card reveal" style="transition-delay:0s">
@@ -58,8 +56,10 @@
                 </div>
             </div>
         </div>
-    </section> -->
+    </section>
 
+    
+    @include('frontend.components.categories-grid')
     @include('frontend.components.choose')
     @include('frontend.components.new-arrivals-slider')
     @include('frontend.components.filter-product-section')
@@ -124,17 +124,17 @@
 .reveal-right.visible{opacity:1;transform:translateX(0)}
 
 /* ── Why Section ────────────────────────────────────────── */
-.why-section{background:#000;margin:56px 0;padding:0}
+.why-section{background:#f8f9fa;margin:56px 0;padding:0}
 .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.why-card{position:relative;padding:32px 28px;border-right:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:flex-start;gap:10px;transition:background .3s ease}
+.why-card{position:relative;padding:32px 28px;border-right:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;align-items:flex-start;gap:10px;transition:background .3s ease}
 .why-card::before{content:'';position:absolute;left:28px;right:28px;top:0;height:2px;background:#e71318;transform:scaleX(.2);transform-origin:left;transition:transform .3s ease}
 .why-card:last-child{border-right:none}
-.why-card:hover{background:rgba(255,255,255,.04)}
+.why-card:hover{background:#fff}
 .why-card:hover::before{transform:scaleX(1)}
 .why-icon{width:48px;height:48px;border:1px solid rgba(231,19,24,.3);display:flex;align-items:center;justify-content:center;color:#e71318;transition:all .3s ease}
 .why-card:hover .why-icon{background:#e71318;color:#fff;border-color:#e71318}
-.why-card h3{font-size:13px;font-weight:800;color:#fff;letter-spacing:.5px;margin:0;text-transform:uppercase}
-.why-card p{font-size:12px;color:rgba(255,255,255,.5);line-height:1.7;margin:0}
+.why-card h3{font-size:13px;font-weight:800;color:#111;letter-spacing:.5px;margin:0;text-transform:uppercase}
+.why-card p{font-size:12px;color:rgba(0,0,0,.6);line-height:1.7;margin:0}
 
 /* ── Promo Banner ───────────────────────────────────────── */
 .promo-banner-section{padding:70px 0}
