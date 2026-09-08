@@ -57,6 +57,19 @@
         @yield('content')
     </main>
 
+    <style>
+        @media (max-width: 1024px) {
+            #main-content {
+                padding-top: 92px;
+            }
+        }
+        @media (max-width: 520px) {
+            #main-content {
+                padding-top: 88px;
+            }
+        }
+    </style>
+
     @include('frontend.components.footer')
 
     {{-- Customer Login Modal --}}

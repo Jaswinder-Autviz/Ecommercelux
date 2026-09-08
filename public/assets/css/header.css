@@ -64,21 +64,24 @@
 }
 
 .site-header {
-    position: absolute;
+    position: fixed;
     top: 0;
-    z-index: 1000;
+    left: 0;
+    right: 0;
+    z-index: 9999;
     background: transparent;
     border-bottom: none;
     box-shadow: none;
     padding: 12px 20px;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     width: 100%;
 }
 
 .site-header.scrolled {
-    background: transparent;
-    box-shadow: none;
-    border-bottom-color: transparent;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .header-inner {
@@ -148,7 +151,7 @@
     font-weight: 500;
     letter-spacing: 0;
     font-family: 'Inter', sans-serif;
-    text-transform: none;
+    text-transform: uppercase;
     padding: 6px 0;
     position: relative;
     transition: color 0.2s ease;
@@ -183,7 +186,7 @@
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 15px;
     flex-shrink: 0;
 }
 

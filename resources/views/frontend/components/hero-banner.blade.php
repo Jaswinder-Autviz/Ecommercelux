@@ -8,7 +8,7 @@
         <img src="{{ asset('assets/images/banners/Banner_1.png') }}"
              alt="Premium Wall Poster Collection" class="hero-slide-img" loading="eager" fetchpriority="high">
         <!-- <div class="hero-slide-overlay absolute inset-0 z-10"></div> -->
-        <div class="hero-slide-content z-20">
+        <div class="hero-slide-content">
             <span class="hsc-tag slide-animate">New Collection</span>
             <h1 class="hsc-title slide-animate"><span class="hsc-title-inner">ART THAT<br>SPEAKS</span></h1>
             <p class="hsc-sub slide-animate"><span class="hsc-sub-inner">Premium wall posters crafted for spaces that demand attention.</span></p>
