@@ -29,7 +29,7 @@
                     </div>
                     <div class="category-overlay"></div>
                     <div class="category-content">
-                        <h3 class="category-title">{{ strtoupper($category->name) }} POSTER</h3>
+                        <h3 class="category-title">{{ strtoupper($category->name) }}</h3>
                     </div>
                 </a>
             @endforeach
