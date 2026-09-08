@@ -6,6 +6,7 @@
 
 <section class="categories-grid-section">
     <div class="container p-0">
+        <div class="content-width">
         <div class="categories-grid">
             @foreach(\App\Models\Category::where('status', true)->get() as $index => $category)
                 <a href="{{ route('shop', ['category' => $category->slug]) }}"
@@ -25,6 +26,7 @@
                     </div>
                 </a>
             @endforeach
+        </div>
         </div>
     </div>
 </section>

@@ -23,6 +23,7 @@
 </div> -->
 
     <div class="container p-0">
+        <div class="content-width">
         <!-- Filter Bar -->
         <div class="fp-filter-wrapper">
             <div class="fp-filter-bar">
@@ -61,6 +62,7 @@
 
         <div id="fp-no-results" class="fp-no-results" style="display:none;">
             <p>No products match your selected filters.</p>
+        </div>
         </div>
     </div>
 </section>

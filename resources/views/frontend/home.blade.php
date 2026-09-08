@@ -24,6 +24,7 @@
 
        {{-- Why Choose Us --}}
     <section class="container p-0">
+        <div class="content-width">
         <div class="why-section">
             <div class="why-grid">
                 <div class="why-card reveal" style="transition-delay:0s">
@@ -56,6 +57,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
     
@@ -68,6 +70,7 @@
     @if(isset($reels) && $reels->count())
     <section class="reels-section">
         <div class="container p-0">
+            <div class="content-width">
             <div class="reels-header reveal">
                 <div class="reels-eyebrow">On the wall</div>
                 <h2 class="reels-title">Hustler in Your Space</h2>
@@ -86,6 +89,7 @@
                     </div>
                 </a>
                 @endforeach
+            </div>
             </div>
         </div>
     </section>
@@ -115,6 +119,7 @@
 
 /* ── Page ───────────────────────────────────────────────── */
 .home-page{background:#fff;overflow:hidden}
+.content-width{max-width:1400px;margin:0 auto;padding:0 20px}
 .section-eyebrow{display:block;color:#e71318;font-size:11px;font-weight:900;letter-spacing:2.6px;line-height:1;text-transform:uppercase;margin-bottom:14px}
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
