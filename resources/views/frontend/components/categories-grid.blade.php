@@ -16,17 +16,21 @@
                 <a href="{{ route('shop', ['category' => $category->slug]) }}"
                    class="category-card reveal"
                    style="transition-delay: {{ $index * 0.08 }}s">
-                    <div class="category-poster-bg">
-                        <div class="category-poster-grid">
-                            <div class="poster-item poster-1"></div>
-                            <div class="poster-item poster-2"></div>
-                            <div class="poster-item poster-3"></div>
-                            <div class="poster-item poster-4"></div>
-                        </div>
+                    <div class="category-image-wrapper">
+                        @if($category->image)
+                            <img src="{{ asset('assets/images/categories/' . $category->image) }}"
+                                 alt="{{ $category->name }}"
+                                 class="category-bg-image">
+                        @else
+                            <div class="category-placeholder">
+                                <span>{{ strtoupper(substr($category->name, 0, 1)) }}</span>
+                            </div>
+                        @endif
                     </div>
+                    <div class="category-overlay"></div>
                     <div class="category-content">
                         <h3 class="category-title">{{ strtoupper($category->name) }} POSTER</h3>
-                        <span class="category-btn">{{ strtolower($category->name) }} collection</span>
+                        <span class="category-btn">{{ ucfirst(strtolower($category->name)) }} collection</span>
                     </div>
                 </a>
             @endforeach
