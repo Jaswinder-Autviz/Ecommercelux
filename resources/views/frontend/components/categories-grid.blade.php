@@ -30,7 +30,6 @@
                     <div class="category-overlay"></div>
                     <div class="category-content">
                         <h3 class="category-title">{{ strtoupper($category->name) }} POSTER</h3>
-                        <span class="category-btn">{{ ucfirst(strtolower($category->name)) }} collection</span>
                     </div>
                 </a>
             @endforeach
