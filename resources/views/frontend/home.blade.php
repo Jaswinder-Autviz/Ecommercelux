@@ -22,6 +22,8 @@
 
     @include('frontend.components.hero-banner')
 
+    @include('frontend.components.categories-grid')
+
     {{-- Why Choose Us --}}
     <!-- <section class="container p-0">
         <div class="why-section">
