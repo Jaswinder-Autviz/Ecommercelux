@@ -41,7 +41,7 @@
 .sf-radio-mark { width: 16px; height: 16px; border: 1.5px solid #d0d0d0; border-radius: 50%; flex-shrink: 0; position: relative; transition: border-color 0.2s; }
 .sf-radio-item input:checked ~ .sf-radio-mark { border-color: #000; }
 .sf-radio-item input:checked ~ .sf-radio-mark::after { content: ''; position: absolute; top: 3px; left: 3px; width: 8px; height: 8px; border-radius: 50%; background: #000; }
-.sp-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+.sp-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 24px; }
 .shop-item { transition: opacity 0.4s ease, transform 0.4s ease; }
 .shop-item.hide { display: none; }
 .shop-item.show { animation: spFadeIn 0.5s forwards; }
@@ -50,6 +50,6 @@
 .sp-no-results p { font-size: 15px; margin-bottom: 20px; }
 .sp-clear-btn { background: #000; color: #fff; border: none; padding: 12px 32px; font-size: 13px; font-weight: 600; letter-spacing: 1px; cursor: pointer; }
 .sp-pagination { margin-top: 48px; display: flex; justify-content: center; }
-@media (max-width: 1280px) { .sp-grid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 1280px) { .sp-grid { grid-template-columns: repeat(4,1fr); } }
 @media (max-width: 1024px) { .shop-main-layout { grid-template-columns: 1fr; } .shop-sidebar-container { position: fixed; left: -300px; top: 0; width: 300px; height: 100vh; background: #fff; z-index: 1001; padding: 30px 24px; overflow-y: auto; transition: left 0.35s cubic-bezier(0.4,0,0.2,1); box-shadow: 4px 0 30px rgba(0,0,0,0.1); } .shop-sidebar-container.active { left: 0; } .mobile-sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid #eee; } .mobile-sidebar-title { font-size: 18px; font-weight: 700; } .mobile-sidebar-close { background: none; border: none; cursor: pointer; } .sp-filter-btn { display: flex; } .mobile-filter-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease; } .mobile-filter-overlay.active { opacity: 1; visibility: visible; } .sp-grid { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 640px) { .shop-hero { height: 420px; } .shop-hero-overlay { padding: 0 24px; } .shop-hero-title { font-size: 42px; } .shop-hero-copy { font-size: 14px; } .sp-grid { grid-template-columns: repeat(2,1fr); gap: 14px; } .sp-topbar { flex-direction: column; align-items: flex-start; gap: 14px; } .sp-topbar-right { width: 100%; justify-content: space-between; } }

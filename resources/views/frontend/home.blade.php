@@ -121,12 +121,24 @@
 .home-page{background:#fff;overflow:hidden}
 .content-width{max-width:1400px;margin:0 auto;padding:0 20px}
 .section-eyebrow{display:block;color:#e71318;font-size:11px;font-weight:900;letter-spacing:2.6px;line-height:1;text-transform:uppercase;margin-bottom:14px}
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1.2s cubic-bezier(.22,1,.36,1),transform 1.2s cubic-bezier(.22,1,.36,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-left{opacity:0;transform:translateX(-36px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal-left{opacity:0;transform:translateX(-50px);transition:opacity 1.2s cubic-bezier(.22,1,.36,1),transform 1.2s cubic-bezier(.22,1,.36,1)}
 .reveal-left.visible{opacity:1;transform:translateX(0)}
-.reveal-right{opacity:0;transform:translateX(36px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal-right{opacity:0;transform:translateX(50px);transition:opacity 1.2s cubic-bezier(.22,1,.36,1),transform 1.2s cubic-bezier(.22,1,.36,1)}
 .reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(0.95);transition:opacity 1.2s cubic-bezier(.22,1,.36,1),transform 1.2s cubic-bezier(.22,1,.36,1)}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+
+/* ── Hover Effects ──────────────────────────────────────── */
+.why-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.why-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+
+.reel-card { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+.reel-card:hover { transform: scale(1.02); z-index: 10; }
+
+/* ── Smooth Scroll ──────────────────────────────────────── */
+html { scroll-behavior: smooth; }
 
 /* ── Why Section ────────────────────────────────────────── */
 .why-section{background:#f8f9fa;margin:56px 0;padding:0}

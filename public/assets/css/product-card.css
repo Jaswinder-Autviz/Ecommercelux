@@ -3,7 +3,7 @@
     display: block; text-decoration: none; color: inherit;
     background: #fff; cursor: pointer;
     position: relative;
-    border-radius: 8px;
+    border-radius: 0px;
     overflow: hidden;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -14,7 +14,6 @@
 .pcp-img-wrap {
     position: relative; 
     overflow: hidden;
-    aspect-ratio: 4/4; 
     background: #F5F5F2;
 }
 .pcp-img {
